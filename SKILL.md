@@ -107,7 +107,10 @@ Read these files for detailed guidance:
 3. Link every method claim to concrete evidence from the materials.
 4. Propose contribution candidates. Distinguish evidence-backed facts from interpretation.
 5. Run `digest/scripts/summarize_repo.py <repo_path>` for a file inventory.
-6. Run `digest/scripts/extract_architecture.py <repo_path>` for deep code analysis: extract nn.Module subclasses, loss functions, hyperparameters, framework detection, and training infrastructure (NEW in v0.4).
+6. Run `digest/scripts/extract_architecture.py <repo_path>` for deep code analysis: extract nn.Module subclasses, loss functions, hyperparameters, framework detection, and training infrastructure.
+7. If Jupyter notebooks (`.ipynb`) exist, run `digest/scripts/parse_notebooks.py <notebooks>` to extract model definitions, training loops, and results tables from notebook cells (NEW in v0.4).
+8. Run `digest/scripts/trace_dependencies.py <repo_path> --entry <entry_point>` to build import graph, trace data flow, and identify core pipeline modules (NEW in v0.4).
+9. Run `digest/scripts/synthesize_brief.py --arch <arch_report> --deps <dep_report> --notebooks <nb_report> --output <output_dir>/00_project_brief.md` to auto-generate the complete project brief, or use `--repo <path>` to run the full digest pipeline end-to-end (NEW in v0.4).
 
 ### Prompt Guidance
 
@@ -940,6 +943,9 @@ Apply at every stage:
 |--------|---------|
 | `digest/scripts/summarize_repo.py <path>` | Quick file inventory of a code repo |
 | `digest/scripts/extract_architecture.py <path> --output <report>` | Deep code analysis: nn.Module extraction, loss function parsing, hyperparameter detection, framework identification (NEW v0.4) |
+| `digest/scripts/parse_notebooks.py <notebook.ipynb> --output <report>` | Extract model definitions, training loops, hyperparameters, results tables from Jupyter notebooks (NEW v0.4) |
+| `digest/scripts/trace_dependencies.py <repo> --output <report>` | Module-level import graph, data flow tracing, core pipeline identification, orphan module detection (NEW v0.4) |
+| `digest/scripts/synthesize_brief.py --arch <arch.md> --deps <dep.md> --output <brief>` | Auto-generate complete project_brief.md from all digest outputs (NEW v0.4) |
 | `experiment/scripts/compute_improvements.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --lower-better <m2> --group-cols <col> --output <path>` | Compute pairwise improvements from CSV (v0.4: added --stats, --all-pairs, --format json, --seed-col) |
 | `experiment/scripts/statistical_tests.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --output <path>` | Bootstrap CI, Cohen's d/Hedges' g, paired t-test, Wilcoxon, multiple comparison correction (NEW v0.4) |
 | `experiment/scripts/result_visualizer.py <csv> --target <name> --metrics <m1,m2> --output-dir <dir>` | Bar charts, ablation waterfall, radar charts, heatmaps, Pareto frontiers (NEW v0.4) |
