@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI-SCI-SKILLs Project State",
+  "description": "Schema for project-state.md — the shared state file used by the unified AI-SCI-SKILLs pipeline to track progress and store intermediate outputs across stages.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["INIT", "DIGEST", "LIT", "EXPER", "WRITE", "DONE"],
+      "description": "Current pipeline stage."
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO date when the project state was first created."
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO date of last modification."
+    },
+    "available_materials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": { "type": "integer" },
+          "type": { "type": "string", "description": "code, notes, experiment_table, diagram, draft, literature, other" },
+          "path": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "target_venue": {
+      "type": "string",
+      "description": "Target journal or conference."
+    },
+    "pipeline_progress": {
+      "type": "object",
+      "properties": {
+        "stage_1_digest": { "type": "boolean" },
+        "stage_2_lit": { "type": "boolean" },
+        "stage_3_exper": { "type": "boolean" },
+        "stage_4_write": { "type": "boolean" }
+      }
+    },
+    "stage_outputs": {
+      "type": "object",
+      "properties": {
+        "digest": { "type": "string", "description": "Stage 1 output: project brief." },
+        "literature": { "type": "string", "description": "Stage 2 output: literature matrix and related work structure." },
+        "experiment": { "type": "string", "description": "Stage 3 output: experiment analysis and claims." },
+        "write": { "type": "string", "description": "Stage 4 output: generated manuscript files." }
+      }
+    },
+    "missing_author_inputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "paper_storyline": {
+      "type": "object",
+      "properties": {
+        "problem": { "type": "string" },
+        "gap": { "type": "string" },
+        "method": { "type": "string" },
+        "evidence": { "type": "string" },
+        "contribution": { "type": "string" }
+      }
+    }
+  }
+}
