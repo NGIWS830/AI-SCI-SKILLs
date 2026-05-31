@@ -20,7 +20,7 @@ from typing import Optional
 
 CROSSREF_API_URL = "https://api.crossref.org/works"
 DBLP_API_URL = "https://dblp.org/search/publ/api"
-USER_AGENT = "AI-SCI-SKILLs/0.3 (mailto:research@example.com)"
+USER_AGENT = "AI-SCI-SKILLs/0.3.1 (mailto:research@example.com)"
 
 # ── Helpers ─────────────────────────────────────────────────────────────────────
 

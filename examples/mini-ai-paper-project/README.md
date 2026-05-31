@@ -1,6 +1,6 @@
 # Mini AI Paper Project Example
 
-This example demonstrates the complete AI-SCI-SKILLs v0.3 workflow with a realistic scenario: **Cross-Modal Feature Alignment for Text-to-Image Retrieval**.
+This example demonstrates the complete AI-SCI-SKILLs v0.3.1 workflow with a realistic scenario: **Cross-Modal Feature Alignment for Text-to-Image Retrieval**.
 
 ## Scenario
 

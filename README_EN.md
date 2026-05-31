@@ -2,7 +2,7 @@
 
 # AI-SCI-SKILLs
 
-[![Version](https://img.shields.io/badge/version-v0.3-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
+[![Version](https://img.shields.io/badge/version-v0.3.1-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20Any%20Agent-lightgrey.svg)
 ![Built with](https://img.shields.io/badge/AI%20Powered-Skill%20%7C%20Pipeline-orange.svg)
@@ -145,7 +145,7 @@ python scripts/render_word.py content.json \
 
 ---
 
-## v0.3 Key Features
+## v0.3.1 Key Features
 
 **Quality Scoring System (Stage 4f)**
 - 5-dimension rubric: Claims-Evidence Alignment / Citation Completeness / Method Precision / Experiment Rigor / Language Quality

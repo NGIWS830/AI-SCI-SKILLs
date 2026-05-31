@@ -3,7 +3,7 @@ name: ai-sci-skills
 description: End-to-end automated SCI paper writing for deep learning, machine learning, computer vision, NLP, multimodal learning, and related AI research. Chinese-first pipeline: raw project materials → structured digest → literature review → experiment analysis → polished English manuscript. Use when the user wants to write a complete SCI paper from code, notes, experiment tables, framework diagrams, or mixed research materials.
 ---
 
-# AI SCI Paper Writer v0.3
+# AI SCI Paper Writer v0.3.1
 
 ## Mission
 

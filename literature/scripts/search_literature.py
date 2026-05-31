@@ -26,7 +26,7 @@ DBLP_API_URL = "https://dblp.org/search/publ/api"
 # Semantic Scholar API key (optional: set SEMANTIC_SCHOLAR_API_KEY env var for higher rate limits)
 S2_API_KEY = os.environ.get("SEMANTIC_SCHOLAR_API_KEY", "")
 
-USER_AGENT = "AI-SCI-SKILLs/0.3 (mailto:research@example.com)"
+USER_AGENT = "AI-SCI-SKILLs/0.3.1 (mailto:research@example.com)"
 
 # ── Helper Functions ────────────────────────────────────────────────────────────
 
