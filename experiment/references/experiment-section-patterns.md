@@ -1,30 +1,16 @@
 # Experiment Section Patterns
 
-## Recommended structure
+This file is a section stub. See the canonical version at:
 
-```markdown
-## 4. Experiments
+**`writer/references/experiment-section-patterns.md`**
 
-### 4.1 Datasets and Evaluation Metrics
+The canonical version contains:
+- Section structure variants (single-dataset, two-dataset, multi-dataset)
+- Result reporting sentence templates (main results, ablation, efficiency, robustness, qualitative)
+- Table formatting standards (bold/underline convention, std format, caption templates)
+- Figure caption templates (architecture, confusion matrix, attention maps, t-SNE, loss curves)
+- Statistical significance patterns
+- Ablation analysis writing
+- Experiment section quality self-check
 
-### 4.2 Implementation Details
-
-### 4.3 Comparison with State-of-the-Art Methods
-
-### 4.4 Ablation Study
-
-### 4.5 Efficiency Analysis
-
-### 4.6 Qualitative Analysis
-```
-
-Only include sections supported by available evidence.
-
-## Results paragraph pattern
-
-1. State the comparison context.
-2. Report the most important numerical evidence.
-3. Explain what the evidence supports.
-4. Add caveat if needed.
-
-Avoid turning every table cell into prose.
+This stub is kept for backward compatibility with Stage 3 (EXPER) references. When the agent reads this file, it should then read the canonical writer version for actual guidance.

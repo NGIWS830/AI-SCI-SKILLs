@@ -70,6 +70,22 @@ Keep the experimental logic close to the reference paper, but adapt all dataset,
 
 Delete unsupported subsections rather than inventing experiments. If only one dataset is available, use one comparison section. If no qualitative, robustness, or efficiency evidence is available, mark the missing item as `AUTHOR_INPUT_NEEDED`.
 
+### V Conclusion
+
+Simple structure — no subsections needed:
+```
+V Conclusion
+[2-4 paragraphs: summary + implications + limitations + future work]
+```
+
+## Optional Sections
+
+### Discussion (between Experiments and Conclusion)
+Use when: substantial interpretation is needed beyond what fits in per-dataset analysis sections. Common in journals (TPAMI, TNNLS). Less common in conferences (page limits).
+
+### Appendix / Supplementary Material
+Use for: additional ablation studies, per-category results, full implementation details, dataset examples, broader impact statement, ethical considerations.
+
 ## Writing Rules
 
 - Treat the reference article as a structure template only; do not copy its claims, module names, datasets, or result wording.
@@ -78,3 +94,14 @@ Delete unsupported subsections rather than inventing experiments. If only one da
 - In `Proposed Method`, start with the overall framework before describing modules.
 - In `Experiments`, report metric direction, baseline scope, and caveats before making result claims.
 - In `Conclusion`, include limitations and future work only when supported or explicitly provided by the author.
+
+## Venue-Specific Variations
+
+| Venue | Typical Page Limit | Notes |
+|-------|--------------------|-------|
+| CVPR / ICCV / ECCV | 8 pages (+ refs) | Dense, every figure must carry weight |
+| NeurIPS / ICML / ICLR | 8-9 pages (+ refs) | Method and experiments sections are longer; intro can be shorter |
+| ACL / EMNLP | 8 pages (+ refs) | Related work can be shorter |
+| AAAI / IJCAI | 7-8 pages (+ refs) | Tight page budget; cut verbose prose |
+| TPAMI / TIP | 12-18 pages | More comprehensive; deeper literature, more analysis |
+| TNNLS | 12-15 pages | Include theoretical analysis if claimed |
