@@ -1,10 +1,24 @@
+<div align="center">
+
 # AI-SCI-SKILLs v0.3
+
+[![Version](https://img.shields.io/badge/version-v0.3-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
+![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Any%20Agent-lightgrey.svg)
+![Built with](https://img.shields.io/badge/AI%20Powered-Skill%20%7C%20Pipeline-orange.svg)
 
 [中文](README.md)
 
+</div>
+
 ---
 
-**One skill. One session. Raw materials → polished English SCI manuscript.**
+<div align="center">
+
+<h3><strong>One Skill. One Session. Raw materials → polished English SCI manuscript. 🚀</strong></h3>
+
+</div>
+
+---
 
 AI-SCI-SKILLs is a Chinese-first, end-to-end pipeline for writing SCI papers in deep learning, machine learning, computer vision, NLP, multimodal learning, and related AI research areas.
 

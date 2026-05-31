@@ -1,10 +1,24 @@
+<div align="center">
+
 # AI-SCI-SKILLs v0.3
+
+[![Version](https://img.shields.io/badge/version-v0.3-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
+![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Any%20Agent-lightgrey.svg)
+![Built with](https://img.shields.io/badge/AI%20Powered-Skill%20%7C%20Pipeline-orange.svg)
 
 [English](README_EN.md)
 
+</div>
+
 ---
 
-**一个技能，一次会话。原始材料 → 英文 SCI 论文终稿。**
+<div align="center">
+
+<h3><strong>一个 Skill，一次会话。原始材料 → 英文 SCI 论文终稿。🚀</strong></h3>
+
+</div>
+
+---
 
 AI-SCI-SKILLs 是一个以中文为先的端到端 SCI 论文写作流水线，覆盖深度学习、机器学习、计算机视觉、NLP、多模态学习及相关 AI 研究方向。
 
