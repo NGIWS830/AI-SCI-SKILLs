@@ -1,6 +1,6 @@
 <div align="center">
 
-# AI-SCI-SKILLs v0.3
+# AI-SCI-SKILLs
 
 [![Version](https://img.shields.io/badge/version-v0.3-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
 ![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Any%20Agent-lightgrey.svg)
