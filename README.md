@@ -22,8 +22,9 @@ SKILL.md（根入口）
 ├── experiment/    — 分析实验并验证论点
 │   └── references/  — 指标指南、声明规则、消融写作、可复现性检查清单
 ├── writer/        — 中文初稿 → 润色 → 英译 → 英文润色 → 自批判
-│   └── references/  — 全章节模板、中英翻译语料库、术语表、质量评分标准
-└── scripts/       — 质量检查、LaTeX 编译、图表抽取、BibTeX 格式化、打包
+│   └── references/  — 全章节模板、中英翻译语料库、术语表、质量评分标准、模板填充指南
+├── scripts/       — 质量检查、LaTeX 编译、图表抽取、BibTeX 格式化、Word 渲染、打包
+└── templates/     — 中文期刊 LaTeX（cjc）、IEEE 会议 LaTeX（IEEEtran）、IEEE 会议 Word
 ```
 
 ### 流水线
@@ -33,7 +34,7 @@ Stage 0: INIT   → 盘点材料，创建项目状态文件
 Stage 1: DIGEST → 阅读项目材料，生成项目简报
 Stage 2: LIT    → 文献检索（API 自动化）、验证、矩阵整理
 Stage 3: EXPER  → 实验分析、改进计算、论点提炼
-Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色 → 4d 英译 → 4e 英文润色 → 4f 自批判
+Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色 → 4d 英译 → 4e 英文润色 → 4f 自批判 → 4g 模板渲染
 ```
 
 流水线可断点续传：若流程中断，重新加载 `SKILL.md` 并指向已有的 `project-state.md`，即可从上一完成阶段继续。
@@ -55,6 +56,12 @@ Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色 → 4d 
 - `writer/references/cn-en-translation-corpus.md` — 高频术语、句式对照，防止翻译错误
 - 声明强度映射表：中文常见夸大表述 → 英文学术安全表述
 
+**模板输出（Stage 4g）**
+- 中文 LaTeX 输出（中文期刊通用格式，基于 cjc 模板）
+- 英文 LaTeX 输出（IEEE 会议格式，基于 IEEEtran 模板）
+- 英文 Word 输出（IEEE 会议格式，程序化填充）
+- `scripts/render_word.py` — 将结构化内容填入 Word 模板
+
 **写作工具脚本**
 - `scripts/compile_latex.py` — 编译 LaTeX 稿件为 PDF
 - `scripts/extract_figures.py` — 从论文中抽取图表
@@ -71,7 +78,7 @@ Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色 → 4d 
 1. 将 `SKILL.md` 加载到任何支持 Markdown 技能定义的 agent 中。
 2. 提供你的研究材料：代码、笔记、实验表格、框架图、文献等。
 3. Agent 自动走完全部阶段。你在关键检查点进行审阅和确认。
-4. 输出：一篇打磨好的英文 SCI 论文，以及所有中间文件和质量报告。
+4. 输出：英文 SCI 论文（LaTeX + Word 双格式）、中文参考稿（LaTeX），以及所有中间文件和质量报告。
 
 ### 打包
 
@@ -131,6 +138,14 @@ python literature/scripts/search_literature.py "cross-modal retrieval contrastiv
 ```bash
 python scripts/check_quality.py examples/mini-ai-paper-project/outputs --all \
     --output examples/mini-ai-paper-project/outputs/10a_auto_check.md
+```
+
+渲染 Word 稿件：
+
+```bash
+python scripts/render_word.py examples/mini-ai-paper-project/outputs/word_content.json \
+    --template templates/ieee-word/template.docx \
+    --output examples/mini-ai-paper-project/outputs/english_manuscript.docx
 ```
 
 ### 开发检查

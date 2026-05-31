@@ -16,7 +16,7 @@ STAGE 0: INIT     → Inventory materials, create project state file
 STAGE 1: DIGEST   → Extract paper-ready facts from project materials
 STAGE 2: LIT      → Search, verify, organize literature
 STAGE 3: EXPER    → Analyze experiments, compute improvements, validate claims
-STAGE 4: WRITE    → Chinese draft → Chinese polish → EN conversion → EN polish → Self-critique
+STAGE 4: WRITE    → Chinese draft → Chinese polish → EN conversion → EN polish → Self-critique → Template Rendering
 ```
 
 Each stage saves its output to a shared project state file. The pipeline can be paused and resumed at any stage.
@@ -719,7 +719,70 @@ python scripts/check_quality.py <output_dir> --all --output <output_dir>/10a_aut
    - List of should-fix issues (non-blocking)
    - Recommendation: READY / NEEDS REVISION / NOT READY
 
-### Output Files
+**Transition to 4g if score >= 80.** If < 80, fix issues and re-evaluate before proceeding.
+
+---
+
+#### 4g: Template Rendering (`chinese_manuscript/`, `english_manuscript/`, `english_manuscript.docx`) **[NEW in v0.3]**
+
+**Purpose:** Render polished content into submission-ready formats: Chinese LaTeX, English LaTeX, and English Word.
+
+**Required Inputs:**
+- `06_chinese_polished.md` (for Chinese LaTeX)
+- `08_english_polished.md` (for English LaTeX and Word)
+- Stage 2: Verified literature matrix (for .bib generation)
+- Stage 0: Author-provided author/affiliation/funding info
+
+**References:**
+- `writer/references/template-filling-guide.md` — complete filling rules for all three templates
+
+**Templates:**
+
+| Template | Location | Output |
+|----------|----------|--------|
+| Chinese LaTeX (cjc) | `templates/chinese/` | `<output_dir>/chinese_manuscript/` |
+| IEEE LaTeX | `templates/ieee-latex/` | `<output_dir>/english_manuscript/` |
+| IEEE Word | `templates/ieee-word/` | `<output_dir>/english_manuscript.docx` |
+
+**Actions:**
+
+**Step 1: Chinese LaTeX Manuscript**
+1. Copy `templates/chinese/` to `<output_dir>/chinese_manuscript/`.
+2. Fill `chinese_manuscript.tex` using content from `06_chinese_polished.md`:
+   - `\classsetup{}`: Bilingual metadata (title, authors, affiliations, abstract, keywords, grants).
+   - 引言, 相关工作, 方法, 实验, 结论: Fill from corresponding sections.
+   - 致谢: From author-provided acknowledgments.
+3. Generate `references.bib` from Stage 2's verified literature entries.
+4. Compile check: `python scripts/compile_latex.py <output_dir>/chinese_manuscript/chinese_manuscript.tex --compiler xelatex`
+
+**Step 2: English LaTeX Manuscript**
+1. Copy `templates/ieee-latex/` to `<output_dir>/english_manuscript/`.
+2. Fill `english_manuscript.tex` using content from `08_english_polished.md`:
+   - `\title{}`, `\author{}`: From Stage 0 author info.
+   - Abstract, Introduction, Related Work, Proposed Method, Experiments, Conclusion: Fill from corresponding sections.
+   - Apply IEEE-specific formatting (tense conventions, figure/table style, citation style).
+3. Generate `references.bib` from Stage 2's verified literature entries (same entries, different BibTeX style via `IEEEtran.bst`).
+4. Compile check: `python scripts/compile_latex.py <output_dir>/english_manuscript/english_manuscript.tex`
+
+**Step 3: English Word Manuscript**
+1. Build a JSON content file at `<output_dir>/word_content.json` from `08_english_polished.md`. See `template-filling-guide.md` for the JSON schema.
+2. Run the Word script:
+   ```bash
+   python scripts/render_word.py <output_dir>/word_content.json \
+       --template templates/ieee-word/template.docx \
+       --output <output_dir>/english_manuscript.docx
+   ```
+
+**Step 4: Cross-Template Consistency Check**
+Verify across all three outputs (see `template-filling-guide.md` for detailed checklist):
+1. Titles match (Chinese `title*` == IEEE title == Word title).
+2. Author lists match in order and affiliation.
+3. English abstracts match between LaTeX and Word.
+4. All metric values are identical.
+5. Citation counts are consistent.
+6. No `AUTHOR_INPUT_NEEDED` or `[CITATION NEEDED]` in any final output.
+
+### Final Output Files
 ```
 <output_dir>/
 ├── project-state.md
@@ -729,13 +792,25 @@ python scripts/check_quality.py <output_dir> --all --output <output_dir>/10a_aut
 ├── 08_english_polished.md
 ├── 09_revision_notes.md
 ├── 10_critique_report.md
-└── 10a_auto_check.md
+├── 10a_auto_check.md
+├── word_content.json
+├── english_manuscript.docx
+├── chinese_manuscript/
+│   ├── chinese_manuscript.tex
+│   ├── cjc.cls, cjc.bst
+│   ├── references.bib
+│   └── figures/
+└── english_manuscript/
+    ├── english_manuscript.tex
+    ├── IEEEtran.cls, IEEEtran.bst
+    ├── references.bib
+    └── figures/
 ```
 
 ### Transition
 1. Update `**Status**` to `DONE`.
 2. Mark `[x] Stage 4: WRITE` in the pipeline progress.
-3. The pipeline is complete. Summarize the output files produced and the critique score.
+3. The pipeline is complete. Summarize all output files and the critique score.
 
 ---
 
@@ -773,6 +848,7 @@ Apply at every stage:
 | `scripts/check_quality.py <output_dir> --all --output <path>` | Automated quality checks on generated paper |
 | `scripts/compile_latex.py <tex_file> --output-dir <dir>` | Compile LaTeX manuscript to PDF |
 | `scripts/format_bibtex.py <bib_file> --validate --normalize --output <path>` | Validate and normalize BibTeX entries |
+| `scripts/render_word.py <content.json> --template <template.docx> --output <output.docx>` | Fill IEEE Word template with structured content |
 | `scripts/package_skills.py --output-dir <dir>` | Package skill suite for distribution |
 
 ## Module Reference Index
@@ -782,4 +858,5 @@ Apply at every stage:
 | Digest | `digest/references/` | Code reading, task taxonomy, evidence rules, project brief template |
 | Literature | `literature/references/` | Search strategies, API search guide, citation verification, classic paper maps, related work patterns, literature matrix template |
 | Experiment | `experiment/references/` | Metrics guide, claim rules, ablation writing, experiment section patterns, reproducibility checklist |
-| Writer | `writer/references/` | Full writing pipeline: title, abstract, introduction, related work, method, experiments, conclusion, discussion patterns; Chinese drafting/polishing; CN→EN conversion; English polishing; forbidden overclaims; terminology glossary; quality rubric |
+| Writer | `writer/references/` | Full writing pipeline: title, abstract, introduction, related work, method, experiments, conclusion, discussion patterns; Chinese drafting/polishing; CN→EN conversion; English polishing; forbidden overclaims; terminology glossary; quality rubric; template filling guide |
+| Templates | `templates/` | Chinese journal LaTeX (cjc), IEEE conference LaTeX (IEEEtran), IEEE conference Word |

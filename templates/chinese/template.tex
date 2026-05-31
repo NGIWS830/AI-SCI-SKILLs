@@ -1,0 +1,176 @@
+% !TeX encoding = UTF-8
+% !TeX program = xelatex
+% 中文期刊 LaTeX 模板 — 通用参考
+% 基于 CTeX-org/chinesejournal 框架 (cjc.cls)
+% 编译: latexmk -xelatex template.tex
+
+\documentclass{cjc}
+
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+
+\classsetup{
+  title        = {论文标题},
+  title*       = {Paper Title},
+  authors      = {
+    author1 = {
+      name         = {作者一},
+      name*        = {First Author},
+      affiliations = {aff1},
+      biography    = {作者简介（投稿时填写）。},
+      biography*   = {Author biography.},
+      email        = {email@example.com},
+      phone-number = {……},
+    },
+    author2 = {
+      name         = {作者二},
+      name*        = {Second Author},
+      affiliations = {aff2},
+      biography    = {作者简介（投稿时填写）。},
+      biography*   = {Author biography.},
+      email        = {email@example.com},
+    },
+    author3 = {
+      name         = {通讯作者},
+      name*        = {Corresponding Author},
+      affiliations = {aff1},
+      biography    = {作者简介（投稿时填写）。},
+      biography*   = {Author biography.},
+      email        = {email@example.com},
+      corresponding = true,
+    },
+  },
+  affiliations = {
+    aff1 = {
+      name  = {单位全名\ 部门全名, 城市 邮政编码, 国家},
+      name* = {Department, University, City ZipCode, Country},
+    },
+    aff2 = {
+      name  = {单位全名\ 部门全名, 城市 邮政编码, 国家},
+      name* = {Department, University, City ZipCode, Country},
+    },
+  },
+  abstract     = {中文摘要内容。},
+  abstract*    = {English abstract.},
+  keywords     = {关键词1, 关键词2, 关键词3, 关键词4, 关键词5},
+  keywords*    = {keyword1, keyword2, keyword3, keyword4, keyword5},
+  grants       = {基金资助信息（如有）。},
+  % received-date = {YYYY-MM-DD},
+  % revised-date  = {YYYY-MM-DD},
+  % clc           = {TP391},
+  % doi           = {},
+}
+
+\newcommand\dif{\mathop{}\!\mathrm{d}}
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\maketitle
+
+% ============================================================
+% 1  引言
+% ============================================================
+\section{引言}
+
+% 研究背景与意义
+% 现有工作与不足
+% 本文贡献（3-4 点，每点应有证据支撑）
+
+\section{相关工作}
+
+% 相关工作应在主题分类下对比分析，避免"作者 [X] 提出……"的罗列模式
+
+\subsection{子领域一}
+
+\subsection{子领域二}
+
+% ============================================================
+% 2  方法
+% ============================================================
+\section{方法}
+
+\subsection{方法总览}
+
+% 整体架构概述 + 架构图引用
+
+\subsection{模块一}
+
+% 输入 → 处理 → 输出 → 设计动机
+
+\subsection{模块二}
+
+\subsection{损失函数}
+
+% ============================================================
+% 3  实验
+% ============================================================
+\section{实验}
+
+\subsection{数据集与实验设置}
+
+% 数据集统计、评估指标、实现细节、超参数
+
+\subsection{与基线方法的对比}
+
+% 主结果表 + 分析
+
+\subsection{消融实验}
+
+% 各模块贡献分析
+
+\subsection{效率分析}
+
+% 参数量、推理时间等
+
+\subsection{定性分析}
+
+% 可视化结果
+
+% ============================================================
+% 4  结论
+% ============================================================
+\section{结论}
+
+% 总结问题、方法、关键发现
+% 未来工作方向
+
+% ============================================================
+% 致谢
+% ============================================================
+\begin{acknowledgments}
+致谢内容。
+\end{acknowledgments}
+
+% ============================================================
+% 参考文献
+% ============================================================
+\bibliographystyle{cjc}
+\bibliography{references}
+
+% ============================================================
+% 附录（可选）
+% ============================================================
+% \newpage
+% \appendix
+% \section{附录标题}
+% 附录内容：详细证明、公式推导、原始数据等。
+
+% ============================================================
+% 作者简介
+% ============================================================
+\makebiographies
+
+% ============================================================
+% 英文背景介绍（可选）
+% ============================================================
+% \begin{background}
+% 英文背景介绍（约 400 单词）。
+% \end{background}
+
+\end{document}

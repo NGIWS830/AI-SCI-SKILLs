@@ -22,8 +22,9 @@ SKILL.md (root entry point)
 ├── experiment/    — Analyze experiments and validate claims
 │   └── references/  — Metrics guide, claim rules, ablation writing, reproducibility checklist
 ├── writer/        — Chinese draft → polish → EN conversion → EN polish → Self-critique
-│   └── references/  — Full section templates, CN-EN translation corpus, terminology glossary, quality rubric
-└── scripts/       — Quality checks, LaTeX compilation, figure extraction, BibTeX formatting, packaging
+│   └── references/  — Full section templates, CN-EN translation corpus, terminology glossary, quality rubric, template filling guide
+├── scripts/       — Quality checks, LaTeX compilation, figure extraction, BibTeX formatting, Word rendering, packaging
+└── templates/     — Chinese journal LaTeX (cjc), IEEE conference LaTeX (IEEEtran), IEEE conference Word
 ```
 
 ### Pipeline
@@ -33,7 +34,7 @@ Stage 0: INIT   → Inventory materials, create project state
 Stage 1: DIGEST → Read project materials, produce project brief
 Stage 2: LIT    → Literature search (API automated), verification, matrix
 Stage 3: EXPER  → Experiment analysis, improvement calc, claims
-Stage 4: WRITE  → 4a Storyline → 4b Chinese draft → 4c Chinese polish → 4d EN conversion → 4e EN polish → 4f Self-critique
+Stage 4: WRITE  → 4a Storyline → 4b Chinese draft → 4c Chinese polish → 4d EN conversion → 4e EN polish → 4f Self-critique → 4g Template Rendering
 ```
 
 The pipeline is resumable: if interrupted, reload `SKILL.md` and point to the existing `project-state.md` to continue from the last completed stage.
@@ -55,6 +56,12 @@ The pipeline is resumable: if interrupted, reload `SKILL.md` and point to the ex
 - `writer/references/cn-en-translation-corpus.md` — High-frequency term and sentence pattern mappings
 - Claim-strength mapping: common Chinese overclaims → safe English academic equivalents
 
+**Template Outputs (Stage 4g)**
+- Chinese LaTeX output (generic Chinese journal format, cjc-based)
+- English LaTeX output (IEEE conference format, IEEEtran-based)
+- English Word output (IEEE conference format, programmatically filled)
+- `scripts/render_word.py` — Fill Word template with structured content
+
 **Writing Tool Scripts**
 - `scripts/compile_latex.py` — Compile LaTeX manuscript to PDF
 - `scripts/extract_figures.py` — Extract figures from papers
@@ -71,7 +78,7 @@ The pipeline is resumable: if interrupted, reload `SKILL.md` and point to the ex
 1. Load `SKILL.md` into any agent that supports markdown-based skill definitions.
 2. Provide your research materials: code, notes, experiment tables, framework diagrams, literature.
 3. The agent walks through all stages automatically. You review and approve at key checkpoints.
-4. Output: a polished English SCI manuscript plus all intermediate files and quality reports.
+4. Output: English SCI manuscript (LaTeX + Word dual format), Chinese reference manuscript (LaTeX), plus all intermediate files and quality reports.
 
 ### Package
 
@@ -131,6 +138,14 @@ Run quality checks:
 ```bash
 python scripts/check_quality.py examples/mini-ai-paper-project/outputs --all \
     --output examples/mini-ai-paper-project/outputs/10a_auto_check.md
+```
+
+Render Word manuscript:
+
+```bash
+python scripts/render_word.py examples/mini-ai-paper-project/outputs/word_content.json \
+    --template templates/ieee-word/template.docx \
+    --output examples/mini-ai-paper-project/outputs/english_manuscript.docx
 ```
 
 ### Development Checks
