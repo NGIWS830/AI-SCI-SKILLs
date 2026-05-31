@@ -4,7 +4,7 @@
 
 [![Version](https://img.shields.io/badge/version-v0.3-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Any%20Agent-lightgrey.svg)
+![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20Any%20Agent-lightgrey.svg)
 ![Built with](https://img.shields.io/badge/AI%20Powered-Skill%20%7C%20Pipeline-orange.svg)
 
 中文 | [English](README_EN.md)
@@ -28,7 +28,7 @@ AI-SCI-SKILLs 是一个以中文为先的端到端 SCI 论文写作流水线，�
 
 ### 触发关键词
 
-对话中出现以下任意关键词时，Claude Code 会自动激活本 skill：
+对话中出现以下任意关键词时，AI Agent 会自动激活本 skill（Claude Code 原生支持自动触发；Codex、Cursor、Copilot 等可直接将 `SKILL.md` 作为上下文加载）：
 
 `写论文` `SCI论文` `学术论文` `paper writing` `SCI paper` `manuscript` `LaTeX论文` `期刊论文` `会议论文` `投稿` `初稿` `论文写作` `写英文论文` `润色论文` `翻译论文` `学术写作` `academic writing`
 
@@ -113,14 +113,15 @@ SKILL.md（根入口）
 
 ## 快速开始
 
-### 方式一：在 Claude Code 中使用
+### 方式一：在 AI Agent 中使用
 
-1. 将本仓库克隆到本地，`SKILL.md` 即 skill 入口。
-2. 在对话中说"帮我写一篇 SCI 论文"，或提供材料后说"把这些写成论文"。
-3. Agent 会从 Stage 0 开始，逐步走完全部流水线。你在关键检查点进行审阅。
-4. 最终输出：英文 SCI 论文（LaTeX + Word 双格式）、中文参考稿（LaTeX），以及所有中间文件和质量报告。
+`SKILL.md` 是一个通用的结构化指令文件，不绑定特定平台。Claude Code 可自动触发；Codex、Cursor、GitHub Copilot 等可将文件内容作为系统 prompt 或上下文加载使用。
 
-**注意：** 本项目是 Claude Code 的 skill，SKILL.md 需在对话中被加载才能生效。直接对话即可触发，无需额外配置。
+1. 将本仓库克隆到本地，`SKILL.md` 即入口文件。
+2. 将 `SKILL.md` 内容作为系统指令/上下文提供给 AI Agent。
+3. 在对话中说"帮我写一篇 SCI 论文"，或提供材料后说"把这些写成论文"。
+4. Agent 会从 Stage 0 开始，逐步走完全部流水线。你在关键检查点进行审阅。
+5. 最终输出：英文 SCI 论文（LaTeX + Word 双格式）、中文参考稿（LaTeX），以及所有中间文件和质量报告。
 
 ### 方式二：作为独立工具使用
 

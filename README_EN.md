@@ -4,7 +4,7 @@
 
 [![Version](https://img.shields.io/badge/version-v0.3-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Any%20Agent-lightgrey.svg)
+![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20Any%20Agent-lightgrey.svg)
 ![Built with](https://img.shields.io/badge/AI%20Powered-Skill%20%7C%20Pipeline-orange.svg)
 
 English | [中文](README.md)
@@ -28,7 +28,7 @@ AI-SCI-SKILLs is a Chinese-first, end-to-end pipeline for writing SCI papers in 
 
 ### Trigger Keywords
 
-The skill activates automatically when any of these keywords appear in conversation:
+The skill activates automatically when any of these keywords appear in conversation (Claude Code natively supports auto-trigger; Codex, Cursor, Copilot, etc. can load `SKILL.md` as context):
 
 `write paper` `SCI paper` `academic paper` `manuscript` `LaTeX paper` `journal paper` `conference paper` `submission` `draft paper` `paper writing` `polish paper` `translate paper` `academic writing` `research paper` `写论文` `论文写作`
 
@@ -111,14 +111,15 @@ SKILL.md (root entry point)
 
 ## Quick Start
 
-### Method 1: Use with Claude Code
+### Method 1: Use with Any AI Agent
 
-1. Clone this repository — `SKILL.md` is the skill entry point.
-2. Say "Write an SCI paper from my research materials" or provide materials and say "Turn these into a paper."
-3. The agent walks through all stages from Stage 0. Review and approve at key checkpoints.
-4. Final output: English SCI manuscript (LaTeX + Word dual format), Chinese reference manuscript (LaTeX), plus all intermediate files and quality reports.
+`SKILL.md` is a universal structured instruction file — not tied to any single platform. Claude Code auto-triggers it natively; Codex, Cursor, GitHub Copilot, and others can load it as system prompt or context.
 
-**Note:** This is a Claude Code skill. `SKILL.md` is loaded automatically — no extra configuration needed.
+1. Clone this repository — `SKILL.md` is the entry point.
+2. Provide `SKILL.md` as system instructions / context to your AI agent.
+3. Say "Write an SCI paper from my research materials" or provide materials and say "Turn these into a paper."
+4. The agent walks through all stages from Stage 0. Review and approve at key checkpoints.
+5. Final output: English SCI manuscript (LaTeX + Word dual format), Chinese reference manuscript (LaTeX), plus all intermediate files and quality reports.
 
 ### Method 2: Standalone Scripts
 
