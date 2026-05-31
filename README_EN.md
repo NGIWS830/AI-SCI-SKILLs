@@ -43,7 +43,9 @@ You can also jump directly to a specific stage:
 
 ## Use Cases
 
-| What You Have | What You Want | Use |
+> **One skill, pick your starting point.** This table shows how the same skill auto-detects the right stage based on what materials you provide and what you ask for. These are NOT separate skills — just different entry points into the same pipeline.
+
+| What You Have | What You Want | Start At |
 |--------------|---------------|-----|
 | Code + experiment tables + notes | Complete English SCI paper | Full pipeline |
 | Experiment CSV + method description | Results analysis and paper | Stage 3-4 |
