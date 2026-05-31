@@ -929,6 +929,7 @@ Apply at every stage:
 | `literature/scripts/search_literature.py "<query>" --sources s2,arxiv --max 20 --output <path>` | Search literature across Academic APIs |
 | `literature/scripts/verify_citations.py <citations_file> --sources crossref,dblp --output <path>` | Verify citation metadata |
 | `literature/scripts/analyze_citations.py <lit_matrix.md> --output <gap_analysis>` | Temporal trends, venue distribution, method-family clustering, research gap identification, network data export (NEW v0.4) |
+| `literature/scripts/auto_fill_matrix.py <search_results.md> --project-brief <brief> --output <matrix>` | Auto-fill literature matrix from search results — classifies papers by task relation, summarizes main ideas, assigns section placement (NEW v0.4) |
 | `scripts/check_quality.py <output_dir> --checks all --output <path>` | Quality checks: claims, citations, reproducibility, language, structure, terminology, CN-overclaims, dedup, AI-flavor |
 | `scripts/compile_latex.py <tex_file> --output-dir <dir>` | Compile LaTeX manuscript to PDF |
 | `scripts/format_bibtex.py <bib_file> --validate --normalize --output <path>` | Validate and normalize BibTeX entries |
