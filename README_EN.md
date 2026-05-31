@@ -45,14 +45,19 @@ You can also jump directly to a specific stage:
 
 > **One skill, pick your starting point.** This table shows how the same skill auto-detects the right stage based on what materials you provide and what you ask for. These are NOT separate skills — just different entry points into the same pipeline.
 
-| What You Have | What You Want | Start At |
-|--------------|---------------|-----|
-| Code + experiment tables + notes | Complete English SCI paper | Full pipeline |
-| Experiment CSV + method description | Results analysis and paper | Stage 3-4 |
-| Chinese paper draft | English SCI journal submission | Stage 4d-4e |
-| English draft | Polish + self-critique + template output | Stage 4e-4g |
-| Complete English manuscript | Quality check and self-critique | Stage 4f |
-| Scattered notes and ideas | Structured research brief | Stage 1 |
+| What You Have | What You Want | Start At | Try Saying |
+|--------------|---------------|----------|------------|
+| Code + experiment tables + notes | Complete English SCI paper | Stage 0-4 Full pipeline | "Write an SCI paper from these materials" |
+| Project folder (code + README + configs) | Paper draft | Stage 0-4 Full pipeline | "Generate a paper from this project" |
+| Experiment CSV + method description | Results analysis and paper | Stage 3-4 | "Analyze these experiment results and write up the experiments section" |
+| Experiment data + method + literature list | English paper | Stage 3-4 | "I have experiment tables and method notes — write the paper" |
+| Existing paper + new experiment results | Update experiments section | Stage 3-4 | "Update the paper with these new experiment results" |
+| Chinese paper draft | English SCI journal submission | Stage 4d-4e | "Translate this Chinese paper into polished English SCI" |
+| English draft | Polish + self-critique + template output | Stage 4e-4g | "Polish this English draft and render it into IEEE template" |
+| Complete English manuscript | Quality check and self-critique | Stage 4f | "Review the quality of this manuscript" |
+| Scattered notes and ideas | Structured research brief | Stage 1 | "Turn these research notes into a paper outline" |
+| Literature list + research direction | Literature review / Related Work | Stage 2 | "Search and organize literature for this research direction" |
+| Complete Chinese paper | LaTeX / Word template rendering | Stage 4g | "Render this paper into IEEE format" |
 
 ---
 
