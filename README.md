@@ -2,7 +2,7 @@
 
 # AI-SCI-SKILLs
 
-[![Version](https://img.shields.io/badge/version-v0.3.1-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
+[![Version](https://img.shields.io/badge/version-v0.4.0-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20Any%20Agent-lightgrey.svg)
 ![Built with](https://img.shields.io/badge/AI%20Powered-Skill%20%7C%20Pipeline-orange.svg)
@@ -128,14 +128,29 @@ SKILL.md（根入口）
 你也可以直接调用各阶段脚本：
 
 ```bash
+# 架构提取（NEW v0.4）
+python digest/scripts/extract_architecture.py my_project/ --output arch_report.md
+
 # 文献搜索
 python literature/scripts/search_literature.py "cross-modal retrieval contrastive learning" \
     --sources s2,arxiv --max 20 --output results.md
 
-# 实验改进计算
+# 引文分析（NEW v0.4）
+python literature/scripts/analyze_citations.py lit_matrix.md --output gap_analysis.md
+
+# 实验改进计算（v0.4 增强：--stats, --all-pairs, --format json）
 python experiment/scripts/compute_improvements.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 \
-    --higher-better R@1 R@5 R@10 --group-cols Dataset --output improvements.md
+    --higher-better R@1 R@5 R@10 --group-cols Dataset --stats --output improvements.md
+
+# 统计检验（NEW v0.4）
+python experiment/scripts/statistical_tests.py results.csv \
+    --target MyModel --metrics R@1 R@5 R@10 \
+    --higher-better R@1 R@5 R@10 --output stats_report.md
+
+# 结果可视化（NEW v0.4）
+python experiment/scripts/result_visualizer.py results.csv \
+    --target MyModel --metrics R@1 R@5 R@10 --output-dir ./figures/
 
 # 质量检查
 python scripts/check_quality.py output_dir/ --all --output quality_report.md
@@ -147,7 +162,25 @@ python scripts/render_word.py content.json \
 
 ---
 
-## v0.3.1 核心能力
+## v0.4.0 核心能力
+
+**统计分析（Stage 3 — NEW）**
+- Bootstrap 置信区间、Cohen's d / Hedges' g 效应量
+- 配对 t 检验 / Wilcoxon 符号秩检验
+- 多重比较校正（Bonferroni / Benjamini-Hochberg）
+- 统计功效分析
+- 结果可视化：柱状图、消融瀑布图、雷达图、热力图、Pareto 前沿
+
+**架构提取（Stage 1 — NEW）**
+- 自动提取所有 nn.Module / Flax / Keras 子类
+- 损失函数解析、超参数检测
+- 框架识别（PyTorch / JAX / TF / HuggingFace）
+- 训练基础设施检测（优化器、调度器、混合精度、分布式训练）
+
+**引文分析（Stage 2 — NEW）**
+- 时间趋势分析、会议/期刊分布
+- 方法家族聚类、研究缺口识别
+- 引文网络数据导出、缺失引用建议
 
 **质量评分体系（Stage 4f）**
 - 5 维度评分：声明-证据对齐 / 引文完整性 / 方法描述精度 / 实验报告严谨性 / 语言质量

@@ -2,7 +2,7 @@
 
 # AI-SCI-SKILLs
 
-[![Version](https://img.shields.io/badge/version-v0.3.1-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
+[![Version](https://img.shields.io/badge/version-v0.4.0-blue.svg)](https://github.com/NGIWS830/AI-SCI-SKILLs/releases)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20Any%20Agent-lightgrey.svg)
 ![Built with](https://img.shields.io/badge/AI%20Powered-Skill%20%7C%20Pipeline-orange.svg)
@@ -145,7 +145,25 @@ python scripts/render_word.py content.json \
 
 ---
 
-## v0.3.1 Key Features
+## v0.4.0 Key Features
+
+**Statistical Analysis (Stage 3 — NEW)**
+- Bootstrap confidence intervals, Cohen's d / Hedges' g effect sizes
+- Paired t-test / Wilcoxon signed-rank test
+- Multiple comparison correction (Bonferroni / Benjamini-Hochberg)
+- Statistical power analysis
+- Result visualization: bar charts, ablation waterfall, radar charts, heatmaps, Pareto frontiers
+
+**Architecture Extraction (Stage 1 — NEW)**
+- Auto-extract all nn.Module / Flax / Keras subclasses
+- Loss function parsing, hyperparameter detection
+- Framework identification (PyTorch / JAX / TF / HuggingFace)
+- Training infrastructure detection (optimizer, scheduler, mixed precision, distributed training)
+
+**Citation Analysis (Stage 2 — NEW)**
+- Temporal trend analysis, venue distribution
+- Method-family clustering, research gap identification
+- Citation network data export, missing citation suggestions
 
 **Quality Scoring System (Stage 4f)**
 - 5-dimension rubric: Claims-Evidence Alignment / Citation Completeness / Method Precision / Experiment Rigor / Language Quality

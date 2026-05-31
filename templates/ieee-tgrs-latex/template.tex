@@ -1,0 +1,487 @@
+% !TeX encoding = UTF-8
+% !TeX program = pdflatex
+% ---------------------------------------------------------------------------
+% IEEE TGRS (Transactions on Geoscience and Remote Sensing) Journal Template
+%
+% Usage:
+%   1. Requires IEEEtran.cls and IEEEtran.bst (included in this directory)
+%   2. Compile: pdflatex template.tex → bibtex template → pdflatex template.tex → pdflatex template.tex
+%
+% Journal: IEEE Transactions on Geoscience and Remote Sensing (TGRS)
+% Publisher: IEEE Geoscience and Remote Sensing Society (GRSS)
+% ISSN: 0196-2892
+% Page limit: typically 12-18 pages (no strict limit for initial submission)
+% ---------------------------------------------------------------------------
+
+\documentclass[journal,onecolumn,draftcls]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% --- Switch to final version for camera-ready ---
+% \documentclass[journal]{IEEEtran}
+% \IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{arydshln}  % dashed lines in tables
+\usepackage{hyperref}
+\usepackage{gensymb}   % \degree, \celsius, etc. (important for remote sensing)
+\usepackage{siunitx}   % SI units: \SI{10}{\meter}
+\usepackage{subcaption}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% --- TGRS Journal Metadata ---
+% \markboth{IEEE Transactions on Geoscience and Remote Sensing, Vol. XX, No. X, Month 2026}%
+% {Author \MakeLowercase{\textit{et al.}}: Short Title Here}
+
+\begin{document}
+
+% ===========================================================================
+% TITLE
+% ===========================================================================
+\title{Your Paper Title: A Comprehensive Study of [Method] for [Remote Sensing Task]}
+
+\author{
+  \IEEEauthorblockN{Author One\IEEEauthorrefmark{1},
+                    Author Two\IEEEauthorrefmark{2},
+                    Author Three\IEEEauthorrefmark{1}}
+  \IEEEauthorblockA{
+    \IEEEauthorrefmark{1}Department of XXX, University of YYY, City, Country \\
+    \IEEEauthorrefmark{2}Institute of ZZZ, Academy of Sciences, City, Country \\
+    E-mail: \{email1, email2\}@university.edu
+  }
+}
+
+% TGRS typically allows long titles. Use descriptive titles that include:
+% - The remote sensing task (e.g., classification, detection, change detection)
+% - The sensor/modality (e.g., SAR, multispectral, hyperspectral, LiDAR)
+% - The core technique (e.g., transformer, diffusion, contrastive learning)
+
+\maketitle
+
+% ===========================================================================
+% ABSTRACT
+% ===========================================================================
+\begin{abstract}
+
+% TGRS abstracts: typically 150-300 words in a single paragraph.
+% Follow modified 2-6-2 structure adapted for journal length:
+%   2-3 sentences: background + remote sensing context + specific gap
+%   5-8 sentences: method (First/Second/Finally)
+%   2-3 sentences: results + broader impact for geoscience applications
+
+Your abstract here. For TGRS, emphasize:
+\begin{enumerate}
+  \item The specific remote sensing application and its practical importance
+  \item The sensor modality (optical/SAR/multispectral/hyperspectral/LiDAR/GNSS)
+  \item The gap in existing geoscience methods
+  \item Your method's key innovations
+  \item Quantitative results on standard remote sensing benchmarks
+\end{enumerate}
+
+\textbf{Example:} Remote sensing image classification is essential for land
+cover mapping, urban planning, and environmental monitoring. However, existing
+deep learning methods struggle with [specific challenge, e.g., "the inherent
+class imbalance between dominant and rare land cover types in large-scale
+satellite imagery"]. To address this, we propose [Method], which [core mechanism].
+First, [component 1 + why it works]. Second, [component 2 + why it works].
+Finally, [component 3 + why it works]. Experiments on [N] benchmark datasets
+([Dataset1, Dataset2, Dataset3]) demonstrate that [Method] improves [metric] by
+[X]\% over [strongest baseline], with particularly strong gains on
+underrepresented classes (+[Y]\%).
+\end{abstract}
+
+% ===========================================================================
+% KEYWORDS — TGRS uses IEEE keywords
+% ===========================================================================
+\begin{IEEEkeywords}
+  Remote sensing, [your task, e.g., land cover classification],
+  [your modality, e.g., multispectral imagery],
+  [your technique, e.g., deep learning, attention mechanism],
+  [secondary technique, e.g., self-supervised learning].
+\end{IEEEkeywords}
+
+% ===========================================================================
+% 1. INTRODUCTION
+% ===========================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+% TGRS Introduction: typically longer than conference papers (~2-3 pages in
+% the submitted manuscript). Structure in 5 paragraphs expanded for journal depth:
+
+% Para 1: Remote sensing context — why this task matters for geoscience.
+%   - Cite specific applications: land cover mapping, disaster monitoring,
+%     agricultural assessment, urban growth, climate change analysis, etc.
+%   - Connect to Earth observation programs (Landsat, Sentinel, MODIS, etc.)
+
+% Para 2: Technical progress in the task.
+%   - Review 2-3 major method families with specific papers.
+%   - Track the evolution: traditional ML → CNN → ViT/Transformer → foundation models.
+%   - Note the unique challenges of remote sensing data: large spatial extent,
+%     multi-source heterogeneity, spectral variability, temporal dynamics.
+
+% Para 3: Remaining gap — what current geoscience methods fail to address.
+%   - Must contain a "because" clause specific to remote sensing.
+%   - Example: "Existing methods assume X, but in remote sensing Y occurs because Z."
+
+% Para 4: Proposed method teaser — 3-4 sentences, core intuition.
+%   - Explain WHY your method is suited for remote sensing data specifically.
+
+% Para 5: Main contributions (4-5 bullets for journal papers):
+%   - Each bullet should map to a specific Table/Figure/Section.
+%   - TGRS reviewers expect at least one contribution to be validated on
+%     multiple remote sensing datasets and/or multiple sensor modalities.
+
+% Example contribution paragraph structure:
+The main contributions of this paper are as follows:
+
+\begin{enumerate}
+  \item We identify [specific limitation] in existing [method family] when
+    applied to [remote sensing scenario], and we validate this limitation
+    quantitatively (Section~\ref{sec:problem-analysis}).
+  \item We propose [Method Name], a [brief description] that [core mechanism]
+    tailored for [remote sensing data characteristic]
+    (Section~\ref{sec:method}).
+  \item We design [specific component], which [what it does] to address
+    [remote sensing challenge] (Section~\ref{sec:method-component}).
+  \item Through extensive experiments on [N] datasets spanning [sensor types
+    / resolutions / geographic regions], we demonstrate that [Method] achieves
+    [key result], outperforming [strongest baseline] by [X]\%
+    (Section~\ref{sec:experiments}).
+  \item We release our code and [trained models / dataset splits] to facilitate
+    reproducible research in remote sensing (URL: to be added).
+\end{enumerate}
+
+% ===========================================================================
+% 2. RELATED WORK
+% ===========================================================================
+\section{Related Work}
+\label{sec:related}
+
+% TGRS Related Work is typically more comprehensive than conference papers.
+% Organize by 4-5 themes, each with detailed discussion.
+
+\subsection{Remote Sensing [Task]}
+\label{sec:related-task}
+
+% Review task-specific methods: traditional approaches → deep learning evolution.
+% Cite TGRS, GRSL, JSTARS, RSE, ISPRS journal papers to show domain expertise.
+
+\subsection{[Method Family A]}
+\label{sec:related-familyA}
+
+% Discuss the method family your approach builds on or competes with.
+
+\subsection{[Method Family B]}
+\label{sec:related-familyB}
+
+% Second relevant method family.
+
+\subsection{Earth Observation Foundation Models}
+\label{sec:related-foundation}
+
+% If relevant, discuss recent geospatial foundation models:
+% - SatMAE, Scale-MAE, GeoViT, Prithvi, SatCLIP, GFM, etc.
+% - Compare to general-purpose models (CLIP, DINOv2) adapted for remote sensing.
+
+\subsection{Summary and Positioning}
+\label{sec:related-summary}
+
+% 2-3 sentence summary: what distinguishes your work from all reviewed prior work.
+% Be specific about the gap your method fills.
+
+% ===========================================================================
+% 3. PROBLEM FORMULATION (optional but common in TGRS)
+% ===========================================================================
+\section{Problem Formulation}
+\label{sec:problem}
+
+% TGRS papers often include a formal problem definition section.
+% Define notation, input/output spaces, assumptions, and evaluation criteria.
+
+\subsection{Notation and Definitions}
+\label{sec:problem-notation}
+
+% Define key symbols: input data X (e.g., multispectral image patches),
+% labels Y, sensor characteristics, spatial resolution, spectral bands, etc.
+
+\subsection{Task Definition}
+\label{sec:problem-task}
+
+% Formal definition of the remote sensing task your paper addresses.
+
+% ===========================================================================
+% 4. PROPOSED METHOD
+% ===========================================================================
+\section{Proposed Method}
+\label{sec:method}
+
+% TGRS method sections should be detailed enough for reproducible research.
+% Aim for ~3-5 pages with clear sub-sections.
+
+\subsection{Overview}
+\label{sec:method-overview}
+
+% Architecture diagram: Fig. 1. Describe the complete pipeline.
+% For remote sensing: emphasize how your method handles unique RS data
+% characteristics (large coverage, multi-scale, multi-source, temporal).
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.85\linewidth}{\centering
+  \vspace{3cm}
+  {\large [Fig. 1: Overall architecture of the proposed method.]}\\
+  \vspace{0.3cm}
+  {\footnotesize The pipeline shows: (a) [Input preprocessing],
+   (b) [Feature extraction backbone],
+   (c) [Core innovation module],
+   (d) [Output/task head].}
+  \vspace{3cm}}}
+  \caption{Overview of the proposed [Method Name] architecture.
+           [One-sentence description of the data flow].}
+  \label{fig:architecture}
+\end{figure}
+
+\subsection{[Core Innovation Module A]}
+\label{sec:method-moduleA}
+
+% For each module: Input → Process → Output → Rationale.
+% Include equations with ALL symbols defined.
+% Discuss WHY this module is specifically suited for remote sensing data.
+
+\subsection{[Core Innovation Module B]}
+\label{sec:method-moduleB}
+
+% Second key innovation.
+
+\subsection{Loss Function and Training Strategy}
+\label{sec:method-loss}
+
+% Define all loss terms. If multi-task, explain task balancing.
+% Remote sensing specific: class imbalance handling, spatial consistency
+% regularization, spectral-photometric invariance, etc.
+
+\begin{equation}
+  \mathcal{L}_{\text{total}} =
+    \mathcal{L}_{\text{task}} +
+    \lambda_{1} \mathcal{L}_{\text{aux1}} +
+    \lambda_{2} \mathcal{L}_{\text{aux2}}
+  \label{eq:total_loss}
+\end{equation}
+
+\subsection{Implementation Details}
+\label{sec:method-implementation}
+
+% Comprehensive for journal reproducibility:
+% - Framework (PyTorch version, CUDA version)
+% - Optimizer type + hyperparameters
+% - Learning rate schedule + warmup
+% - Batch size + gradient accumulation
+% - Hardware (GPU model, count, memory)
+% - Training duration (wall-clock time, epochs)
+% - Data preprocessing pipeline
+% - Data augmentation (geometric + spectral)
+% - Pretrained weights used (if any)
+
+% ===========================================================================
+% 5. EXPERIMENTS
+% ===========================================================================
+\section{Experiments}
+\label{sec:experiments}
+
+% TGRS experiments: typically very comprehensive (4-6 pages).
+% Expected components: datasets, implementation, main results, ablation,
+% parameter sensitivity, computational efficiency, qualitative visualization,
+% failure case analysis.
+
+% ---------------------------------------------------------------------------
+\subsection{Datasets}
+\label{sec:exp-datasets}
+
+% For each dataset, describe:
+% - Sensor/platform (e.g., Sentinel-2, Landsat-8, Gaofen-2, WorldView-3)
+% - Spatial resolution and coverage
+% - Spectral bands and wavelengths
+% - Temporal coverage (if multi-temporal)
+% - Geographic region
+% - Training/validation/test split
+% - Number of samples per class
+% - Any preprocessing (cloud removal, atmospheric correction, etc.)
+
+\begin{table}[t]
+  \centering
+  \caption{Summary of datasets used in experiments. GSD = Ground Sampling Distance.}
+  \label{tab:datasets}
+  \begin{tabular}{lccccr}
+    \toprule
+    \textbf{Dataset} & \textbf{Sensor} & \textbf{GSD (m)} & \textbf{Bands} &
+    \textbf{Classes} & \textbf{Images} \\
+    \midrule
+    Dataset 1 & Sensor A & 10 & 13 (MS) & 15 & 5,000 \\
+    Dataset 2 & Sensor B & 0.5 & 3 (RGB) & 8  & 2,000 \\
+    Dataset 3 & Sensor C & 30 & 6 (MS) & 10 & 1,500 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\subsection{Evaluation Metrics}
+\label{sec:exp-metrics}
+
+% TGRS common metrics:
+% Classification: OA (Overall Accuracy), AA (Average Accuracy), Kappa (κ),
+%                 per-class F1, confusion matrix
+% Segmentation: mIoU, FWIoU, per-class IoU
+% Detection: mAP, AP@[.5:.95]
+% Change detection: OA, F1, Kappa
+% Regression: RMSE, MAE, R²
+
+% Define each metric and state direction (higher/lower is better).
+
+% ---------------------------------------------------------------------------
+\subsection{Comparison with State-of-the-Art}
+\label{sec:exp-main}
+
+% Main results table: bold = best, underline = second best.
+% Include: method name, year, OA, AA, Kappa, per-class metrics, params, FLOPs.
+% Use \pm for standard deviations over multiple runs.
+
+\begin{table}[t]
+  \centering
+  \caption{Comparison with state-of-the-art methods on [Dataset].
+           Best results in \textbf{bold}, second-best \underline{underlined}.
+           All results are mean $\pm$ std over 5 runs.}
+  \label{tab:main_results}
+  \begin{tabular}{lccccc}
+    \toprule
+    \textbf{Method} & \textbf{OA (\%)} & \textbf{AA (\%)} &
+    \textbf{$\kappa \times 100$} & \textbf{Params (M)} & \textbf{FLOPs (G)} \\
+    \midrule
+    SVM \cite{ref1}           & 82.3 $\pm$ 0.5 & 79.1 $\pm$ 0.8 &
+    0.801 & -- & -- \\
+    CNN-2D \cite{ref2}        & 90.5 $\pm$ 0.3 & 88.7 $\pm$ 0.5 &
+    0.895 & 5.2 & 8.3 \\
+    ResNet-50 \cite{ref3}     & 92.1 $\pm$ 0.2 & 90.3 $\pm$ 0.4 &
+    0.913 & 23.5 & 4.1 \\
+    ViT-B \cite{ref4}         & 93.2 $\pm$ 0.3 & 91.5 $\pm$ 0.4 &
+    0.925 & 86.0 & 17.6 \\
+    \textbf{Ours}             & \textbf{94.8 $\pm$ 0.2} &
+    \textbf{93.2 $\pm$ 0.3} & \textbf{0.942} & 28.1 & 5.3 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\subsection{Ablation Study}
+\label{sec:exp-ablation}
+
+% Comprehensive ablation: each claimed component tested individually.
+% Use waterfall-style table (full model → remove component A → ... → baseline).
+
+% ---------------------------------------------------------------------------
+\subsection{Parameter Sensitivity Analysis}
+\label{sec:exp-sensitivity}
+
+% TGRS reviewers expect sensitivity analysis for key hyperparameters.
+% Show how performance varies with λ, temperature, window size, etc.
+% Use line plots (Fig. X) showing stability range.
+
+% ---------------------------------------------------------------------------
+\subsection{Computational Efficiency}
+\label{sec:exp-efficiency}
+
+% For TGRS: efficiency matters for large-scale remote sensing deployment.
+% Report: training time, inference time (per image / per km²), GPU memory,
+% model size, throughput.
+
+% ---------------------------------------------------------------------------
+\subsection{Qualitative Analysis and Visualization}
+\label{sec:exp-qualitative}
+
+% Show classification maps, attention heatmaps, feature visualizations.
+% Compare predicted maps against ground truth.
+% Show BOTH successes and failure cases — TGRS reviewers value honesty.
+
+% ===========================================================================
+% 6. DISCUSSION
+% ===========================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+% TGRS journal papers often have a dedicated Discussion section.
+% Topics to cover:
+\subsection{Key Findings and Implications}
+\label{sec:discuss-findings}
+
+\subsection{Why the Method Works for Remote Sensing Data}
+\label{sec:discuss-why}
+
+\subsection{Limitations and Failure Cases}
+\label{sec:discuss-limitations}
+
+% Be specific about:
+% - Geographic transferability (does it work in different regions?)
+% - Sensor transferability (does it work with different sensors?)
+% - Temporal robustness (does it work across seasons?)
+% - Computational scalability (can it handle country-scale mapping?)
+
+\subsection{Future Work}
+\label{sec:discuss-future}
+
+% Concrete directions, not generic statements.
+% Example: "Extending to [other sensor modality, e.g., SAR] by [specific approach]."
+% Example: "Integrating physical models ([specific model, e.g., PROSAIL]) as a prior."
+
+% ===========================================================================
+% 7. CONCLUSION
+% ===========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% Restate: problem, method, key findings. NO new claims or citations.
+% 2-3 paragraphs for journal length.
+
+% ===========================================================================
+% ACKNOWLEDGMENTS
+% ===========================================================================
+\section*{Acknowledgments}
+
+% Acknowledge funding, data providers (ESA/NASA/USGS for satellite data),
+% computing resources.
+
+% ===========================================================================
+% APPENDICES (if needed, placed after references)
+% ===========================================================================
+% \appendices
+% \section{Derivation of [Equation]}
+% \section{Additional Experimental Results}
+
+% ===========================================================================
+% REFERENCES
+% ===========================================================================
+{
+  % TGRS uses numeric IEEE citation style: [1], [2], ...
+  % Include ~40-80 references for a journal submission.
+  % Balance: classic RS papers, recent deep learning papers, domain journals.
+
+  \bibliographystyle{IEEEtran}
+  \bibliography{references}
+}
+
+\end{document}

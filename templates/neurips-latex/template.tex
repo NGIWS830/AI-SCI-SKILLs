@@ -1,0 +1,172 @@
+% ---------------------------------------------------------------------------
+% NeurIPS / ICML Conference Paper Template
+%
+% Usage:
+%   1. Download official neurips_2026.sty from: https://neurips.cc/Conferences/2026/PaperInformation/StyleFiles
+%   2. Place neurips_2026.sty in this directory
+%   3. Compile: pdflatex template.tex && bibtex template && pdflatex template.tex x2
+%
+% Conference: NeurIPS (Neural Information Processing Systems) / ICML (International Conference on Machine Learning)
+% Page limit: 9 pages (NeurIPS) / 8 pages (ICML) + references + appendices
+% ---------------------------------------------------------------------------
+
+\documentclass{article}
+
+% --- UNCOMMENT when neurips_2026.sty is available ---
+% \usepackage[final]{neurips_2026}
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
+% \usepackage{hyperref}
+% \usepackage{url}
+% \usepackage{booktabs}
+% \usepackage{amsfonts,amsmath,amssymb}
+% \usepackage{nicefrac}
+% \usepackage{microtype}
+% \usepackage{xcolor}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[pagebackref,breaklinks,colorlinks,citecolor=blue]{hyperref}
+\usepackage[margin=1in]{geometry}  % Remove when using neurips_2026.sty
+
+% --- Paper ID (anonymous submission) ---
+% \neuripsfinalcopy
+
+\title{Your Paper Title Here}
+
+\author{
+  Anonymous Author(s) \\
+  Anonymous Institution \\
+  \texttt{anonymous@institution.edu}
+}
+
+\begin{document}
+
+\maketitle
+
+% ===========================================================================
+% ABSTRACT
+% ===========================================================================
+\begin{abstract}
+  Your abstract here. NeurIPS typically allows slightly longer abstracts than CVPR.
+  Follow 2-6-2 structure: 2 background/gap, 6 method (First/Second/Finally),
+  2 results/implication. Target: $\sim$210 words.
+\end{abstract}
+
+% ===========================================================================
+% 1. INTRODUCTION
+% ===========================================================================
+\section{Introduction}
+
+% Standard 5-paragraph structure with NeurIPS flavor:
+% - More emphasis on algorithmic/optimization novelties
+% - Theory/analysis contributions highlighted more than CVPR
+% - Broader impact statement often required
+
+Your introduction text here.
+
+% ===========================================================================
+% 2. RELATED WORK
+% ===========================================================================
+\section{Related Work}
+
+% ===========================================================================
+% 3. PROPOSED METHOD
+% ===========================================================================
+\section{Proposed Method}
+
+\subsection{Preliminaries}
+\label{sec:prelim}
+
+Define notation, background concepts, and problem formulation.
+
+\subsection{Method Overview}
+\label{sec:method-overview}
+
+\subsection{Key Component A}
+\label{sec:method-compA}
+
+\subsection{Key Component B}
+\label{sec:method-compB}
+
+\subsection{Training Algorithm}
+\label{sec:method-training}
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.8\linewidth}{\centering
+  \vspace{2cm}
+  {\large [Architecture Diagram]}
+  \vspace{2cm}}}
+  \caption{Overview of the proposed method.}
+  \label{fig:architecture}
+\end{figure}
+
+% ===========================================================================
+% 4. THEORETICAL ANALYSIS (if applicable, valued at NeurIPS/ICML)
+% ===========================================================================
+\section{Theoretical Analysis}
+\label{sec:theory}
+
+% Convergence analysis, generalization bounds, etc.
+% Remove this section if not applicable.
+
+% ===========================================================================
+% 5. EXPERIMENTS
+% ===========================================================================
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Experimental Setup}
+\label{sec:exp-setup}
+
+\subsection{Main Results}
+\label{sec:exp-main}
+
+\subsection{Ablation Studies}
+\label{sec:exp-ablation}
+
+\subsection{Analysis and Discussion}
+\label{sec:exp-analysis}
+
+% ===========================================================================
+% 6. CONCLUSION
+% ===========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% ===========================================================================
+% BROADER IMPACT (required for NeurIPS)
+% ===========================================================================
+\section*{Broader Impact}
+
+Discuss potential societal consequences of this work, both positive and negative.
+
+% ===========================================================================
+% ACKNOWLEDGMENTS
+% ===========================================================================
+\section*{Acknowledgments}
+
+% ===========================================================================
+% REFERENCES
+% ===========================================================================
+{
+  \small
+  \bibliographystyle{plain}
+  \bibliography{references}
+}
+
+% ===========================================================================
+% APPENDIX (optional)
+% ===========================================================================
+\appendix
+\section{Appendix: Additional Results}
+\label{sec:appendix}
+
+% Additional experiments, proofs, implementation details.
+
+\end{document}

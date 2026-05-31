@@ -1,0 +1,220 @@
+% ---------------------------------------------------------------------------
+% ACL / EMNLP / NAACL Conference Paper Template
+%
+% Usage:
+%   1. Download official acl.sty from: https://acl-org.github.io/ACLPUB/
+%   2. Place acl.sty and acl_natbib.bst in this directory
+%   3. Compile: pdflatex template.tex && bibtex template && pdflatex template.tex x2
+%
+% Conference: ACL (Association for Computational Linguistics) / EMNLP / NAACL
+% Page limit: 8 pages (long) / 4 pages (short) + references
+% ---------------------------------------------------------------------------
+
+\documentclass[11pt,a4paper]{article}
+
+% --- UNCOMMENT when acl.sty is available ---
+% \usepackage[review]{acl}
+% \usepackage{times}
+% \usepackage{latexsym}
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage{microtype}
+% \usepackage{inconsolata}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[pagebackref,breaklinks,colorlinks,citecolor=blue]{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{times}
+
+% --- Paper Information ---
+% \aclfinalcopy
+
+\title{Your Paper Title Here}
+
+\author{
+  Author One${}^1$,
+  Author Two${}^1$,
+  Author Three${}^2$ \\
+  \\
+  ${}^1$Institution One \\
+  ${}^2$Institution Two \\
+  \texttt{\{email1, email2\}@institution.edu}
+}
+
+\begin{document}
+
+\maketitle
+
+% ===========================================================================
+% ABSTRACT
+% ===========================================================================
+\begin{abstract}
+  Your abstract here. ACL format: typically single paragraph, $\sim$200 words.
+  NLP papers often emphasize: task definition, method approach, key innovations,
+  and empirical results.
+
+  Follow 2-6-2 structure adapted for NLP:
+  2 background/gap,
+  6 method (First/Second/Finally),
+  2 results/implication.
+  Target: $\sim$200 words (ACL limit is typically 200 words).
+\end{abstract}
+
+% ===========================================================================
+% 1. INTRODUCTION
+% ===========================================================================
+\section{Introduction}
+
+% 5-paragraph structure, NLP-flavored:
+% Para 1: Task importance + real NLP applications
+% Para 2: Current progress -- pretrained LMs, fine-tuning, prompting approaches
+% Para 3: Remaining gap -- specific limitations of existing NLP approaches
+% Para 4: Proposed method -- core mechanism teaser
+% Para 5: Contributions -- 3-4 bullets with evidence
+
+Our main contributions are:
+\begin{enumerate}
+  \item Contribution 1.
+  \item Contribution 2.
+  \item Contribution 3.
+\end{enumerate}
+
+% ===========================================================================
+% 2. RELATED WORK
+% ===========================================================================
+\section{Related Work}
+
+% NLP papers often organize by: task, method paradigm, or resource
+\subsection{Task-Specific Approaches}
+\subsection{Pretrained Language Models for [Task]}
+\subsection{[Method Paradigm]}
+
+% ===========================================================================
+% 3. PROPOSED METHOD
+% ===========================================================================
+\section{Proposed Method}
+\label{sec:method}
+
+\subsection{Problem Formulation}
+\label{sec:method-problem}
+
+Given [input definition], our goal is to [task definition].
+
+\subsection{Model Architecture}
+\label{sec:method-arch}
+
+\subsection{Training Objective}
+\label{sec:method-loss}
+
+\begin{equation}
+  \mathcal{L} = \mathcal{L}_{\text{task}} + \lambda \mathcal{L}_{\text{aux}}
+  \label{eq:loss}
+\end{equation}
+
+\subsection{Inference}
+\label{sec:method-inference}
+
+% ===========================================================================
+% 4. EXPERIMENTAL SETUP
+% ===========================================================================
+\section{Experimental Setup}
+\label{sec:setup}
+
+\subsection{Datasets}
+\label{sec:setup-data}
+
+\begin{table}[t]
+  \centering
+  \caption{Dataset statistics.}
+  \label{tab:datasets}
+  \begin{tabular}{lrrr}
+    \toprule
+    \textbf{Dataset} & \textbf{Train} & \textbf{Dev} & \textbf{Test} \\
+    \midrule
+    Dataset 1 & 0,000 & 0,000 & 0,000 \\
+    Dataset 2 & 0,000 & 0,000 & 0,000 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Baselines}
+\label{sec:setup-baselines}
+
+\subsection{Implementation Details}
+\label{sec:setup-impl}
+
+\subsection{Evaluation Metrics}
+\label{sec:setup-metrics}
+
+% ===========================================================================
+% 5. RESULTS AND ANALYSIS
+% ===========================================================================
+\section{Results and Analysis}
+\label{sec:results}
+
+\subsection{Main Results}
+\label{sec:results-main}
+
+\begin{table}[t]
+  \centering
+  \caption{Main results. Best in \textbf{bold}, second-best \underline{underlined}.}
+  \label{tab:main}
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Method} & \textbf{DS1} & \textbf{DS2} & \textbf{DS3} & \textbf{Avg} \\
+    \midrule
+    Baseline 1 & 00.0 & 00.0 & 00.0 & 00.0 \\
+    Baseline 2 & 00.0 & 00.0 & 00.0 & 00.0 \\
+    \textbf{Ours} & \textbf{00.0} & \textbf{00.0} & \textbf{00.0} & \textbf{00.0} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Ablation Studies}
+\label{sec:results-ablation}
+
+\subsection{Analysis}
+\label{sec:results-analysis}
+
+% Include error analysis, qualitative examples, attention visualization
+% NLP papers benefit from qualitative analysis more than CV papers
+
+% ===========================================================================
+% 6. CONCLUSION
+% ===========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% ===========================================================================
+% LIMITATIONS (required at ACL/EMNLP/NAACL)
+% ===========================================================================
+\section*{Limitations}
+
+Discuss limitations: computational requirements, language coverage,
+domain specificity, ethical considerations, etc.
+
+% ===========================================================================
+% ETHICS STATEMENT (required at ACL)
+% ===========================================================================
+\section*{Ethics Statement}
+
+% ===========================================================================
+% ACKNOWLEDGMENTS
+% ===========================================================================
+\section*{Acknowledgments}
+
+% ===========================================================================
+% REFERENCES
+% ===========================================================================
+{
+  \small
+  \bibliographystyle{acl_natbib}
+  \bibliography{references}
+}
+
+\end{document}

@@ -1,0 +1,161 @@
+% ---------------------------------------------------------------------------
+% AAAI / IJCAI Conference Paper Template
+%
+% Usage:
+%   1. Download official aaai24.sty from: https://aaai.org/authorkit24-2/
+%   2. Place aaai24.sty and aaai24.bst in this directory
+%   3. Compile: pdflatex template.tex && bibtex template && pdflatex template.tex x2
+%
+% Conference: AAAI (Association for the Advancement of Artificial Intelligence) / IJCAI
+% Page limit: 7 pages (AAAI) + references (+ 2 extra pages for appendices in some years)
+% Two-column format, camera-ready style
+% ---------------------------------------------------------------------------
+
+\documentclass[letterpaper]{article}
+
+% --- UNCOMMENT when aaai24.sty is available ---
+% \usepackage{aaai24}
+% \usepackage{times}
+% \usepackage{helvet}
+% \usepackage{courier}
+% \usepackage[hyphens]{url}
+% \usepackage{graphicx}
+% \urlstyle{rm}
+% \def\UrlFont{\rm}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{times}
+\usepackage[pagebackref,breaklinks,colorlinks,citecolor=blue]{hyperref}
+\usepackage[margin=1in]{geometry}  % Remove when using aaai24.sty
+
+% --- Paper ID ---
+% \setAAAIID{12345}
+
+\title{Your Paper Title Here}
+
+\author{
+  Author One${}^1$,
+  Author Two${}^1$,
+  Author Three${}^2$ \\
+  \\
+  ${}^1$Institution One, Country \\
+  ${}^2$Institution Two, Country \\
+  \texttt{\{email1, email2\}@institution.edu}
+}
+
+\begin{document}
+
+\maketitle
+
+% ===========================================================================
+% ABSTRACT
+% ===========================================================================
+\begin{abstract}
+  Your abstract here. AAAI papers span all AI subfields.
+  Follow 2-6-2 structure: 2 background/gap, 6 method, 2 results/implication.
+  Target: $\sim$200 words.
+
+  AAAI emphasizes: broad AI relevance, practical impact, clear methodology.
+  Ensure the abstract is accessible to a broad AI audience (not just your subfield).
+\end{abstract}
+
+% ===========================================================================
+% 1. INTRODUCTION
+% ===========================================================================
+\section{Introduction}
+
+% 5-paragraph structure, broad-AI-audience flavor
+% AAAI papers benefit from: accessible motivation, clear contributions,
+% and explicit connection to broader AI themes
+
+Our main contributions are:
+\begin{itemize}
+  \item Contribution 1 -- [what + evidence].
+  \item Contribution 2 -- [what + evidence].
+  \item Contribution 3 -- [what + evidence].
+\end{itemize}
+
+% ===========================================================================
+% 2. RELATED WORK
+% ===========================================================================
+\section{Related Work}
+
+% Organize by themes with clear differentiation from your method
+% AAAI reviewers appreciate explicit positioning within the AI landscape
+
+% ===========================================================================
+% 3. PROPOSED APPROACH
+% ===========================================================================
+\section{Proposed Approach}
+\label{sec:method}
+
+\subsection{Problem Setting}
+\label{sec:method-problem}
+
+\subsection{Method Description}
+\label{sec:method-desc}
+
+\subsection{Algorithm}
+\label{sec:method-algorithm}
+
+% AAAI papers often benefit from clear algorithmic descriptions
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.8\linewidth}{\centering
+  \vspace{2cm}
+  {\large [Architecture / Algorithm Diagram]}
+  \vspace{2cm}}}
+  \caption{Overview of the proposed approach.}
+  \label{fig:method}
+\end{figure}
+
+% ===========================================================================
+% 4. EXPERIMENTS
+% ===========================================================================
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Experimental Setup}
+\label{sec:exp-setup}
+
+\subsection{Main Results}
+\label{sec:exp-main}
+
+\subsection{Ablation Study}
+\label{sec:exp-ablation}
+
+\subsection{Further Analysis}
+\label{sec:exp-analysis}
+
+% ===========================================================================
+% 5. CONCLUSION
+% ===========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% ===========================================================================
+% ACKNOWLEDGMENTS
+% ===========================================================================
+\section*{Acknowledgments}
+
+% ===========================================================================
+% REFERENCES
+% ===========================================================================
+{
+  \small
+  \bibliographystyle{aaai24}
+  \bibliography{references}
+}
+
+% ===========================================================================
+% APPENDIX (optional -- check current AAAI CFP for appendix policy)
+% ===========================================================================
+% \appendix
+% \section{Appendix}
+
+\end{document}

@@ -1,0 +1,472 @@
+% !TeX encoding = UTF-8
+% !TeX program = pdflatex
+% ---------------------------------------------------------------------------
+% IEEE TIP (Transactions on Image Processing) Journal Template
+%
+% Usage:
+%   1. Requires IEEEtran.cls and IEEEtran.bst (copy from templates/ieee-latex/)
+%   2. Compile: pdflatex → bibtex → pdflatex → pdflatex
+%
+% Journal: IEEE Transactions on Image Processing
+% Publisher: IEEE Signal Processing Society
+% ISSN: 1057-7149
+% Impact Factor: ~10.6 (2024 JCR)
+% Scope: Image/video processing, computer vision, image analysis,
+%        image coding, restoration, enhancement, and related theory
+% ---------------------------------------------------------------------------
+
+\documentclass[journal,onecolumn,draftcls]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% --- Final version ---
+% \documentclass[journal]{IEEEtran}
+% \IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% --- TIP Journal Metadata ---
+% \markboth{IEEE Transactions on Image Processing, Vol. XX, No. X, Month 2026}%
+% {Author \MakeLowercase{\textit{et al.}}: Short Title Here}
+
+\begin{document}
+
+% ===========================================================================
+% TITLE
+% ===========================================================================
+\title{Your Paper Title: [Method Name] for [Image Processing / Computer Vision Task]}
+
+\author{
+  \IEEEauthorblockN{Author One\IEEEauthorrefmark{1},
+                    Author Two\IEEEauthorrefmark{2},
+                    Author Three\IEEEauthorrefmark{1}}
+  \IEEEauthorblockA{
+    \IEEEauthorrefmark{1}Department of XXX, University of YYY, City, Country \\
+    \IEEEauthorrefmark{2}Institute of ZZZ, Academy of Sciences, City, Country \\
+    E-mail: \{email1, email2\}@university.edu
+  }
+}
+
+\maketitle
+
+% ===========================================================================
+% ABSTRACT
+% ===========================================================================
+\begin{abstract}
+
+% TIP abstracts: 150-250 words, single paragraph.
+% Must clearly convey the image processing contribution.
+%
+% TIP emphasizes: (1) image/video processing novelty,
+% (2) rigorous experimental validation on standard benchmarks,
+% (3) theoretical justification where applicable.
+
+Your abstract here. Structure:
+\begin{itemize}
+  \item \textbf{Problem:} What image/video processing task and why it matters.
+  \item \textbf{Gap:} Why existing image processing methods are insufficient.
+  \item \textbf{Method:} First... Second... Finally... (core IP/CV contribution).
+  \item \textbf{Results:} Quantitative evidence on standard benchmarks.
+  \item \textbf{Significance:} Broader impact for image processing community.
+\end{itemize}
+
+\end{abstract}
+
+% ===========================================================================
+% KEYWORDS
+% ===========================================================================
+\begin{IEEEkeywords}
+  Image processing, [your task, e.g., image restoration, super-resolution,
+  denoising, segmentation], [your technique, e.g., deep learning, attention
+  mechanism, diffusion models], [secondary technique],
+  [application domain if applicable].
+\end{IEEEkeywords}
+
+% ===========================================================================
+% 1. INTRODUCTION
+% ===========================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+% TIP Introduction (5 paragraphs, ~2-3 pages in journal submission):
+
+% Para 1: Image processing context and importance.
+%   - Why this image/video processing task matters.
+%   - Real-world applications (medical imaging, photography, autonomous
+%     driving, surveillance, remote sensing, entertainment, etc.).
+%   - Connect to the broader signal/image processing community.
+
+% Para 2: Technical progress.
+%   - Evolution: classical signal processing → hand-crafted features →
+%     deep learning → foundation models / diffusion / transformers.
+%   - 2-3 major method families with representative works.
+%   - Cite TIP, TIP, TIP papers to show you know the venue.
+
+% Para 3: Remaining gap — must have a "because" clause.
+%   - Image-processing-specific gap examples:
+%     "Existing denoising methods assume AWGN, but real-world sensor noise
+%      follows signal-dependent distributions..."
+%     "Current SR methods produce plausible but unfaithful details because..."
+%     "Segmentation models fail on fine structures because..."
+%   - Quantify the gap if possible (cite numbers from prior work).
+
+% Para 4: Proposed method teaser (3-4 sentences).
+%   - Core image processing insight.
+%   - WHY it addresses the gap at the signal/image level.
+
+% Para 5: Main contributions (4-5 bullets).
+
+The main contributions of this paper are:
+\begin{enumerate}
+  \item We identify [specific limitation] in existing [method family] for
+    [image processing task], validated through [analysis / preliminary
+    experiments] (Section~\ref{sec:motivation}).
+  \item We propose [Method Name], which [core image processing mechanism]
+    to address [specific challenge] (Section~\ref{sec:method}).
+  \item We provide [theoretical analysis / mathematical justification]
+    showing that [property] holds, and we analyze [complexity / convergence /
+    optimality] (Section~\ref{sec:theory}).
+  \item Extensive experiments on [N] benchmark datasets demonstrate that
+    [Method] achieves [key quantitative result], outperforming [M] SOTA
+    methods, with [specific advantage, e.g., "3× fewer parameters" or
+    "2.1 dB PSNR gain"] (Section~\ref{sec:experiments}).
+  \item Code and pretrained models are available at [URL].
+\end{enumerate}
+
+% ===========================================================================
+% 2. RELATED WORK
+% ===========================================================================
+\section{Related Work}
+\label{sec:related}
+
+% TIP Related Work: comprehensive, 3-4 pages in journal mode.
+% Organize by method family AND by task.
+
+\subsection{Image [Task]: Classical Approaches}
+\label{sec:related-classical}
+
+% Classical signal/image processing approaches:
+% - Filtering-based methods (bilateral, guided, BM3D, NLM)
+% - Variational / PDE-based methods (TV, anisotropic diffusion)
+% - Sparse representation / dictionary learning
+% - Wavelet / frequency-domain methods
+% Show you understand the fundamentals of image processing, not just DL.
+
+\subsection{Deep Learning for Image [Task]}
+\label{sec:related-dl}
+
+% Deep learning evolution: CNN → ResNet/UNet → Transformer/ViT →
+% Diffusion → Mamba/SSM.
+% Organize by architecture type, not paper-by-paper.
+
+\subsection{[Method Paradigm A]}
+\label{sec:related-paradigmA}
+
+% e.g., GAN-based methods, diffusion-based methods, NeRF-based methods
+
+\subsection{[Method Paradigm B]}
+\label{sec:related-paradigmB}
+
+% e.g., Self-supervised, multi-task, multi-modal approaches
+
+\subsection{Summary and Positioning}
+\label{sec:related-summary}
+
+% Explicitly state what ALL prior work misses and how your method differs.
+% TIP reviewers want a clear contribution statement in Related Work.
+
+% ===========================================================================
+% 3. PRELIMINARIES
+% ===========================================================================
+\section{Preliminaries}
+\label{sec:preliminaries}
+
+\subsection{Problem Formulation}
+\label{sec:prelim-problem}
+
+% Formal mathematical definition of the image processing task.
+% Example for image restoration:
+%   $\mathbf{y} = \mathbf{H}\mathbf{x} + \mathbf{n}$
+%   where $\mathbf{y}$ is the degraded observation,
+%   $\mathbf{H}$ is the degradation operator,
+%   $\mathbf{x}$ is the clean image,
+%   $\mathbf{n}$ is noise.
+% Goal: recover $\hat{\mathbf{x}} \approx \mathbf{x}$ from $\mathbf{y}$.
+
+\subsection{Background Concepts}
+\label{sec:prelim-bg}
+
+% Define key concepts needed to understand your method.
+% Keep this brief -- TIP readers are image processing experts.
+
+% ===========================================================================
+% 4. PROPOSED METHOD
+% ===========================================================================
+\section{Proposed Method}
+\label{sec:method}
+
+% TIP method sections: very detailed (3-5 pages).
+% A reader should be able to re-implement from this description.
+% Every equation must be explained; every architecture choice justified.
+
+\subsection{Overview}
+\label{sec:method-overview}
+
+% Architecture overview diagram (Fig. 1).
+% Describe the complete pipeline from input image to output.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.85\linewidth}{\centering
+  \vspace{3cm}
+  {\large [Fig. 1: Architecture overview of the proposed method.]}\\
+  \vspace{0.3cm}
+  {\footnotesize The pipeline: degraded image → [preprocessing] →
+   [feature extraction] → [core module] → [reconstruction] → restored image.}
+  \vspace{3cm}}}
+  \caption{Overview of the proposed [Method]. [One sentence describing data flow].}
+  \label{fig:architecture}
+\end{figure}
+
+\subsection{[Core Module A]}
+\label{sec:method-moduleA}
+
+% For each module: Input → Process → Output → Rationale.
+% Image processing specifics:
+% - Specify tensor shapes: (B, C, H, W) for images, (B, T, C, H, W) for video
+% - Define kernel sizes, stride, padding for convolution layers
+% - Define window size, patch size for transformer-based methods
+% - Define noise level, degradation model for restoration methods
+
+\subsection{[Core Module B]}
+\label{sec:method-moduleB}
+
+% Second innovation.
+
+\subsection{Loss Function Design}
+\label{sec:method-loss}
+
+% TIP papers often have carefully designed loss functions.
+% Common image processing losses:
+% - Reconstruction: L1 (MAE), L2 (MSE), Charbonnier
+% - Perceptual: VGG perceptual loss, LPIPS
+% - Adversarial: GAN loss (LSGAN, hinge, WGAN-GP)
+% - Structural: SSIM loss, MS-SSIM loss
+% - Frequency: FFT loss, wavelet loss
+% - Edge-aware: gradient loss, Laplacian loss
+
+% Explain WHY each loss term is included and what image property it preserves.
+
+\begin{equation}
+  \mathcal{L}_{\text{total}} =
+    \lambda_1 \mathcal{L}_{\text{reconstruction}} +
+    \lambda_2 \mathcal{L}_{\text{perceptual}} +
+    \lambda_3 \mathcal{L}_{\text{[auxiliary]}}
+  \label{eq:total_loss}
+\end{equation}
+
+% Each λ chosen via [validation / grid search / adaptive weighting].
+
+\subsection{Implementation Details}
+\label{sec:method-implementation}
+
+% Comprehensive for TIP reproducibility:
+% - Framework and version (PyTorch X.X, CUDA X.X)
+% - Optimizer, learning rate, scheduler
+% - Batch size, patch size, number of epochs/iterations
+% - Data augmentation (geometric, photometric, degradation-specific)
+% - Hardware and training time
+% - Pretrained weights (if used)
+
+% ===========================================================================
+% 5. EXPERIMENTS
+% ===========================================================================
+\section{Experiments}
+\label{sec:experiments}
+
+% TIP experiments: very comprehensive, 4-6 pages.
+% Must include: datasets, metrics, main comparison, ablation, efficiency,
+% qualitative visual comparison, failure case analysis.
+
+% ---------------------------------------------------------------------------
+\subsection{Datasets and Evaluation Protocols}
+\label{sec:exp-datasets}
+
+% For each dataset: source, size, resolution, characteristics, split.
+% Standard image processing benchmarks:
+
+\begin{table}[t]
+  \centering
+  \caption{Summary of datasets used in experiments.}
+  \label{tab:datasets}
+  \begin{tabular}{lccrl}
+    \toprule
+    \textbf{Dataset} & \textbf{Images} & \textbf{Resolution} &
+    \textbf{Task} & \textbf{Split (Train/Val/Test)} \\
+    \midrule
+    DIV2K & 1,000 & 2K & SR & 800/100/100 \\
+    Flickr2K & 2,650 & 2K & SR & 2,450/0/200 \\
+    BSD68 & 68 & 481×321/321×481 & Denoising & --/--/68 \\
+    Set5/Set14 & 5/14 & various & SR/Denoising & --/--/5,14 \\
+    Urban100 & 100 & various & SR & --/--/100 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\subsection{Evaluation Metrics}
+\label{sec:exp-metrics}
+
+% TIP standard metrics:
+% - Full-reference: PSNR, SSIM, MS-SSIM, LPIPS, DISTS, NLPD, FSIM, VIF
+% - No-reference: NIQE, BRISQUE, PIQE, MANIQA, CLIPIQA
+% - Task-specific: mIoU (segmentation), AP (detection), FID (generation)
+% - Efficiency: Params (M), FLOPs (G), runtime (ms), GPU memory (GB)
+%
+% State metric direction: higher is better for PSNR/SSIM/PSNR;
+% lower is better for LPIPS/NIQE/runtime.
+
+% ---------------------------------------------------------------------------
+\subsection{Comparison with State-of-the-Art}
+\label{sec:exp-main}
+
+% Table: method, year, venue, PSNR, SSIM, LPIPS, Params, FLOPs, Runtime.
+% Bold = best, underline = second-best.
+% Multiple scale factors (×2, ×3, ×4) in separate tables or sub-tables.
+% If reporting on multiple noise levels, organize by σ.
+
+\begin{table}[t]
+  \centering
+  \caption{Quantitative comparison on [Dataset] for [Task].
+           Best results in \textbf{bold}, second-best \underline{underlined.}}
+  \label{tab:main}
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Method} & \textbf{PSNR↑} & \textbf{SSIM↑} & \textbf{LPIPS↓} &
+    \textbf{Params (M)} & \textbf{FLOPs (G)} & \textbf{Runtime (ms)} \\
+    \midrule
+    Method A \cite{ref1} & 32.10 & 0.895 & 0.112 & 15.2 & 88.3 & 45 \\
+    Method B \cite{ref2} & 32.85 & 0.902 & 0.095 & 32.0 & 156.7 & 78 \\
+    \textbf{Ours} & \textbf{33.21} & \textbf{0.910} &
+    \textbf{0.078} & 18.5 & 92.1 & 38 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\subsection{Ablation Study}
+\label{sec:exp-ablation}
+
+% Comprehensive ablation of ALL components.
+% Waterfall-style: Full model → remove A → remove B → remove both → baseline.
+% Show PSNR drop for each removal.
+
+% ---------------------------------------------------------------------------
+\subsection{Model Efficiency Analysis}
+\label{sec:exp-efficiency}
+
+% TIP highly values efficiency -- image processing needs to be practical.
+% - Parameter count comparison (bar chart)
+% - FLOPs vs PSNR scatter (Pareto frontier)
+% - Runtime on different resolutions
+% - GPU memory consumption
+% - Throughput (FPS) for video tasks
+
+% ---------------------------------------------------------------------------
+\subsection{Qualitative Results}
+\label{sec:exp-qualitative}
+
+% Visual comparison with SOTA methods.
+% Show zoomed-in patches to highlight fine details.
+% Use consistent color mapping across methods.
+% Show at least 2-3 diverse examples per dataset.
+% Include both easy and challenging cases.
+
+% ---------------------------------------------------------------------------
+\subsection{Failure Case Analysis}
+\label{sec:exp-failure}
+
+% TIP expects honesty about limitations.
+% Show cases where the method fails:
+% - What types of images/scenes cause degradation?
+% - What image structures are poorly reconstructed?
+% - Is there a systematic bias (e.g., over-smoothing, hallucination)?
+% Discuss WHY these failures occur.
+
+% ---------------------------------------------------------------------------
+\subsection{Generalization Analysis}
+\label{sec:exp-generalization}
+
+% TIP values generalization:
+% - Cross-dataset: train on A, test on B
+% - Cross-degradation: train on one noise level, test on others
+% - Cross-resolution: train on 2K, test on 4K images
+% - Real-world: test on real (not synthetic) degraded images
+
+% ===========================================================================
+% 6. DISCUSSION
+% ===========================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Interpretation of Results}
+\label{sec:discuss-interpretation}
+
+% Explain WHY your method outperforms baselines.
+% Connect experimental observations to design choices.
+
+\subsection{Limitations}
+\label{sec:discuss-limitations}
+
+% Honest assessment of limitations.
+% Image-processing-specific:
+% - Resolution dependence
+% - Content dependence (textures, faces, text)
+% - Sensor/noise-type dependence
+% - Computational constraints for real-time applications
+
+\subsection{Future Work}
+\label{sec:discuss-future}
+
+% Concrete image processing research directions.
+
+% ===========================================================================
+% 7. CONCLUSION
+% ===========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% ---------------------------------------------------------------------------
+% 8. ACKNOWLEDGMENTS
+% ---------------------------------------------------------------------------
+\section*{Acknowledgments}
+
+% ===========================================================================
+% REFERENCES
+% ===========================================================================
+{
+  \bibliographystyle{IEEEtran}
+  \bibliography{references}
+}
+
+\end{document}

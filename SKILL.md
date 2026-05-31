@@ -1,9 +1,9 @@
 ---
 name: ai-sci-skills
-description: End-to-end automated SCI paper writing for deep learning, machine learning, computer vision, NLP, multimodal learning, and related AI research. Chinese-first pipeline: raw project materials → structured digest → literature review → experiment analysis → polished English manuscript. Use when the user wants to write a complete SCI paper from code, notes, experiment tables, framework diagrams, or mixed research materials.
+description: End-to-end automated SCI paper writing for deep learning, machine learning, computer vision, NLP, multimodal learning, and related AI research. Chinese-first pipeline: raw project materials → structured digest → literature review → experiment analysis → polished English manuscript. v0.4 adds statistical testing, architecture extraction, citation network analysis, and result visualization. Use when the user wants to write a complete SCI paper from code, notes, experiment tables, framework diagrams, or mixed research materials.
 ---
 
-# AI SCI Paper Writer v0.3.1
+# AI SCI Paper Writer v0.4.0
 
 ## Mission
 
@@ -106,7 +106,8 @@ Read these files for detailed guidance:
 2. Extract: research task, problem motivation, method pipeline, core modules, datasets, baselines, metrics, training/inference flow.
 3. Link every method claim to concrete evidence from the materials.
 4. Propose contribution candidates. Distinguish evidence-backed facts from interpretation.
-5. If code is available, optionally run `digest/scripts/summarize_repo.py <repo_path>` for a file inventory.
+5. Run `digest/scripts/summarize_repo.py <repo_path>` for a file inventory.
+6. Run `digest/scripts/extract_architecture.py <repo_path>` for deep code analysis: extract nn.Module subclasses, loss functions, hyperparameters, framework detection, and training infrastructure (NEW in v0.4).
 
 ### Prompt Guidance
 
@@ -225,6 +226,7 @@ python literature/scripts/verify_citations.py <output_dir>/citations_to_verify.t
 5. Verify every citation using `verify_citations.py`. Never fabricate DOI, arXiv ID, venue, year, or authors.
 6. Build the literature matrix. Every row must have a verification status.
 7. Draft related-work structure organized by themes, not paper-by-paper.
+8. Run `literature/scripts/analyze_citations.py <output_dir>/02_literature_matrix.md` for gap analysis: temporal trends, venue distribution, method-family clustering, and missing citation suggestions (NEW in v0.4).
 
 ### Literature Matrix Column Guidance
 
@@ -288,6 +290,16 @@ Read these files for detailed guidance:
 When CSV/Excel tables are provided, run:
 ```bash
 python experiment/scripts/compute_improvements.py <table_path> --target <method_name> --metrics <m1,m2,...> --higher-better <m1,m2> --lower-better <m3> --group-cols <col> --output <output_dir>/03a_improvement_summary.md
+```
+
+For statistical significance testing (NEW in v0.4), run:
+```bash
+python experiment/scripts/statistical_tests.py <table_path> --target <method_name> --metrics <m1,m2> --higher-better <m1> --output <output_dir>/03b_statistical_tests.md
+```
+
+For result visualizations (NEW in v0.4), run:
+```bash
+python experiment/scripts/result_visualizer.py <table_path> --target <method_name> --metrics <m1,m2> --output-dir <output_dir>/figures/
 ```
 
 ### Prompt Guidance
@@ -770,9 +782,16 @@ python scripts/check_quality.py <output_dir> --all --output <output_dir>/10a_aut
 |----------|----------|--------|
 | Chinese LaTeX (cjc) | `templates/chinese/` | `<output_dir>/chinese_manuscript/` |
 | IEEE LaTeX | `templates/ieee-latex/` | `<output_dir>/english_manuscript/` |
+| IEEE TGRS LaTeX (NEW) | `templates/ieee-tgrs-latex/` | `<output_dir>/tgrs_manuscript/` |
+| IEEE TETCI LaTeX (NEW) | `templates/ieee-tetci-latex/` | `<output_dir>/tetci_manuscript/` |
+| IEEE TIP LaTeX (NEW) | `templates/ieee-tip-latex/` | `<output_dir>/tip_manuscript/` |
 | IEEE Word | `templates/ieee-word/` | `<output_dir>/english_manuscript.docx` |
 | Cover Letter LaTeX | `templates/cover-letter/` | `<output_dir>/cover_letter/` |
 | Cover Letter Word | `templates/ieee-word/` | `<output_dir>/cover_letter.docx` |
+| CVPR/ICCV LaTeX (NEW) | `templates/cvpr-latex/` | `<output_dir>/cvpr_manuscript/` |
+| NeurIPS/ICML LaTeX (NEW) | `templates/neurips-latex/` | `<output_dir>/neurips_manuscript/` |
+| ACL/EMNLP LaTeX (NEW) | `templates/acl-latex/` | `<output_dir>/acl_manuscript/` |
+| AAAI/IJCAI LaTeX (NEW) | `templates/aaai-latex/` | `<output_dir>/aaai_manuscript/` |
 
 **Actions:**
 
@@ -821,6 +840,23 @@ Verify across all outputs (see `template-filling-guide.md` for detailed checklis
 5. Citation counts are consistent.
 6. Cover letter claims do not exceed manuscript claims.
 7. No `AUTHOR_INPUT_NEEDED` or `[CITATION NEEDED]` in any final output.
+
+### Post-Submission Scripts (NEW in v0.4)
+
+After submission, use these scripts for reviewer response and presentation:
+
+**Rebuttal Generation:**
+```bash
+python scripts/generate_rebuttal.py reviews.txt --paper <output_dir>/08_english_polished.md --output <output_dir>/rebuttal.md
+python scripts/generate_rebuttal.py reviews.json --latex --output rebuttal.tex
+```
+
+**Presentation Slides Generation:**
+```bash
+python scripts/paper_to_slides.py <output_dir>/08_english_polished.md --format beamer --output slides.tex
+python scripts/paper_to_slides.py <output_dir>/08_english_polished.md --format markdown --output slides.md
+python scripts/paper_to_slides.py <output_dir>/08_english_polished.md --notes-only --output speaker_notes.md
+```
 
 ### Final Output Files
 ```
@@ -886,13 +922,19 @@ Apply at every stage:
 | Script | Purpose |
 |--------|---------|
 | `digest/scripts/summarize_repo.py <path>` | Quick file inventory of a code repo |
-| `experiment/scripts/compute_improvements.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --lower-better <m2> --group-cols <col> --output <path>` | Compute pairwise improvements from CSV |
+| `digest/scripts/extract_architecture.py <path> --output <report>` | Deep code analysis: nn.Module extraction, loss function parsing, hyperparameter detection, framework identification (NEW v0.4) |
+| `experiment/scripts/compute_improvements.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --lower-better <m2> --group-cols <col> --output <path>` | Compute pairwise improvements from CSV (v0.4: added --stats, --all-pairs, --format json, --seed-col) |
+| `experiment/scripts/statistical_tests.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --output <path>` | Bootstrap CI, Cohen's d/Hedges' g, paired t-test, Wilcoxon, multiple comparison correction (NEW v0.4) |
+| `experiment/scripts/result_visualizer.py <csv> --target <name> --metrics <m1,m2> --output-dir <dir>` | Bar charts, ablation waterfall, radar charts, heatmaps, Pareto frontiers (NEW v0.4) |
 | `literature/scripts/search_literature.py "<query>" --sources s2,arxiv --max 20 --output <path>` | Search literature across Academic APIs |
 | `literature/scripts/verify_citations.py <citations_file> --sources crossref,dblp --output <path>` | Verify citation metadata |
+| `literature/scripts/analyze_citations.py <lit_matrix.md> --output <gap_analysis>` | Temporal trends, venue distribution, method-family clustering, research gap identification, network data export (NEW v0.4) |
 | `scripts/check_quality.py <output_dir> --checks all --output <path>` | Quality checks: claims, citations, reproducibility, language, structure, terminology, CN-overclaims, dedup, AI-flavor |
 | `scripts/compile_latex.py <tex_file> --output-dir <dir>` | Compile LaTeX manuscript to PDF |
 | `scripts/format_bibtex.py <bib_file> --validate --normalize --output <path>` | Validate and normalize BibTeX entries |
 | `scripts/render_word.py <content.json> --template <template.docx> --output <output.docx>` | Fill IEEE Word template with structured content |
+| `scripts/generate_rebuttal.py <reviews> --paper <paper> --output <rebuttal>` | Structured reviewer response / rebuttal letter generation (NEW v0.4) |
+| `scripts/paper_to_slides.py <paper> --format beamer|markdown --output <slides>` | Paper to presentation slides (Beamer LaTeX / Marp Markdown) + speaker notes (NEW v0.4) |
 | `scripts/package_skills.py --output-dir <dir>` | Package skill suite for distribution |
 
 ## Module Reference Index

@@ -1,0 +1,260 @@
+% ---------------------------------------------------------------------------
+% CVPR / ICCV Conference Paper Template
+%
+% Usage:
+%   1. Download official cvpr.sty from: https://cvpr.thecvf.com/author_guidelines
+%   2. Place cvpr.sty in this directory
+%   3. Compile: pdflatex template.tex && bibtex template && pdflatex template.tex x2
+%
+% Conference: CVPR (Computer Vision and Pattern Recognition) / ICCV (International Conference on Computer Vision)
+% Page limit: 8 pages (CVPR) + references
+% Typical structure follows CVPR 2-column format
+% ---------------------------------------------------------------------------
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+% --- UNCOMMENT when cvpr.sty is available ---
+% \usepackage{cvpr}
+% \usepackage[pagebackref,breaklinks,colorlinks,citecolor=blue]{hyperref}
+% \cvprfinalcopy
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[pagebackref,breaklinks,colorlinks,citecolor=blue]{hyperref}
+\usepackage[margin=1in]{geometry}  % Remove when using cvpr.sty
+
+% --- Paper Information ---
+% \def\cvprPaperID{****}
+% \def\confName{CVPR}
+% \def\confYear{2026}
+
+\begin{document}
+
+% ===========================================================================
+% TITLE
+% ===========================================================================
+\title{Your Paper Title Here}
+
+\author{
+  Author One${}^1$,
+  Author Two${}^1$,
+  Author Three${}^2$ \\
+  \\
+  ${}^1$Institution One, City, Country \\
+  ${}^2$Institution Two, City, Country \\
+  \texttt{\{email1, email2\}@institution.edu}
+}
+
+\maketitle
+
+% ===========================================================================
+% ABSTRACT
+% ===========================================================================
+\begin{abstract}
+  Your abstract here. Follow the 2-6-2 structure:
+  2 sentences background/gap,
+  6 sentences method (First/Second/Finally),
+  2 sentences results/implication.
+  Target: $\sim$210 English words.
+
+  \textbf{Example:} Establishing fine-grained semantic correspondence between
+  natural language and visual content is the central challenge in cross-modal
+  retrieval. Existing methods [gap]... First, we [component 1 + why].
+  Second, we [component 2 + why]. Finally, we [component 3 + why].
+  On [dataset], [Method] achieves [metric] = [value]\%, outperforming
+  [baseline] by [X] percentage points.
+\end{abstract}
+
+% ===========================================================================
+% 1. INTRODUCTION
+% ===========================================================================
+\section{Introduction}
+\label{sec:intro}
+
+% Para 1: Task importance and real-world applications
+% Para 2: Current progress -- 2-3 method families with specific examples
+% Para 3: Remaining gap -- what existing methods fail to do and WHY
+% Para 4: Proposed method teaser -- 2-3 sentences, WHAT + intuition
+% Para 5: Contributions -- 3-4 bullets with evidence pointers
+
+Your introduction text here.
+
+Our main contributions are:
+\begin{enumerate}
+  \item Contribution 1 with evidence pointer (Table/Figure/Section).
+  \item Contribution 2 with evidence pointer.
+  \item Contribution 3 with evidence pointer.
+\end{enumerate}
+
+% ===========================================================================
+% 2. RELATED WORK
+% ===========================================================================
+\section{Related Work}
+\label{sec:related}
+
+% Organize by themes, NOT paper-by-paper:
+% 2.1 Theme A (2-3 papers, comparison to your method)
+% 2.2 Theme B (2-3 papers, comparison to your method)
+% 2.3 Theme C (gap evidence)
+
+\subsection{Theme A: [Method Family Name]}
+
+Discussion of related work organized by themes.
+
+\subsection{Theme B: [Another Method Family]}
+
+Discussion of related work.
+
+% ===========================================================================
+% 3. PROPOSED METHOD
+% ===========================================================================
+\section{Proposed Method}
+\label{sec:method}
+
+% 3.1 Overview -- architecture diagram reference (Fig.~1)
+\subsection{Overview}
+\label{sec:method-overview}
+
+Figure~\ref{fig:architecture} illustrates the overall architecture.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.8\linewidth}{\centering
+  \vspace{2cm}
+  {\large [Architecture Diagram -- Fig.~1]}\\
+  Insert architecture diagram here.
+  \vspace{2cm}}}
+  \caption{Overview of the proposed method.}
+  \label{fig:architecture}
+\end{figure}
+
+% 3.2 Module B -- Input → Process → Output → Rationale
+\subsection{Module B: [Component Name]}
+\label{sec:method-moduleb}
+
+Describe your first key component. For each module, follow this structure:
+\begin{enumerate}
+  \item \textbf{Input:} What goes in (tensor shapes, data types)
+  \item \textbf{Process:} What computation happens (equations, algorithms)
+  \item \textbf{Output:} What comes out
+  \item \textbf{Rationale:} Why this design choice
+\end{enumerate}
+
+% 3.3 Module C
+\subsection{Module C: [Component Name]}
+\label{sec:method-modulec}
+
+Describe your second key component.
+
+% 3.4 Loss Function / Training Objective
+\subsection{Training Objective}
+\label{sec:method-loss}
+
+The overall training objective combines:
+\begin{equation}
+  \mathcal{L}_{\text{total}} = \mathcal{L}_{\text{primary}} + \lambda \mathcal{L}_{\text{auxiliary}}
+  \label{eq:loss}
+\end{equation}
+
+% ===========================================================================
+% 4. EXPERIMENTS
+% ===========================================================================
+\section{Experiments}
+\label{sec:experiments}
+
+% 4.1 Datasets and Implementation Details
+\subsection{Datasets and Implementation Details}
+\label{sec:exp-setup}
+
+\textbf{Datasets.} Describe datasets: name, size, splits, preprocessing.
+
+\textbf{Implementation Details.} Include: framework, optimizer, learning rate,
+scheduler, batch size, epochs, hardware, seeds, data augmentation.
+
+\textbf{Baselines.} List all baselines with citations.
+
+\textbf{Evaluation Metrics.} Define metrics with direction (higher/lower is better).
+
+% 4.2 Comparison with State-of-the-Art
+\subsection{Comparison with State-of-the-Art}
+\label{sec:exp-main}
+
+\begin{table}[t]
+  \centering
+  \caption{Main results comparison on [Dataset]. Best in \textbf{bold}, second-best \underline{underlined}.}
+  \label{tab:main-results}
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Method} & \textbf{Metric 1} & \textbf{Metric 2} & \textbf{Metric 3} \\
+    \midrule
+    Baseline 1 \cite{ref1} & 00.0 & 00.0 & 00.0 \\
+    Baseline 2 \cite{ref2} & 00.0 & 00.0 & 00.0 \\
+    Baseline 3 \cite{ref3} & 00.0 & 00.0 & 00.0 \\
+    \textbf{Ours}          & \textbf{00.0} & \textbf{00.0} & \textbf{00.0} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% 4.3 Ablation Study
+\subsection{Ablation Study}
+\label{sec:exp-ablation}
+
+\begin{table}[t]
+  \centering
+  \caption{Ablation study on [Dataset]. Each row removes one component from the full model.}
+  \label{tab:ablation}
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Variant} & \textbf{Metric 1} & \textbf{$\Delta$} \\
+    \midrule
+    Full Model & 00.0 & -- \\
+    w/o Component B & 00.0 & -0.0 \\
+    w/o Component C & 00.0 & -0.0 \\
+    w/o Both & 00.0 & -0.0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% 4.4 Efficiency Analysis (if applicable)
+\subsection{Efficiency Analysis}
+\label{sec:exp-efficiency}
+
+% 4.5 Qualitative Analysis
+\subsection{Qualitative Analysis}
+\label{sec:exp-qualitative}
+
+% ===========================================================================
+% 5. CONCLUSION
+% ===========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% Restate problem, method, key findings.
+% Do NOT add new claims or citations.
+% End with 1-2 specific future work directions.
+
+In this paper, we have presented [Method], which [problem + core mechanism].
+Experiments on [N] datasets demonstrate that [key finding 1] and [key finding 2].
+Limitations include [specific limitation]. Future work may explore [specific direction].
+
+% ===========================================================================
+% ACKNOWLEDGMENTS (optional)
+% ===========================================================================
+% \section*{Acknowledgments}
+% Funding and thanks here.
+
+% ===========================================================================
+% REFERENCES
+% ===========================================================================
+{
+  \small
+  \bibliographystyle{ieee_fullname}
+  \bibliography{references}
+}
+
+\end{document}

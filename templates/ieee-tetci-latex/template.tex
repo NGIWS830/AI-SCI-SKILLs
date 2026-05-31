@@ -1,0 +1,467 @@
+% !TeX encoding = UTF-8
+% !TeX program = pdflatex
+% ---------------------------------------------------------------------------
+% IEEE TETCI (Transactions on Emerging Topics in Computational Intelligence)
+%
+% Usage:
+%   1. Requires IEEEtran.cls and IEEEtran.bst (copy from templates/ieee-latex/)
+%   2. Compile: pdflatex → bibtex → pdflatex → pdflatex
+%
+% Journal: IEEE Transactions on Emerging Topics in Computational Intelligence
+% Publisher: IEEE Computational Intelligence Society (CIS)
+% ISSN: 2471-285X
+% First published: 2017
+% Scope: Neural networks, evolutionary computation, fuzzy systems, and
+%        emerging computational intelligence topics
+% ---------------------------------------------------------------------------
+
+\documentclass[journal,onecolumn,draftcls]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% --- Final version ---
+% \documentclass[journal]{IEEEtran}
+% \IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{subcaption}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% --- TETCI Journal Metadata ---
+% \markboth{IEEE Transactions on Emerging Topics in Computational Intelligence, Vol. XX, No. X, Month 2026}%
+% {Author \MakeLowercase{\textit{et al.}}: Short Title Here}
+
+\begin{document}
+
+% ===========================================================================
+% TITLE
+% ===========================================================================
+\title{Your Paper Title: [Method Name] for [Computational Intelligence Task]}
+
+\author{
+  \IEEEauthorblockN{Author One\IEEEauthorrefmark{1},
+                    Author Two\IEEEauthorrefmark{2},
+                    Author Three\IEEEauthorrefmark{1}}
+  \IEEEauthorblockA{
+    \IEEEauthorrefmark{1}Department of XXX, University of YYY, City, Country \\
+    \IEEEauthorrefmark{2}Institute of ZZZ, Academy of Sciences, City, Country \\
+    E-mail: \{email1, email2\}@university.edu
+  }
+}
+
+\maketitle
+
+% ===========================================================================
+% ABSTRACT
+% ===========================================================================
+\begin{abstract}
+
+% TETCI abstracts: 150-250 words, single paragraph.
+% Must clearly convey the computational intelligence contribution.
+%
+% TETCI emphasizes: (1) emerging/novel CI methods,
+% (2) rigorous theoretical or empirical validation,
+% (3) clear motivation for WHY a new CI method is needed.
+
+Your abstract here. Structure:
+\begin{itemize}
+  \item \textbf{Context:} What CI problem does this paper address?
+  \item \textbf{Gap:} Why existing CI methods are insufficient.
+  \item \textbf{Method:} Your CI approach -- First... Second... Finally...
+  \item \textbf{Results:} Quantitative evidence of effectiveness.
+  \item \textbf{Implication:} What this means for the CI community.
+\end{itemize}
+
+\end{abstract}
+
+% ===========================================================================
+% KEYWORDS
+% ===========================================================================
+\begin{IEEEkeywords}
+  Computational intelligence, [your CI paradigm, e.g., evolutionary computation,
+  neural networks, fuzzy systems], [your technique, e.g., multi-objective
+  optimization, deep reinforcement learning, transfer learning],
+  [application domain, e.g., industrial optimization, medical diagnosis].
+\end{IEEEkeywords}
+
+% ===========================================================================
+% 1. INTRODUCTION
+% ===========================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+% TETCI Introduction (5 paragraphs, ~2 pages journal style):
+
+% Para 1: CI context and practical motivation.
+%   Why this problem matters from a computational intelligence perspective.
+%   Connect to real-world applications that require CI solutions.
+
+% Para 2: Current CI approaches.
+%   Review 2-3 major CI paradigms applied to this problem:
+%   - Evolutionary computation / swarm intelligence
+%   - Neural networks / deep learning
+%   - Fuzzy systems / rough sets
+%   - Hybrid CI approaches
+%   Discuss what each paradigm contributes and where it falls short.
+
+% Para 3: Remaining gap.
+%   Must contain a "because" clause specific to the CI challenge.
+%   Examples of CI-specific gaps:
+%   - "Existing evolutionary algorithms converge slowly because the search space
+%      grows exponentially with [problem characteristic]."
+%   - "Current neural network approaches lack interpretability because [reason],
+%      which is critical for [application]."
+%   - "Fuzzy rule-based systems fail to handle [data characteristic] because
+%      their membership functions cannot adapt to [condition]."
+
+% Para 4: Proposed method teaser.
+%   3-4 sentences explaining the CI innovation and core intuition.
+
+% Para 5: Contributions (4-5 bullets for TETCI journal).
+
+The main contributions of this paper are:
+\begin{enumerate}
+  \item We identify [specific limitation] in existing [CI paradigm] for
+    [problem class], and we provide quantitative evidence of this limitation
+    (Section~\ref{sec:motivation}).
+  \item We propose [Method Name], which [core CI mechanism] to address
+    [specific CI challenge] (Section~\ref{sec:method}).
+  \item We provide [theoretical analysis / convergence proof / complexity
+    analysis] demonstrating that [property] holds for the proposed method
+    (Section~\ref{sec:theory}).
+  \item Through experiments on [benchmark suites / real-world problems],
+    [Method] achieves [key result], outperforming [N] state-of-the-art
+    CI methods by [X]\% on [metric] (Section~\ref{sec:experiments}).
+  \item We release [code / benchmark / dataset] to facilitate reproducible
+    CI research.
+\end{enumerate}
+
+% ===========================================================================
+% 2. RELATED WORK
+% ===========================================================================
+\section{Related Work}
+\label{sec:related}
+
+% Organize by CI paradigm, not paper-by-paper.
+% TETCI expects breadth across CI subfields.
+
+\subsection{[CI Paradigm A]}
+\label{sec:related-paradigmA}
+
+% e.g., Evolutionary Computation approaches to this problem
+
+\subsection{[CI Paradigm B]}
+\label{sec:related-paradigmB}
+
+% e.g., Neural Network / Deep Learning approaches
+
+\subsection{[CI Paradigm C]}
+\label{sec:related-paradigmC}
+
+% e.g., Fuzzy Logic / Rough Set approaches (if applicable)
+
+\subsection{Hybrid and Emerging CI Approaches}
+\label{sec:related-hybrid}
+
+% Discuss hybrid methods (e.g., neuro-evolution, fuzzy-neural, etc.)
+% This is especially relevant for an "Emerging Topics" journal.
+
+\subsection{Positioning of This Work}
+\label{sec:related-positioning}
+
+% Explicitly differentiate: what CI paradigm(s) do you combine or advance?
+% How is your work different from ALL reviewed approaches?
+
+% ===========================================================================
+% 3. PRELIMINARIES AND PROBLEM FORMULATION
+% ===========================================================================
+\section{Preliminaries and Problem Formulation}
+\label{sec:preliminaries}
+
+% TETCI papers often include formal definitions.
+% For CI papers, define:
+% - The optimization/search problem
+% - The decision space and objective space
+% - Constraints and assumptions
+% - Performance criteria
+
+\subsection{Background}
+\label{sec:prelim-bg}
+
+% Define relevant CI concepts needed to understand your method.
+% Example: if proposing a new evolutionary operator, explain the base EA first.
+
+\subsection{Problem Definition}
+\label{sec:prelim-problem}
+
+% Formal mathematical definition of the problem.
+% For optimization: $\min_{\mathbf{x} \in \Omega} f(\mathbf{x})$
+% For learning: define input space $\mathcal{X}$, output space $\mathcal{Y}$,
+%   loss function, hypothesis class.
+
+% ===========================================================================
+% 4. PROPOSED METHOD
+% ===========================================================================
+\section{Proposed Method}
+\label{sec:method}
+
+% TETCI method sections should be rigorous.
+% CI papers: include pseudocode, complexity analysis, theoretical justification.
+
+\subsection{Overview and Design Rationale}
+\label{sec:method-overview}
+
+% Architecture/flowchart: Fig. 1.
+% Explain the CI design philosophy: WHY this approach, not just WHAT.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.85\linewidth}{\centering
+  \vspace{3cm}
+  {\large [Fig. 1: Overview of the proposed CI method.]}\\
+  \vspace{0.3cm}
+  {\footnotesize The framework consists of: (a) [Initialization / encoding],
+   (b) [Core CI mechanism],
+   (c) [Adaptation / learning strategy],
+   (d) [Output / decision module].}
+  \vspace{3cm}}}
+  \caption{Overview of the proposed [Method Name].}
+  \label{fig:architecture}
+\end{figure}
+
+\subsection{[Core CI Component A]}
+\label{sec:method-componentA}
+
+% Detailed description with equations and/or pseudocode.
+% For evolutionary methods: describe encoding, operators, selection mechanism.
+% For neural methods: describe architecture, training algorithm.
+% For fuzzy methods: describe rule base, inference mechanism, defuzzification.
+
+\begin{algorithm}[t]
+  \caption{[Core Component] of the Proposed Method}
+  \label{alg:core}
+  \begin{algorithmic}[1]
+    \STATE \textbf{Input:} [problem parameters], [hyperparameters]
+    \STATE Initialize [population / network / rule base]
+    \FOR{each [iteration / generation / epoch]}
+      \STATE [Core operation step 1]
+      \STATE [Core operation step 2]
+      \STATE [Adaptation / update step]
+    \ENDFOR
+    \STATE \textbf{Output:} [solution / model / decision]
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{[CI Component B]}
+\label{sec:method-componentB}
+
+% Second key innovation.
+
+\subsection{Complexity Analysis}
+\label{sec:method-complexity}
+
+% TETCI strongly values computational complexity analysis.
+% For evolutionary methods: per-generation complexity, convergence rate.
+% For neural methods: FLOPs, parameter count, training complexity, inference complexity.
+% Compare to baseline methods' complexity.
+
+The time complexity of [Method] is $O([expression])$ per [unit], compared to
+$O([baseline\_expression])$ for [baseline]. The space complexity is
+$O([expression])$. This [is comparable to / is lower than / trades off against]
+the baseline.
+
+% ===========================================================================
+% 5. THEORETICAL ANALYSIS (highly valued at TETCI)
+% ===========================================================================
+\section{Theoretical Analysis}
+\label{sec:theory}
+
+% TETCI expects theoretical rigor. Depending on your CI paradigm, include:
+
+\subsection{[Relevant Property, e.g., Convergence Analysis]}
+\label{sec:theory-convergence}
+
+% For evolutionary methods: convergence proof, runtime analysis.
+% For neural methods: generalization bound, optimization landscape analysis.
+% For fuzzy methods: approximation capability, stability analysis.
+
+\subsection{[Second Property, e.g., Computational Complexity]}
+\label{sec:theory-complexity}
+
+% Detailed complexity analysis and comparison.
+
+% If your paper does not have theoretical contributions, replace this section
+% with a rigorous "Analysis and Discussion" section in the Experiments.
+
+% ===========================================================================
+% 6. EXPERIMENTS
+% ===========================================================================
+\section{Experiments}
+\label{sec:experiments}
+
+% TETCI experiments: rigorous, reproducible, statistically validated.
+
+\subsection{Experimental Settings}
+\label{sec:exp-settings}
+
+\subsubsection{Benchmark Problems}
+% Define test problems/suites:
+% - For optimization: CEC benchmark suites, ZDT/DTLZ for multi-objective
+% - For classification/regression: standard ML datasets
+% - For specific applications: describe the real-world problem
+% For each benchmark: dimensionality, characteristics, difficulty.
+
+\begin{table}[t]
+  \centering
+  \caption{Summary of benchmark problems / datasets.}
+  \label{tab:benchmarks}
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Problem} & \textbf{Dim} & \textbf{Characteristics} &
+    \textbf{Source} \\
+    \midrule
+    F1--F10 & 30/50/100 & Unimodal & CEC 2024 \cite{ref1} \\
+    F11--F20 & 30/50/100 & Multimodal & CEC 2024 \cite{ref1} \\
+    Real-world A & variable & [description] & [source] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Compared Methods}
+% List ALL compared CI methods with citations and parameter settings.
+% Use the original authors' recommended parameters.
+% Be explicit about which methods you re-implemented vs. used official code.
+
+\subsubsection{Performance Metrics and Statistical Validation}
+% TETCI requires rigorous statistics:
+% - For optimization: best, mean, median, std of objective values over N runs
+% - For classification/regression: accuracy/F1/RMSE with std
+% - Statistical tests: Wilcoxon rank-sum, Friedman test with post-hoc,
+%   critical difference diagrams
+% - Effect size: Cohen's d, Vargha-Delaney A measure
+% State significance level (typically α = 0.05).
+
+\subsubsection{Implementation and Reproducibility}
+% - Programming language and version
+% - Key libraries
+% - Hardware (CPU/GPU)
+% - Number of independent runs and random seeds
+% - Stopping criteria (max evaluations, convergence threshold)
+% - Code availability
+
+\subsection{Main Results}
+\label{sec:exp-main}
+
+% Results tables with statistical annotations.
+% Use \pm for std, superscripts for statistical rankings.
+
+\subsection{Ablation and Component Analysis}
+\label{sec:exp-ablation}
+
+% Demonstrate the contribution of each CI component.
+% Show that each innovation independently improves performance.
+
+\subsection{Parameter Sensitivity}
+\label{sec:exp-sensitivity}
+
+% CI methods often have several hyperparameters.
+% Show robust performance across reasonable parameter ranges.
+% Identify which parameters are most sensitive.
+
+\subsection{Scalability Analysis}
+\label{sec:exp-scalability}
+
+% How does performance scale with problem dimension, population size, etc.?
+% Critical for TETCI -- shows the method is practical.
+
+\subsection{Comparison on Real-World Applications}
+\label{sec:exp-realworld}
+
+% TETCI emphasizes practical relevance.
+% Apply your method to at least one real-world CI problem.
+
+% ===========================================================================
+% 7. DISCUSSION
+% ===========================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why the Proposed CI Approach Works}
+\label{sec:discuss-why}
+
+% Connect experimental results back to the CI design principles.
+
+\subsection{Limitations and When the Method May Fail}
+\label{sec:discuss-limitations}
+
+% Be honest about:
+% - Problem classes where the method underperforms
+% - Computational overhead compared to simpler alternatives
+% - Sensitivity to specific problem characteristics
+% - Scalability limits
+
+\subsection{Future Research Directions}
+\label{sec:discuss-future}
+
+% Concrete CI research directions:
+% - Extending to [another CI paradigm, e.g., multi-task, multi-modal]
+% - Integration with [another CI technique, e.g., surrogate-assisted]
+% - Application to [new domain]
+
+% ===========================================================================
+% 8. CONCLUSION
+% ===========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% Restate problem, method, and key findings (~3 paragraphs for journal).
+% No new claims or citations.
+
+% ===========================================================================
+% ACKNOWLEDGMENTS
+% ===========================================================================
+\section*{Acknowledgments}
+
+% Funding sources, computational resources, helpful discussions.
+
+% ===========================================================================
+% APPENDICES (optional)
+% ===========================================================================
+% \appendices
+% \section{Detailed Derivation of [Theorem/Equation]}
+% \section{Additional Experimental Results}
+% \section{Parameter Settings for Compared Methods}
+
+% ===========================================================================
+% REFERENCES
+% ===========================================================================
+{
+  % TETCI uses numeric IEEE citation: [1], [2], ...
+  % Include ~40-70 references spanning:
+  % - Classic CI papers (Goldberg, Holland, Kennedy & Eberhart, Zadeh, etc.)
+  % - Recent CI advances (deep neuroevolution, quality-diversity, etc.)
+  % - Application-domain papers
+  % - Benchmark/competition papers (CEC, GECCO proceedings)
+
+  \bibliographystyle{IEEEtran}
+  \bibliography{references}
+}
+
+\end{document}
