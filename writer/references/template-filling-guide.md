@@ -83,7 +83,7 @@ latexmk -xelatex chinese_manuscript.tex
 
 ### Abstract & Keywords
 
-- Abstract: 150-250 words. From `08_english_polished.md` Abstract section. Include specific numbers (metric, dataset, value).
+- Abstract: ~210 words (range 180-250). From `08_english_polished.md` Abstract section. Follow the 2-6-2 structure: 2 sentences background/gap, 6 sentences method (First/Second/Finally), 2 sentences results/implication. Include specific numbers (metric, dataset, value) in sentence 9.
 - Keywords: 4-6 keywords. No abbreviations unless standard (e.g., CNN, NLP). Use `IEEEkeywords` environment.
 
 ### Section Filling

@@ -157,12 +157,12 @@ Different sections may *reference* the same fact at different levels of detail:
 
 | Content | Primary Section | May Be Briefly Referenced In |
 |---------|----------------|------------------------------|
-| Method design & architecture | III. Proposed Method | Abstract (1 sentence), Introduction (1-2 sentences) |
+| Method design & architecture | III. Proposed Method | Abstract (6 sentences, First/Second/Finally structure), Introduction (1-2 sentences) |
 | Experiment setup | IV.A. Datasets and Implementation Details | — |
-| Main results | IV.B. Comparison with SOTA | Abstract (key numbers), Introduction (contribution bullets), Conclusion |
+| Main results | IV.B. Comparison with SOTA | Abstract (1 sentence, sentence 9), Introduction (contribution bullets), Conclusion |
 | Ablation findings | IV.C. Ablation Study | Abstract (optionally), Conclusion |
 | Efficiency data | IV.D. Efficiency Analysis | — |
-| Problem motivation | I. Introduction (detailed) | Abstract (1 sentence) |
+| Problem motivation | I. Introduction (detailed) | Abstract (1 sentence, sentence 1) |
 | Background & gap | I. Introduction (detailed) | — |
 | Literature positioning | II. Related Work (detailed) | Introduction (brief citation of key gaps) |
 
@@ -193,6 +193,11 @@ Different sections may *reference* the same fact at different levels of detail:
 
 **Rule**: Contribution bullets should summarize the contribution TYPE (e.g., "a lightweight module for X that achieves Y"), while Results paragraphs provide the full evidence.
 
+#### Type 6: Abstract Method Sentences ≈ Section III Sentences
+**BAD**: The abstract's 6 method sentences (First/Second/Finally) copy or near-copy sentences from Section III (Proposed Method).
+
+**Rule**: The abstract's method sentences should describe WHAT each component does and WHY it works at a conceptual level. Section III describes HOW in full detail (architectures, formulas, dimensions). Write the abstract's method sentences first as a high-level sketch, then expand each into a full subsection in Section III — never the reverse.
+
 ### Dedup Self-Scan Procedure
 
 After writing the complete draft, run this scan:
@@ -208,10 +213,13 @@ Use this to verify each section contains only what it should:
 
 **Abstract** (should contain):
 - [ ] Problem context (1 sentence)
-- [ ] Gap (1 sentence)
-- [ ] Method teaser (WHAT, not HOW — 1-2 sentences)
-- [ ] Key evidence (specific numbers — 1-2 sentences)
+- [ ] Gap with "because" clause (1 sentence)
+- [ ] Method — First component + why it works (2 sentences)
+- [ ] Method — Second component + why it works (2 sentences)
+- [ ] Method — Third innovation or key design choice + why it matters (2 sentences)
+- [ ] Key evidence — specific numbers with dataset + metric + value (1 sentence)
 - [ ] Implication (1 sentence, optional)
+- [ ] Total: exactly 10 sentences. English: 180-250 words (target 210). Chinese: 200-280 characters (target 250).
 
 Should NOT contain:
 - [ ] Method implementation details

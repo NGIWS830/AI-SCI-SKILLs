@@ -17,10 +17,12 @@ Use conservative SCI journal style: clear, precise, formal, and not overdecorate
 ## Section-Specific Polishing Checklists
 
 ### Abstract
+- [ ] Exactly 10 sentences (2-6-2 structure)
+- [ ] Sentences 3/5/7 start with "First," / "Second," / "Finally,"
 - [ ] Every sentence carries unique information (no filler)
-- [ ] Specific numbers present (metric + dataset + value)
+- [ ] Specific numbers present in sentence 9 (metric + dataset + value)
 - [ ] No citations (abstracts rarely cite others)
-- [ ] Under word limit (count: ______)
+- [ ] 180-250 words (target 210; count: ______)
 
 ### Introduction
 - [ ] Para 1 hook is specific, not "X is important in many areas"
