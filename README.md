@@ -6,7 +6,7 @@
 ![Platform](https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Any%20Agent-lightgrey.svg)
 ![Built with](https://img.shields.io/badge/AI%20Powered-Skill%20%7C%20Pipeline-orange.svg)
 
-[English](README_EN.md)
+中文 | [English](README_EN.md)
 
 </div>
 
@@ -22,7 +22,7 @@
 
 AI-SCI-SKILLs 是一个以中文为先的端到端 SCI 论文写作流水线，覆盖深度学习、机器学习、计算机视觉、NLP、多模态学习及相关 AI 研究方向。
 
----
+
 
 ## 触发方式
 
