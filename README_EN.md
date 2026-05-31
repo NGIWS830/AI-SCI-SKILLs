@@ -47,17 +47,17 @@ You can also jump directly to a specific stage:
 
 | What You Have | What You Want | Start At | Try Saying |
 |--------------|---------------|----------|------------|
-| Code + experiment tables + notes | Complete English SCI paper | Stage 0-4 Full pipeline | "Write an SCI paper from these materials" |
-| Project folder (code + README + configs) | Paper draft | Stage 0-4 Full pipeline | "Generate a paper from this project" |
-| Experiment CSV + method description | Results analysis and paper | Stage 3-4 | "Analyze these experiment results and write up the experiments section" |
-| Experiment data + method + literature list | English paper | Stage 3-4 | "I have experiment tables and method notes — write the paper" |
-| Existing paper + new experiment results | Update experiments section | Stage 3-4 | "Update the paper with these new experiment results" |
-| Chinese paper draft | English SCI journal submission | Stage 4d-4e | "Translate this Chinese paper into polished English SCI" |
-| English draft | Polish + self-critique + template output | Stage 4e-4g | "Polish this English draft and render it into IEEE template" |
-| Complete English manuscript | Quality check and self-critique | Stage 4f | "Review the quality of this manuscript" |
-| Scattered notes and ideas | Structured research brief | Stage 1 | "Turn these research notes into a paper outline" |
-| Literature list + research direction | Literature review / Related Work | Stage 2 | "Search and organize literature for this research direction" |
-| Complete Chinese paper | LaTeX / Word template rendering | Stage 4g | "Render this paper into IEEE format" |
+| Code + experiment tables + notes | Complete English SCI paper | Stage 0-4 Full pipeline | "Write an SCI paper from these materials" (Stage 0-4) |
+| Project folder (code + README + configs) | Paper draft | Stage 0-4 Full pipeline | "Generate a paper from this project" (Stage 0-4) |
+| Experiment CSV + method description | Results analysis and paper | Stage 3-4 | "Analyze these experiment results and write up the experiments section" (Stage 3-4) |
+| Experiment data + method + literature list | English paper | Stage 3-4 | "I have experiment tables and method notes — write the paper" (Stage 3-4) |
+| Existing paper + new experiment results | Update experiments section | Stage 3-4 | "Update the paper with these new experiment results" (Stage 3-4) |
+| Chinese paper draft | English SCI journal submission | Stage 4d-4e | "Translate this Chinese paper into polished English SCI" (Stage 4d-4e) |
+| English draft | Polish + self-critique + template output | Stage 4e-4g | "Polish this English draft and render it into IEEE template" (Stage 4e-4g) |
+| Complete English manuscript | Quality check and self-critique | Stage 4f | "Review the quality of this manuscript" (Stage 4f) |
+| Scattered notes and ideas | Structured research brief | Stage 1 | "Turn these research notes into a paper outline" (Stage 1) |
+| Literature list + research direction | Literature review / Related Work | Stage 2 | "Search and organize literature for this research direction" (Stage 2) |
+| Complete Chinese paper | LaTeX / Word template rendering | Stage 4g | "Render this paper into IEEE format" (Stage 4g) |
 
 ---
 
