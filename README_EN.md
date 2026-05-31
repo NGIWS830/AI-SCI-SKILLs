@@ -14,7 +14,7 @@ English | [中文](README.md)
 
 <div align="center">
 
-<h3><strong>One Skill. One Session. Raw materials → polished English SCI manuscript. 🚀</strong></h3>
+<h3><strong>One Skill. One Session. Raw materials → polished English SCI manuscript 🚀</strong></h3>
 
 </div>
 
