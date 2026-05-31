@@ -304,6 +304,21 @@ For result visualizations (NEW in v0.4), run:
 python experiment/scripts/result_visualizer.py <table_path> --target <method_name> --metrics <m1,m2> --output-dir <output_dir>/figures/
 ```
 
+**Experiment planning (NEW in v0.4):** Generate a structured experiment plan BEFORE running experiments:
+```bash
+python experiment/scripts/design_experiments.py --project-brief <output_dir>/00_project_brief.md --venue cvpr --output <output_dir>/experiment_plan.md
+```
+
+**Experiment narrative synthesis (NEW in v0.4):** After analysis, synthesize into prose:
+```bash
+python experiment/scripts/synthesize_experiments.py --improvements <output_dir>/03a_improvement_summary.md --stats <output_dir>/03b_statistical_tests.md --project-brief <output_dir>/00_project_brief.md --output <output_dir>/experiment_synthesis.md
+```
+
+**Claim-evidence audit (NEW in v0.4):** Before submission, verify every claim has evidence:
+```bash
+python scripts/claim_evidence_auditor.py <output_dir>/08_english_polished.md --output-dir <output_dir>/ --output <output_dir>/claim_audit.md
+```
+
 ### Prompt Guidance
 
 Before making any claim, apply this decision tree:
@@ -928,12 +943,15 @@ Apply at every stage:
 | `experiment/scripts/compute_improvements.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --lower-better <m2> --group-cols <col> --output <path>` | Compute pairwise improvements from CSV (v0.4: added --stats, --all-pairs, --format json, --seed-col) |
 | `experiment/scripts/statistical_tests.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --output <path>` | Bootstrap CI, Cohen's d/Hedges' g, paired t-test, Wilcoxon, multiple comparison correction (NEW v0.4) |
 | `experiment/scripts/result_visualizer.py <csv> --target <name> --metrics <m1,m2> --output-dir <dir>` | Bar charts, ablation waterfall, radar charts, heatmaps, Pareto frontiers (NEW v0.4) |
+| `experiment/scripts/design_experiments.py --project-brief <brief> --output <plan>` | Generate structured experiment plan: required tables, ablation design, baseline coverage check, completeness checklist (NEW v0.4) |
+| `experiment/scripts/synthesize_experiments.py --improvements <imp.md> --stats <stats.md> --output <synth>` | Synthesize experiment results into narrative paragraphs for Setup, Results, Ablation, Efficiency, Discussion (NEW v0.4) |
 | `literature/scripts/search_literature.py "<query>" --sources s2,arxiv --max 20 --output <path>` | Search literature across Academic APIs |
 | `literature/scripts/verify_citations.py <citations_file> --sources crossref,dblp --output <path>` | Verify citation metadata |
 | `literature/scripts/analyze_citations.py <lit_matrix.md> --output <gap_analysis>` | Temporal trends, venue distribution, method-family clustering, research gap identification, network data export (NEW v0.4) |
 | `literature/scripts/auto_fill_matrix.py <search_results.md> --project-brief <brief> --output <matrix>` | Auto-fill literature matrix from search results — classifies papers by task relation, summarizes main ideas, assigns section placement (NEW v0.4) |
 | `literature/scripts/synthesize_literature.py <lit_matrix.md> --project-brief <brief> --output <synthesis>` | Synthesize matrix into narrative for Introduction + Related Work — theme grouping, logical arc, paragraph templates with differentiation (NEW v0.4) |
 | `scripts/check_quality.py <output_dir> --checks all --output <path>` | Quality checks: claims, citations, reproducibility, language, structure, terminology, CN-overclaims, dedup, AI-flavor |
+| `scripts/claim_evidence_auditor.py <paper.md> --tables <csv> --output <audit>` | Structured claim-evidence audit: extracts claims, checks table references, verifies numbers, detects overclaims, flags unsupported statements (NEW v0.4) |
 | `scripts/compile_latex.py <tex_file> --output-dir <dir>` | Compile LaTeX manuscript to PDF |
 | `scripts/format_bibtex.py <bib_file> --validate --normalize --output <path>` | Validate and normalize BibTeX entries |
 | `scripts/render_word.py <content.json> --template <template.docx> --output <output.docx>` | Fill IEEE Word template with structured content |
