@@ -111,7 +111,8 @@ SKILL.md（根入口）
 │                      result_visualizer.py
 ├── writer/        — 中文初稿 → 润色 → 英译 → 英文润色 → 自批判
 │   └── references/  — 全章节模板、中英翻译语料库、术语表、质量评分标准
-├── scripts/       — 质量检查、LaTeX 编译、BibTeX 格式化、Word 渲染、
+├── scripts/       — 质量检查、声明-证据审计、交叉引用校验、
+│                    LaTeX 编译、BibTeX 格式化、Word 渲染、
 │                    审稿回复生成、论文转Slides
 └── templates/     — 11 个会议/期刊模板（中英文、CV/ML/NLP/AI/遥感/
                      计算智能/图像处理）、Cover Letter
@@ -164,10 +165,11 @@ python experiment/scripts/synthesize_experiments.py \
     --improvements improvements.md --stats stats_report.md \
     --project-brief project_brief.md --output exp_synthesis.md
 
-# ── Stage 4f: 质量检查 + 声明-证据审计 ──
+# ── Stage 4f: 质量检查 + 声明-证据审计 + 交叉引用校验 ──
 python scripts/check_quality.py output_dir/ --all --output quality_report.md
 python scripts/claim_evidence_auditor.py paper.md \
     --output-dir output_dir/ --output claim_audit.md
+python scripts/validate_references.py paper.md --output ref_report.md
 
 # ── Stage 4g: 模板渲染 ──
 python scripts/render_word.py content.json \
@@ -196,11 +198,10 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 - 结果可视化：6 种图表类型（PNG/PDF/SVG/PGF）
 - **实验叙述合成** — 自动生成 Setup / Results / Ablation / Efficiency / Discussion 段落模板
 
-**声明-证据审计（Stage 4f — NEW）**
-- 从稿件中提取全部事实性声明
-- 逐条追溯表/图引用，数值交叉验证
-- 夸大表述检测，未支撑声明标记
-- 按严重性分级（high/medium/low/clean）
+**质量保障三件套（Stage 4f — NEW）**
+- **质量评分** — 5 维度 100 分制自动检查
+- **声明-证据审计** — 提取全部事实性声明，逐条追溯表/图引用，数值交叉验证，夸大表述检测
+- **交叉引用校验** — 图/表/公式/章节编号连续性、孤立对象检测、引用-定义顺序检查、缩写首次使用检测
 
 **架构提取（Stage 1 — NEW）**
 - 自动提取所有 nn.Module / Flax / Keras 子类
@@ -211,10 +212,6 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 **投稿后工具（Stage 4 — NEW）**
 - 审稿回复信生成（Markdown / LaTeX）、评论自动分类、跨审稿人一致性检查
 - 论文转 Slides（Beamer LaTeX / Marp Markdown）+ 讲稿生成
-
-**质量评分体系（Stage 4f）**
-- 5 维度评分：声明-证据对齐 / 引文完整性 / 方法描述精度 / 实验报告严谨性 / 语言质量
-- `scripts/check_quality.py` 自动检查，分数 ≥80 可交付
 
 **去夸大 · 去重 · 去AI味**
 - 中英文夸大表述禁用词表 + 安全替代 + 自查流程

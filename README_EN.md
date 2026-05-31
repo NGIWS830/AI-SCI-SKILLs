@@ -107,7 +107,8 @@ SKILL.md (root entry point)
 │   └── scripts/     — compute_improvements.py, statistical_tests.py, result_visualizer.py
 ├── writer/        — Chinese draft → polish → EN conversion → EN polish → Self-critique
 │   └── references/  — Full section templates, CN-EN translation corpus, terminology glossary, quality rubric
-├── scripts/       — Quality checks, LaTeX compilation, BibTeX formatting, Word rendering,
+├── scripts/       — Quality checks, claim-evidence audit, cross-reference validation,
+│                    LaTeX compilation, BibTeX formatting, Word rendering,
 │                    rebuttal generation, paper-to-slides
 └── templates/     — 11 conference/journal templates (CN/EN, CV/ML/NLP/AI/RS/CI/IP),
                      Cover Letter
@@ -160,10 +161,11 @@ python experiment/scripts/synthesize_experiments.py \
     --improvements improvements.md --stats stats_report.md \
     --project-brief project_brief.md --output exp_synthesis.md
 
-# -- Stage 4f: Quality checks + Claim-evidence audit --
+# -- Stage 4f: Quality checks + Claim-evidence audit + Cross-reference validation --
 python scripts/check_quality.py output_dir/ --all --output quality_report.md
 python scripts/claim_evidence_auditor.py paper.md \
     --output-dir output_dir/ --output claim_audit.md
+python scripts/validate_references.py paper.md --output ref_report.md
 
 # -- Stage 4g: Template rendering --
 python scripts/render_word.py content.json \
@@ -192,11 +194,10 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 - Result visualization: 6 chart types (PNG/PDF/SVG/PGF)
 - **Experiment narrative synthesis** — auto-generates paragraph templates for Setup / Results / Ablation / Efficiency / Discussion
 
-**Claim-Evidence Audit (Stage 4f — NEW)**
-- Extracts all factual claims from manuscript text
-- Traces each to table/figure references, cross-verifies numbers
-- Detects overclaim language, flags unsupported statements
-- Severity-rated per-claim audit (high/medium/low/clean)
+**Quality Assurance Suite (Stage 4f — NEW)**
+- **Quality Scoring** — 5-dimension 100-point automated check
+- **Claim-Evidence Audit** — extracts all factual claims, traces to table/figure refs, cross-verifies numbers, detects overclaims
+- **Cross-Reference Validator** — sequential numbering check, orphan object detection, ref-before-def order, abbreviation first-use, citation range
 
 **Architecture Extraction (Stage 1 — NEW)**
 - Auto-extract all nn.Module / Flax / Keras subclasses
@@ -207,10 +208,6 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 **Post-Submission Tools (Stage 4 — NEW)**
 - Reviewer rebuttal letter generation (Markdown / LaTeX), comment auto-classification, cross-reviewer consistency check
 - Paper-to-slides conversion (Beamer LaTeX / Marp Markdown) + speaker notes
-
-**Quality Scoring System (Stage 4f)**
-- 5-dimension rubric: Claims-Evidence Alignment / Citation Completeness / Method Precision / Experiment Rigor / Language Quality
-- `scripts/check_quality.py` for automated checks; score ≥80 is submission-ready
 
 **Anti-Overclaim · Dedup · De-AI**
 - Banned CN+EN overclaim terms with safe alternatives and self-scan procedures
