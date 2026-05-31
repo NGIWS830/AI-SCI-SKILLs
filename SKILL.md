@@ -194,6 +194,7 @@ Read these files for detailed guidance:
 - `literature/references/multimodal-classic-papers.md` — seed map: multimodal
 - `literature/references/related-work-patterns.md` — prose structure
 - `literature/references/literature-matrix-template.md` — output template
+- `literature/references/literature-synthesis-guide.md` — from matrix to narrative: theme extraction, logical arc, mapping to Introduction/Related Work (NEW v0.4)
 
 ### Automated Search
 
@@ -227,6 +228,7 @@ python literature/scripts/verify_citations.py <output_dir>/citations_to_verify.t
 6. Build the literature matrix. Every row must have a verification status.
 7. Draft related-work structure organized by themes, not paper-by-paper.
 8. Run `literature/scripts/analyze_citations.py <output_dir>/02_literature_matrix.md` for gap analysis: temporal trends, venue distribution, method-family clustering, and missing citation suggestions (NEW in v0.4).
+9. Run `literature/scripts/synthesize_literature.py <output_dir>/02_literature_matrix.md --project-brief <output_dir>/00_project_brief.md` to synthesize the matrix into narrative themes and generate Introduction + Related Work paragraph templates with logical flow (NEW in v0.4). Read `literature/references/literature-synthesis-guide.md` for the full methodology.
 
 ### Literature Matrix Column Guidance
 
@@ -930,6 +932,7 @@ Apply at every stage:
 | `literature/scripts/verify_citations.py <citations_file> --sources crossref,dblp --output <path>` | Verify citation metadata |
 | `literature/scripts/analyze_citations.py <lit_matrix.md> --output <gap_analysis>` | Temporal trends, venue distribution, method-family clustering, research gap identification, network data export (NEW v0.4) |
 | `literature/scripts/auto_fill_matrix.py <search_results.md> --project-brief <brief> --output <matrix>` | Auto-fill literature matrix from search results — classifies papers by task relation, summarizes main ideas, assigns section placement (NEW v0.4) |
+| `literature/scripts/synthesize_literature.py <lit_matrix.md> --project-brief <brief> --output <synthesis>` | Synthesize matrix into narrative for Introduction + Related Work — theme grouping, logical arc, paragraph templates with differentiation (NEW v0.4) |
 | `scripts/check_quality.py <output_dir> --checks all --output <path>` | Quality checks: claims, citations, reproducibility, language, structure, terminology, CN-overclaims, dedup, AI-flavor |
 | `scripts/compile_latex.py <tex_file> --output-dir <dir>` | Compile LaTeX manuscript to PDF |
 | `scripts/format_bibtex.py <bib_file> --validate --normalize --output <path>` | Validate and normalize BibTeX entries |
