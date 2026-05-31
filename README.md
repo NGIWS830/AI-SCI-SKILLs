@@ -82,7 +82,7 @@ AI-SCI-SKILLs 是一个以中文为先的端到端 SCI 论文写作流水线，�
 ```
 Stage 0: INIT   → 盘点材料，创建项目状态文件
 Stage 1: DIGEST → 阅读项目材料，生成结构化简报
-Stage 2: LIT    → 文献检索（API 自动化）、验证、矩阵整理
+Stage 2: LIT    → 文献检索（API 自动化）、AI 自动填矩阵、验证、缺口分析、叙述合成（矩阵→Introduction+Related Work）
 Stage 3: EXPER  → 实验分析、改进计算、论点提炼
 Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色
                → 4d 英译 → 4e 英文润色 → 4f 自批判 → 4g 模板渲染
@@ -97,16 +97,24 @@ Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色
 ```
 SKILL.md（根入口）
 ├── digest/        — 从项目材料中提取论文可用信息
-│   └── references/  — 代码阅读、任务分类、证据规则、简报模板
-├── literature/    — 检索、验证并组织文献
-│   ├── references/  — 搜索策略、API 指南、引文验证、经典论文地图
-│   └── scripts/     — search_literature.py, verify_citations.py
+│   ├── references/  — 代码阅读、任务分类、证据规则、简报模板
+│   └── scripts/     — summarize_repo.py, extract_architecture.py
+├── literature/    — 检索 → 自动填矩阵 → 验证 → 缺口分析 → 叙述合成
+│   ├── references/  — 搜索策略、API 指南、引文验证、经典论文地图、
+│   │                  文献合成指南（矩阵→叙事）
+│   └── scripts/     — search_literature.py, auto_fill_matrix.py,
+│                      verify_citations.py, analyze_citations.py,
+│                      synthesize_literature.py
 ├── experiment/    — 分析实验并验证论点
-│   └── references/  — 指标指南、声明规则、消融写作、可复现性检查清单
+│   ├── references/  — 指标指南、声明规则、消融写作、可复现性检查清单
+│   └── scripts/     — compute_improvements.py, statistical_tests.py,
+│                      result_visualizer.py
 ├── writer/        — 中文初稿 → 润色 → 英译 → 英文润色 → 自批判
 │   └── references/  — 全章节模板、中英翻译语料库、术语表、质量评分标准
-├── scripts/       — 质量检查、LaTeX 编译、图表抽取、BibTeX 格式化、Word 渲染
-└── templates/     — 中文期刊、IEEE LaTeX、IEEE Word、Cover Letter 模板
+├── scripts/       — 质量检查、LaTeX 编译、BibTeX 格式化、Word 渲染、
+│                    审稿回复生成、论文转Slides
+└── templates/     — 11 个会议/期刊模板（中英文、CV/ML/NLP/AI/遥感/
+                     计算智能/图像处理）、Cover Letter
 ```
 
 ---
@@ -128,41 +136,51 @@ SKILL.md（根入口）
 你也可以直接调用各阶段脚本：
 
 ```bash
-# 架构提取（NEW v0.4）
+# ── Stage 1: 架构提取 ──
 python digest/scripts/extract_architecture.py my_project/ --output arch_report.md
 
-# 文献搜索
+# ── Stage 2: 文献检索 → 填矩阵 → 验证 → 分析 → 合成 ──
 python literature/scripts/search_literature.py "cross-modal retrieval contrastive learning" \
-    --sources s2,arxiv --max 20 --output results.md
-
-# 引文分析（NEW v0.4）
+    --sources s2,arxiv --max 30 --output results.md
+python literature/scripts/auto_fill_matrix.py results.md \
+    --project-brief project_brief.md --output lit_matrix.md
+python literature/scripts/verify_citations.py citations.txt --sources crossref,dblp
 python literature/scripts/analyze_citations.py lit_matrix.md --output gap_analysis.md
+python literature/scripts/synthesize_literature.py lit_matrix.md \
+    --project-brief project_brief.md --output synthesis.md
 
-# 实验改进计算（v0.4 增强：--stats, --all-pairs, --format json）
+# ── Stage 3: 实验分析 + 统计 + 可视化 ──
 python experiment/scripts/compute_improvements.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 \
     --higher-better R@1 R@5 R@10 --group-cols Dataset --stats --output improvements.md
-
-# 统计检验（NEW v0.4）
 python experiment/scripts/statistical_tests.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 \
     --higher-better R@1 R@5 R@10 --output stats_report.md
-
-# 结果可视化（NEW v0.4）
 python experiment/scripts/result_visualizer.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 --output-dir ./figures/
 
-# 质量检查
+# ── Stage 4f: 质量检查 ──
 python scripts/check_quality.py output_dir/ --all --output quality_report.md
 
-# 渲染 Word 稿件
+# ── Stage 4g: 模板渲染 ──
 python scripts/render_word.py content.json \
     --template templates/ieee-word/template.docx --output manuscript.docx
+
+# ── 投稿后: 审稿回复 + Slides ──
+python scripts/generate_rebuttal.py reviews.txt --paper paper.md --output rebuttal.md
+python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --output slides.tex
 ```
 
 ---
 
 ## v0.4.0 核心能力
+
+**文献流水线（Stage 2 — 全面升级）**
+- API 自动搜索（Semantic Scholar / arXiv / CrossRef / DBLP）
+- AI 自动填充文献矩阵（Category / Main Idea / Relation / Use in Paper）
+- 引文元数据交叉验证
+- 时间趋势分析、会议分布、方法家族聚类、研究缺口识别
+- **文献叙述合成** — 矩阵自动转化为 Introduction 和 Related Work 的有逻辑段落（按范式组织，非论文罗列；含主题句、论述演进、方法区分、逻辑流检查）
 
 **统计分析（Stage 3 — NEW）**
 - Bootstrap 置信区间、Cohen's d / Hedges' g 效应量
@@ -177,10 +195,9 @@ python scripts/render_word.py content.json \
 - 框架识别（PyTorch / JAX / TF / HuggingFace）
 - 训练基础设施检测（优化器、调度器、混合精度、分布式训练）
 
-**引文分析（Stage 2 — NEW）**
-- 时间趋势分析、会议/期刊分布
-- 方法家族聚类、研究缺口识别
-- 引文网络数据导出、缺失引用建议
+**投稿后工具（Stage 4 — NEW）**
+- 审稿回复信生成（Markdown / LaTeX）、评论自动分类、跨审稿人一致性检查
+- 论文转 Slides（Beamer LaTeX / Marp Markdown）+ 讲稿生成
 
 **质量评分体系（Stage 4f）**
 - 5 维度评分：声明-证据对齐 / 引文完整性 / 方法描述精度 / 实验报告严谨性 / 语言质量
@@ -191,18 +208,12 @@ python scripts/render_word.py content.json \
 - 跨章节去重规则、AI套话检测
 - 集成到中文润色、英文润色、自批判三个阶段
 
-**API 自动化文献检索与引文验证**
-- Semantic Scholar / arXiv 自动搜索
-- CrossRef / DBLP 引文元数据验证
-
 **中英翻译语料库**
 - 高频术语、句式对照，声明强度映射（中文夸大 → 英文学术安全表述）
 
 **模板输出（Stage 4g）**
-- 中文 LaTeX（中文期刊通用格式）
-- 英文 LaTeX（IEEE 会议格式）
-- 英文 Word（IEEE 会议格式）
-- Cover Letter（LaTeX + Word 双格式）
+- 11 个会议/期刊 LaTeX 模板：中文期刊、IEEE 会议、IEEE TGRS（遥感）、IEEE TETCI（计算智能）、IEEE TIP（图像处理）、CVPR/ICCV、NeurIPS/ICML、ACL/EMNLP、AAAI/IJCAI
+- IEEE Word 模板 + Cover Letter（LaTeX + Word 双格式）
 
 ---
 
@@ -235,6 +246,13 @@ requests, python-docx, pylatexenc
 
 ```bash
 pip install requests python-docx pylatexenc
+```
+
+可选依赖（按需安装）：
+
+```bash
+pip install matplotlib          # result_visualizer.py 可视化图表
+pip install anthropic           # auto_fill_matrix.py / synthesize_literature.py 的 --auto 模式
 ```
 
 LaTeX 编译需要本地安装 TeX Live 或 MiKTeX（仅 Stage 4g 需要）。

@@ -80,7 +80,7 @@ You can also jump directly to a specific stage:
 ```
 Stage 0: INIT   → Inventory materials, create project state file
 Stage 1: DIGEST → Read project materials, produce structured project brief
-Stage 2: LIT    → Literature search (API-automated), verification, matrix
+Stage 2: LIT    → Literature search (API), AI auto-filled matrix, verification, gap analysis, narrative synthesis (matrix→Introduction+Related Work)
 Stage 3: EXPER  → Experiment analysis, improvement calculations, claims
 Stage 4: WRITE  → 4a Storyline → 4b Chinese draft → 4c Chinese polish
                → 4d EN conversion → 4e EN polish → 4f Self-critique → 4g Template rendering
@@ -95,16 +95,22 @@ Resumable: if interrupted, reload `SKILL.md` with the existing `project-state.md
 ```
 SKILL.md (root entry point)
 ├── digest/        — Extract paper-ready facts from project materials
-│   └── references/  — Code reading, task taxonomy, evidence rules, brief template
-├── literature/    — Search, verify, and organize literature
-│   ├── references/  — Search strategies, API guide, citation verification, classic paper maps
-│   └── scripts/     — search_literature.py, verify_citations.py
+│   ├── references/  — Code reading, task taxonomy, evidence rules, brief template
+│   └── scripts/     — summarize_repo.py, extract_architecture.py
+├── literature/    — Search → auto-fill matrix → verify → gap analysis → narrative synthesis
+│   ├── references/  — Search strategies, API guide, citation verification, classic paper maps,
+│   │                  literature synthesis guide (matrix→narrative)
+│   └── scripts/     — search_literature.py, auto_fill_matrix.py, verify_citations.py,
+│                      analyze_citations.py, synthesize_literature.py
 ├── experiment/    — Analyze experiments and validate claims
-│   └── references/  — Metrics guide, claim rules, ablation writing, reproducibility checklist
+│   ├── references/  — Metrics guide, claim rules, ablation writing, reproducibility checklist
+│   └── scripts/     — compute_improvements.py, statistical_tests.py, result_visualizer.py
 ├── writer/        — Chinese draft → polish → EN conversion → EN polish → Self-critique
 │   └── references/  — Full section templates, CN-EN translation corpus, terminology glossary, quality rubric
-├── scripts/       — Quality checks, LaTeX compilation, figure extraction, BibTeX formatting, Word rendering
-└── templates/     — Chinese journal, IEEE LaTeX, IEEE Word, Cover Letter templates
+├── scripts/       — Quality checks, LaTeX compilation, BibTeX formatting, Word rendering,
+│                    rebuttal generation, paper-to-slides
+└── templates/     — 11 conference/journal templates (CN/EN, CV/ML/NLP/AI/RS/CI/IP),
+                     Cover Letter
 ```
 
 ---
@@ -126,26 +132,51 @@ SKILL.md (root entry point)
 You can also use individual stage scripts directly:
 
 ```bash
-# Literature search
-python literature/scripts/search_literature.py "cross-modal retrieval contrastive learning" \
-    --sources s2,arxiv --max 20 --output results.md
+# -- Stage 1: Architecture extraction --
+python digest/scripts/extract_architecture.py my_project/ --output arch_report.md
 
-# Compute experiment improvements
+# -- Stage 2: Literature search -> fill matrix -> verify -> analyze -> synthesize --
+python literature/scripts/search_literature.py "cross-modal retrieval contrastive learning" \
+    --sources s2,arxiv --max 30 --output results.md
+python literature/scripts/auto_fill_matrix.py results.md \
+    --project-brief project_brief.md --output lit_matrix.md
+python literature/scripts/verify_citations.py citations.txt --sources crossref,dblp
+python literature/scripts/analyze_citations.py lit_matrix.md --output gap_analysis.md
+python literature/scripts/synthesize_literature.py lit_matrix.md \
+    --project-brief project_brief.md --output synthesis.md
+
+# -- Stage 3: Experiment analysis + statistics + visualization --
 python experiment/scripts/compute_improvements.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 \
-    --higher-better R@1 R@5 R@10 --group-cols Dataset --output improvements.md
+    --higher-better R@1 R@5 R@10 --group-cols Dataset --stats --output improvements.md
+python experiment/scripts/statistical_tests.py results.csv \
+    --target MyModel --metrics R@1 R@5 R@10 \
+    --higher-better R@1 R@5 R@10 --output stats_report.md
+python experiment/scripts/result_visualizer.py results.csv \
+    --target MyModel --metrics R@1 R@5 R@10 --output-dir ./figures/
 
-# Quality checks
+# -- Stage 4f: Quality checks --
 python scripts/check_quality.py output_dir/ --all --output quality_report.md
 
-# Render Word manuscript
+# -- Stage 4g: Template rendering --
 python scripts/render_word.py content.json \
     --template templates/ieee-word/template.docx --output manuscript.docx
+
+# -- Post-submission: Rebuttal + Slides --
+python scripts/generate_rebuttal.py reviews.txt --paper paper.md --output rebuttal.md
+python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --output slides.tex
 ```
 
 ---
 
 ## v0.4.0 Key Features
+
+**Literature Pipeline (Stage 2 — Fully Upgraded)**
+- API-automated search (Semantic Scholar / arXiv / CrossRef / DBLP)
+- AI auto-fill of literature matrix (Category / Main Idea / Relation / Use in Paper)
+- Citation metadata cross-verification
+- Temporal trend analysis, venue distribution, method-family clustering, research gap identification
+- **Literature narrative synthesis** — automatic conversion of matrix into logically organized Introduction and Related Work prose (by paradigm, not paper-by-paper; includes topic sentences, evolutionary arcs, method differentiation, logical flow verification)
 
 **Statistical Analysis (Stage 3 — NEW)**
 - Bootstrap confidence intervals, Cohen's d / Hedges' g effect sizes
@@ -160,10 +191,9 @@ python scripts/render_word.py content.json \
 - Framework identification (PyTorch / JAX / TF / HuggingFace)
 - Training infrastructure detection (optimizer, scheduler, mixed precision, distributed training)
 
-**Citation Analysis (Stage 2 — NEW)**
-- Temporal trend analysis, venue distribution
-- Method-family clustering, research gap identification
-- Citation network data export, missing citation suggestions
+**Post-Submission Tools (Stage 4 — NEW)**
+- Reviewer rebuttal letter generation (Markdown / LaTeX), comment auto-classification, cross-reviewer consistency check
+- Paper-to-slides conversion (Beamer LaTeX / Marp Markdown) + speaker notes
 
 **Quality Scoring System (Stage 4f)**
 - 5-dimension rubric: Claims-Evidence Alignment / Citation Completeness / Method Precision / Experiment Rigor / Language Quality
@@ -174,18 +204,12 @@ python scripts/render_word.py content.json \
 - Cross-section deduplication rules, AI-flavor detection
 - Integrated into Chinese polish, English polish, and self-critique stages
 
-**API-Automated Literature Search & Citation Verification**
-- Semantic Scholar / arXiv automated search
-- CrossRef / DBLP citation metadata verification
-
 **CN-EN Translation Corpus**
 - High-frequency term/sentence mappings, claim-strength mapping (Chinese overclaims → safe English academic equivalents)
 
 **Template Outputs (Stage 4g)**
-- Chinese LaTeX (generic Chinese journal format)
-- English LaTeX (IEEE conference format)
-- English Word (IEEE conference format)
-- Cover Letter (LaTeX + Word dual format)
+- 11 conference/journal LaTeX templates: Chinese journal, IEEE Conference, IEEE TGRS (Remote Sensing), IEEE TETCI (Computational Intelligence), IEEE TIP (Image Processing), CVPR/ICCV, NeurIPS/ICML, ACL/EMNLP, AAAI/IJCAI
+- IEEE Word template + Cover Letter (LaTeX + Word dual format)
 
 ---
 
@@ -218,6 +242,13 @@ Install:
 
 ```bash
 pip install requests python-docx pylatexenc
+```
+
+Optional dependencies:
+
+```bash
+pip install matplotlib          # result_visualizer.py for charts
+pip install anthropic           # auto_fill_matrix.py / synthesize_literature.py --auto mode
 ```
 
 LaTeX compilation (Stage 4g only) requires a local TeX Live or MiKTeX installation.
