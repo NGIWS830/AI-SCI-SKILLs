@@ -14,7 +14,7 @@
 
 <div align="center">
 
-<h3><strong>一个 Skill，一次会话。原始材料 → 英文 SCI 论文终稿。🚀</strong></h3>
+<h3><strong>一个 Skill，一次会话。原始材料 → 英文 SCI 论文终稿🚀</strong></h3>
 
 </div>
 
