@@ -120,6 +120,359 @@ SKILL.md (root entry point)
 
 ---
 
+## Pipeline Detailed Mechanisms
+
+> The following sections unpack the operational semantics of each stage: role instructions, decision trees, scoring criteria, threshold logic, and audit procedures. These are the core rules from SKILL.md that drive AI agent behavior.
+
+### Stage 0 — INIT: Material Inventory & State Setup
+
+**Purpose**: Inventory all user-provided materials and create a project state file that tracks the pipeline.
+
+1. Ask the user for: output directory, target venue/journal, and any specific requirements.
+2. Identify all materials: code repos, README, configs, logs, experiment tables (CSV/Excel), framework diagrams, notes (Word/TXT/Markdown), prior drafts, literature lists.
+3. Create `<output_dir>/project-state.md` with material inventory, target venue, pipeline progress checkboxes, stage output placeholders, and a missing-author-input log.
+4. Update status to `STAGE 1 | DIGEST`.
+
+**Two core annotation conventions (used throughout all stages):**
+- `AUTHOR_INPUT_NEEDED`: information requiring author input (never fabricate)
+- `[CITATION NEEDED]`: citations not yet cross-verified against databases
+
+---
+
+### Stage 1 — DIGEST: Project Digestion
+
+**Purpose**: Extract paper-ready facts from project materials and produce a structured project brief.
+
+**5-Step Chain-of-Thought:**
+
+```
+STEP 1: TASK IDENTIFICATION
+→ What is the research task? (classification/detection/segmentation/generation/retrieval/...)
+→ Input modality? (image/text/audio/video/multimodal)
+→ Output format? (class label/mask/bounding box/text/embedding)
+
+STEP 2: METHOD EXTRACTION
+→ Backbone? (ResNet/ViT/BERT/GPT/custom)
+→ Novel modules? Every nn.Module subclass or custom function
+→ Training objective? Every loss term
+→ Inference pipeline? Step-by-step description
+
+STEP 3: EVIDENCE GROUNDING
+→ HIGH: directly visible in code/configs/notes (e.g., "uses CrossEntropyLoss" confirmed at loss.py:42)
+→ MEDIUM: strongly implied but not fully specified (e.g., "uses AdamW" inferred from config keys)
+→ LOW: plausible interpretation requiring author confirmation
+
+STEP 4: GAP ANALYSIS
+→ What datasets are claimed but lack provided splits?
+→ What metrics are mentioned but have no computed values?
+→ What baselines are named but lack implementation details?
+→ What hyperparameters are missing?
+
+STEP 5: CONTRIBUTION CANDIDATES
+→ For each candidate: what is novel + what evidence supports it + what validation is still needed
+```
+
+**5-Script Chain:**
+```
+summarize_repo.py → extract_architecture.py → parse_notebooks.py → trace_dependencies.py → synthesize_brief.py
+```
+`synthesize_brief.py --repo <path>` runs the full digest pipeline end-to-end in one command.
+
+**Output**: `00_project_brief.md` — research task, method module→evidence mapping table, data flow, candidate contributions, missing information checklist, paper-writing risks.
+
+**Transition**: Update status to `STAGE 2 | LIT`. If critical information is missing, ask the user before proceeding.
+
+---
+
+### Stage 2 — LIT: Literature Review
+
+**Purpose**: Build verified literature support — classic foundations, recent SOTA, method-family papers, dataset papers, and gap evidence.
+
+**Query Derivation Rules** (extract 3-5 key technical terms from Stage 1; generate 3 query variants per term):
+
+| Variant | Pattern | Example |
+|---------|---------|---------|
+| Broad | `"<task> <method_family>"` | `"text-to-image retrieval cross-modal alignment"` |
+| Specific | `"<task> <specific_technique>"` | `"cross-modal retrieval contrastive learning"` |
+| Gap-focused | `"<task> limitation <pain_point>"` | `"text-image retrieval fine-grained alignment"` |
+
+**Literature Matrix Column Meanings:**
+
+| Column | Description |
+|--------|-------------|
+| Relation to Our Work | 5 categories: direct competitor / method inspiration / baseline comparison / dataset source / gap evidence |
+| Use in Paper | Which section and for what purpose (e.g., "Intro para 2 — representative method") |
+| Verification | 3-tier: ✓ confirmed (DOI+arXiv) / ~ single source / ✗ unverified |
+
+**Classic Paper Seed Maps**: `cv-classic-papers.md` / `nlp-classic-papers.md` / `multimodal-classic-papers.md` catch high-impact older papers that automated search might miss.
+
+**Literature Narrative Synthesis (NEW v0.4)**: `synthesize_literature.py` converts the matrix into logically organized Introduction and Related Work prose — organized by paradigm, not paper-by-paper; includes topic sentences, evolutionary arcs, method differentiation, and logical flow checks.
+
+**Script Chain**: `search_literature.py` → `auto_fill_matrix.py` → `verify_citations.py` → `analyze_citations.py` → `synthesize_literature.py`
+
+**Output**: `02_literature_matrix.md` — search queries, literature matrix, Related Work theme structure, research gap evidence, citation gaps.
+
+**Transition**: Update status to `STAGE 3 | EXPER`.
+
+---
+
+### Stage 3 — EXPER: Experiment Analysis
+
+**Purpose**: Convert experiment artifacts into evidence-grounded result claims.
+
+**Claim-Strength Decision Tree** (every claim must pass through):
+
+```
+Q1: Is the improvement direction correct given the metric?
+    → Check higher-is-better vs lower-is-better. If unsure, flag AUTHOR_INPUT_NEEDED.
+
+Q2: Is the improvement consistent across datasets/settings?
+    → Consistent (all datasets) → STRONG
+    → Mixed (most datasets)     → MODERATE
+    → Single dataset            → WEAK
+    → No direct evidence        → UNSUPPORTED — do not claim.
+
+Q3: Is the improvement large enough to matter?
+    → Classification >1pp | Detection >1 mAP | Segmentation >1 mIoU/Dice | Generation >1 BLEU
+    → Below threshold → use "comparable to" / "on par with"
+
+Q4: Could confounding factors explain the improvement?
+    → Different backbone capacity? Training budget? Data preprocessing?
+    → If yes, flag as caveat.
+```
+
+**Results Paragraph Fill-in-the-Blank Template:**
+> As shown in Table [X], [Method] achieves [value] on [dataset], [direction] the strongest baseline [baseline] by [absolute] ([relative]%). On [dataset_2], [Method] achieves [value_2], a [absolute_2] improvement over [baseline_2]. These results demonstrate that [component] contributes to [capability], as evidenced by [specific_evidence].
+
+**5 Scripts**: `design_experiments.py` (experiment plan) → `compute_improvements.py` (improvements + Bootstrap CI) → `statistical_tests.py` (effect sizes/significance/multiple comparison correction/power analysis) → `result_visualizer.py` (6 chart types) → `synthesize_experiments.py` (narrative synthesis).
+
+**Output**: `03_experiment_analysis.md` — tables analyzed, main results, improvement over baselines, ablation findings, claim→evidence mapping (with strength level and caveats).
+
+**Transition**: Update status to `STAGE 4 | WRITE`.
+
+---
+
+### Stage 4a — Storyline
+
+**Purpose**: Distill the paper's single scientific narrative before drafting.
+
+**5-Element Structure:**
+- **Problem**: The ONE scientific question the paper answers (one sentence)
+- **Gap**: The missing piece of knowledge, with a "because" clause
+- **Method**: Core mechanism in 2-3 sentences (module-level)
+- **Evidence**: 2-3 key experimental results supporting the claims
+- **Contribution**: One sentence, aligned with evidence
+
+**5-Point Self-Check:**
+1. Does the problem statement match what the method actually solves?
+2. Is the gap articulated with specificity (not "few works study X" but "existing methods fail to handle Y because Z")?
+3. Does the method description highlight the novel part, not the standard pipeline?
+4. Does every contribution bullet trace to evidence in Stage 1 or Stage 3?
+5. Is the contribution scope honest — claiming only what the evidence supports?
+
+---
+
+### Stage 4b — Chinese Draft (`05_chinese_draft.md`)
+
+**Role Instruction:**
+> You are now drafting a Chinese academic paper manuscript. Your goal is to produce a complete, logically coherent first draft where every factual claim is grounded in the project state file's evidence. Write in formal Chinese academic register. Use short to medium sentences (20-50 characters). Prefer active voice with explicit subjects (本文/我们/该方法). Every paragraph should have a clear topic sentence. Preserve all `AUTHOR_INPUT_NEEDED` and `[CITATION NEEDED]` markers.
+
+**Section-by-Section Guidance:**
+
+| Section | Structure Rules |
+|---------|----------------|
+| **Title** | Propose 3 variants; choose the most specific and least overclaiming. Pattern: `[Method Name]: [Core Mechanism] for [Task]` |
+| **Abstract** | 2-6-2 structure, exactly 10 sentences: 2 background/gap + 6 method (signaled by First/Second/Finally; each pair = claim + why-it-works) + 2 results/implication. ~250 Chinese characters |
+| **Introduction** | 5 paragraphs: task importance → current progress (2-3 method families) → remaining gap (with "because" clause) → proposed method (core mechanism in 2-3 sentences) → contributions (3-4 bullets, each pointing to evidence) |
+| **Related Work** | Theme-based (from Stage 2), 1 paragraph per theme: theme statement → 2-3 papers with comparison → how your method differs. Avoid laundry-list pattern |
+| **Method** | III-A Overview (with architecture diagram ref), III-B/C/D per module: input→process→output→rationale. Every formula explained in prose |
+| **Experiments** | Subsections: Datasets & Implementation Details / Main Results / Ablation Study / Efficiency Analysis / Qualitative Analysis. Every result number in both table AND prose |
+| **Conclusion** | Restate problem, method, key findings. No new claims or citations. End with 1-2 specific future directions |
+
+---
+
+### Stage 4c — Chinese Polish (`06_chinese_polished.md`)
+
+**Role Instruction:**
+> You are now polishing a Chinese academic manuscript. Polish for academic clarity, logical flow, and concise expression. The goal is NOT to make the text flowery — it is to remove ambiguity, tighten logic, eliminate redundancy, and ensure every paragraph earns its place. Scientific meaning is sacred — never alter it to sound better.
+
+**De-AI Scan (4 categories of Chinese AI boilerplate):**
+1. Generic openers ("近年来，随着...的发展") → concrete problem statements
+2. Generic closers ("综上所述，本文提出的方法有效...") → specific findings
+3. Hollow modifiers ("强大的性能", "良好的效果") → replace with specific numbers
+4. Over-explanation of basic concepts → delete (SCI reviewers already know them)
+
+**Cross-Section Dedup:**
+- Method details appear ONLY in Method section, not Introduction
+- Results appear ONLY in Experiments section, not Method
+- Abstract, Introduction, and Conclusion use distinct phrasing
+- No two sections share near-identical sentences
+
+**10-Item Polishing Checklist:**
+
+| # | Check | Before (BAD) | After (GOOD) |
+|---|-------|-------------|--------------|
+| 1 | Remove empty modifiers | 该方法取得了较好的性能提升 | 该方法在Cityscapes上提升了2.3 mIoU |
+| 2 | Add missing subjects | 使用ResNet-50作为骨干网络 | 我们使用ResNet-50作为骨干网络 |
+| 3 | Split long sentences (>50 chars) | (a 60-character run-on) | (two 25-35 character sentences) |
+| 4 | Unify terminology | Mixed 注意力机制/Attention机制 | Unify to one term (with English on first use) |
+| 5 | Remove redundant pairs | 精度和准确率均得到提升 | 精度提升了1.2个百分点 (specify which metric) |
+| 6 | Strengthen weak transitions | 另外，我们还做了... | 在效率方面，我们进一步分析了... |
+| 7 | Ground vague claims | 性能优于所有基线方法 | On all three datasets, outperforms all baselines (Table 2) |
+| 8 | Fix dangling references | 如图所示 | 如图3所示 |
+| 9 | Align parallel structures | 我们提出了X，设计了Y，以及对Z进行了优化 | 我们提出了X，设计了Y，优化了Z |
+| 10 | Check claim-consistency | CN "显著提升" vs EN "significant" | Ensure magnitude language matches Stage 3 evidence strength |
+
+**Logic Flow Audit**: At each paragraph boundary, ask: does it follow logically? New information or restated? Is the argument chain unbroken?
+
+**Redundancy Detection**: Scan for consecutive same-meaning sentences, identical wording across sections, repeated numbers without added interpretation.
+
+---
+
+### Stage 4d — CN→EN Conversion (`07_english_draft.md`)
+
+**Role Instruction:**
+> You are now converting a polished Chinese academic manuscript into English SCI prose. This is NOT literal translation. You are rewriting: restructure sentences from Chinese topic-comment pattern to English SVO pattern, add explicit subjects where Chinese omitted them, convert Chinese aspect markers to English tense, add articles (a/an/the), and maintain academic register throughout. Preserve all numbers, metric values, citation markers, and claim strength EXACTLY.
+
+**Tense Conventions:**
+
+| Section | Primary Tense | Exceptions |
+|---------|--------------|------------|
+| Abstract | Present | Past for "We evaluated on..." |
+| Introduction | Present | Past for "Previous methods struggled...", Present perfect for "Recent work has shown..." |
+| Related Work | Present perfect / Present | Past for specific historical results |
+| Method | Present | — |
+| Experiments | Past | Present for "Table 1 reports..." |
+| Conclusion | Present | Past for summarizing specific results |
+
+**Voice Conventions:**
+
+| Section | Guidance |
+|---------|----------|
+| Abstract | Active preferred: "We propose..." |
+| Introduction | Active: "We propose...", "We evaluate..." |
+| Related Work | Mix: passive for existing methods, active for "We differ from..." |
+| Method | Passive acceptable for process; active for design rationale: "We design X to..." |
+| Experiments | Active for narrative: "We compare..."; passive for procedure: "Models were trained..." |
+| Conclusion | Active: "We have presented...", "We demonstrated..." |
+
+**Claim-Strength Mapping (key entries):**
+
+| Chinese | Overclaiming English ✗ | Safer English ✓ |
+|---------|----------------------|-----------------|
+| 显著提升 | significantly improves | achieves a X.X pp improvement |
+| 解决了...问题 | solves the problem of... | addresses / alleviates / mitigates |
+| 优于现有方法 | outperforms all existing methods | outperforms [named baselines] on [specific datasets] |
+| 首次提出 | is the first to / novel | introduces / proposes (no "first" unless verifiable) |
+| 证明了 | proves that | demonstrates that / provides evidence that |
+
+**5 CN→EN Translation Pitfalls**: topic-prominence transfer (add subjects), modifier stacking (pre→post), parallel structure (repetition→conjunction reduction), zero article→article, aspect→tense.
+
+---
+
+### Stage 4e — English Polish (`08_english_polished.md`)
+
+**Role Instruction:**
+> You are now polishing an English SCI manuscript. Polish for: academic register, sentence variety, cohesion, precision, and readability. Do NOT change scientific content, add unsupported claims, or strengthen claim wording. If in doubt about whether a change alters meaning, keep the original.
+
+**De-AI Scan (5 categories of English AI boilerplate):**
+1. Generic openers ("In recent years, there has been growing interest in...") → concrete statements
+2. Overused connectors (Moreover, Furthermore, In addition) → max 2 per section
+3. Hollow adjectives ("powerful", "effective", "promising") → specific evidence or delete
+4. Formulaic conclusions ("These results demonstrate the effectiveness of our approach.") → delete
+5. Over-explanation of basic concepts (CNN, attention, transformer basics) → delete
+
+**Sentence Variety Audit:**
+- Count "We"-starting sentences per section. If >3 consecutive, restructure (e.g., "The model achieves...", "Results on [dataset] show...")
+- Sentence length: if all sentences in a paragraph are 25-35 words, mix in a short punchy sentence (10-15 words)
+- Paragraph length: no 1-sentence paragraphs or >12-sentence paragraphs
+
+**Cohesion Device Injection (6 categories):**
+
+| Function | Connectors |
+|----------|-----------|
+| Addition | furthermore, moreover, in addition |
+| Contrast | however, in contrast, conversely, whereas |
+| Cause-effect | therefore, consequently, as a result, thus |
+| Exemplification | for instance, specifically, in particular |
+| Emphasis | notably, importantly |
+| Sequence | first, second, finally, subsequently |
+
+**Academic Register Check (informal → formal):**
+"a lot of" → "substantial" / "considerable" · "big"/"huge" → "large" / "considerable" · "get" → "obtain" / "achieve" · "find out" → "determine" / "identify" · "look at" → "examine" / "investigate"
+
+**Additional checks**: scan `forbidden-overclaims.md` for banned English terms; produce revision notes `09_revision_notes.md`.
+
+---
+
+### Stage 4f — Self-Critique (`10_critique_report.md`)
+
+**Purpose**: Before declaring the paper complete, conduct a systematic self-critique using the quality rubric and automated checks.
+
+**Role Instruction:**
+> You are now the reviewer of this manuscript. Adopt a critical, skeptical stance. Your job is to find every weakness, overclaim, missing citation, and imprecise statement. Be harsh but fair. Rate each dimension honestly — inflating scores helps no one.
+
+**5-Dimension Scoring (1-4 scale, weighted to 100):**
+
+| Dimension | Weight | What It Evaluates |
+|-----------|--------|-------------------|
+| Claims-Evidence Alignment | **25%** | Does every factual claim have a table/figure/section reference? Does wording match evidence strength? |
+| Citation Completeness & Accuracy | **15%** | Are citations verified via CrossRef/DBLP? Are `[CITATION NEEDED]` markers >3? |
+| Method Description Precision | **20%** | Does each module cover input/output/process/rationale? Notation consistent? Implementation details complete? |
+| Experiment Reporting Rigor | **25%** | Metric directions stated? Std devs reported? Baselines described? Ablation covers all claimed contributions? |
+| Language Quality | **15%** | Academic register consistent? Terminology uniform? Sentence variety? No AI boilerplate? |
+
+**Three-Tier Score Thresholds:**
+
+| Score | Verdict | Action |
+|-------|---------|--------|
+| **≥ 80/100** | READY | Proceed to Stage 4g Template Rendering |
+| **70-79/100** | NEEDS REVISION | Fix identified issues, re-run critique |
+| **< 70/100** | NOT READY | Return to the relevant sub-stage for substantive revision |
+
+**Fallback Guidance (by failing dimension):**
+- Claims/Citation issues → Stage 2 (LIT) or Stage 3 (EXPER)
+- Method/Experiment issues → Stage 1 (DIGEST) or Stage 3 (EXPER)
+- Language issues → Stage 4c (Chinese Polish) or 4e (English Polish)
+
+**5 Manual Audits:**
+
+| Audit | What It Checks |
+|-------|---------------|
+| **Claims Audit** | List every factual claim → locate evidence source → flag unsupported claims → flag overstated wording |
+| **Citation Audit** | Count citation markers → `[CITATION NEEDED]` >3 means paper is not ready → bidirectional text↔references verification |
+| **Overclaim Scan** | Scan CN+EN banned terms (`forbidden-overclaims.md`) → check each in context → rewrite or caveat |
+| **Readability Audit** | Figure/table referenced in text BEFORE it appears → cross-reference consistency → abstract standalone comprehensibility |
+| **Terminology Audit** | Inconsistent term detection → abbreviation first-use check → bilingual 1:1 term mapping |
+
+**Automated Check**: `python scripts/check_quality.py <output_dir> --all --output 10a_auto_check.md` (9 checks: claims alignment, citation completeness, reproducibility, language quality, structure, CN overclaims, dedup, AI-flavor, terminology consistency)
+
+**Output Report Structure**: per-dimension score + detailed issues + automated check results + must-fix list + should-fix list + overall recommendation (READY / NEEDS REVISION / NOT READY)
+
+---
+
+### Stage 4g — Template Rendering
+
+**5-Step Process:**
+1. **Chinese LaTeX**: Copy `templates/chinese/`, fill from `06_chinese_polished.md`, compile with XeLaTeX
+2. **English LaTeX**: Copy `templates/ieee-latex/`, fill from `08_english_polished.md`, generate `references.bib`, compile with pdflatex
+3. **English Word**: Build `word_content.json`, run `render_word.py` against IEEE Word template
+4. **Cover Letter**: 5-paragraph structure (submission statement / background+contributions / key findings / why this journal / declarations), LaTeX + Word dual format. Cover letter must NOT copy-paste the abstract; all overclaim rules apply doubly
+5. **Cross-Template Consistency Check**: titles match / author order matches / all metric values identical / citation counts consistent / Cover Letter claims ≤ manuscript claims / no `[CITATION NEEDED]` or `AUTHOR_INPUT_NEEDED`
+
+**11 Available Templates**: Chinese Journal / IEEE Conference / IEEE TGRS / IEEE TETCI / IEEE TIP / CVPR·ICCV / NeurIPS·ICML / ACL·EMNLP / AAAI·IJCAI / IEEE Word / Cover Letter
+
+---
+
+### Post-Submission Tools (NEW v0.4)
+
+| Tool | Script | Function |
+|------|--------|----------|
+| Rebuttal | `generate_rebuttal.py` | Comment auto-classification / per-comment response template / cross-reviewer consistency check / Markdown + LaTeX output |
+| Paper-to-Slides | `paper_to_slides.py` | Beamer LaTeX / Marp Markdown dual format + speaker notes |
+
+---
+
 ## Quick Start
 
 ### Method 1: Use with Any AI Agent
