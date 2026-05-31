@@ -81,7 +81,7 @@ You can also jump directly to a specific stage:
 Stage 0: INIT   → Inventory materials, create project state file
 Stage 1: DIGEST → Read project materials, produce structured project brief
 Stage 2: LIT    → Literature search (API), AI auto-filled matrix, verification, gap analysis, narrative synthesis (matrix→Introduction+Related Work)
-Stage 3: EXPER  → Experiment analysis, improvement calculations, claims
+Stage 3: EXPER  → Experiment planning, improvement calculation, statistical analysis, visualization, narrative synthesis
 Stage 4: WRITE  → 4a Storyline → 4b Chinese draft → 4c Chinese polish
                → 4d EN conversion → 4e EN polish → 4f Self-critique → 4g Template rendering
 ```
@@ -145,7 +145,9 @@ python literature/scripts/analyze_citations.py lit_matrix.md --output gap_analys
 python literature/scripts/synthesize_literature.py lit_matrix.md \
     --project-brief project_brief.md --output synthesis.md
 
-# -- Stage 3: Experiment analysis + statistics + visualization --
+# -- Stage 3: Design -> Analyze -> Test -> Visualize -> Synthesize --
+python experiment/scripts/design_experiments.py \
+    --project-brief project_brief.md --venue cvpr --output experiment_plan.md
 python experiment/scripts/compute_improvements.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 \
     --higher-better R@1 R@5 R@10 --group-cols Dataset --stats --output improvements.md
@@ -154,9 +156,14 @@ python experiment/scripts/statistical_tests.py results.csv \
     --higher-better R@1 R@5 R@10 --output stats_report.md
 python experiment/scripts/result_visualizer.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 --output-dir ./figures/
+python experiment/scripts/synthesize_experiments.py \
+    --improvements improvements.md --stats stats_report.md \
+    --project-brief project_brief.md --output exp_synthesis.md
 
-# -- Stage 4f: Quality checks --
+# -- Stage 4f: Quality checks + Claim-evidence audit --
 python scripts/check_quality.py output_dir/ --all --output quality_report.md
+python scripts/claim_evidence_auditor.py paper.md \
+    --output-dir output_dir/ --output claim_audit.md
 
 # -- Stage 4g: Template rendering --
 python scripts/render_word.py content.json \
@@ -178,12 +185,18 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 - Temporal trend analysis, venue distribution, method-family clustering, research gap identification
 - **Literature narrative synthesis** — automatic conversion of matrix into logically organized Introduction and Related Work prose (by paradigm, not paper-by-paper; includes topic sentences, evolutionary arcs, method differentiation, logical flow verification)
 
-**Statistical Analysis (Stage 3 — NEW)**
-- Bootstrap confidence intervals, Cohen's d / Hedges' g effect sizes
-- Paired t-test / Wilcoxon signed-rank test
-- Multiple comparison correction (Bonferroni / Benjamini-Hochberg)
-- Statistical power analysis
-- Result visualization: bar charts, ablation waterfall, radar charts, heatmaps, Pareto frontiers
+**Experiment Full Pipeline (Stage 3 — Fully Upgraded)**
+- **Experiment design planner** — derives required experiments and ablation variants from claims, baseline coverage check, phased roadmap
+- Improvement calculation + Bootstrap CI (v0.3 + v0.4 enhanced)
+- Statistical testing: effect sizes, significance tests, multiple comparison correction, power analysis
+- Result visualization: 6 chart types (PNG/PDF/SVG/PGF)
+- **Experiment narrative synthesis** — auto-generates paragraph templates for Setup / Results / Ablation / Efficiency / Discussion
+
+**Claim-Evidence Audit (Stage 4f — NEW)**
+- Extracts all factual claims from manuscript text
+- Traces each to table/figure references, cross-verifies numbers
+- Detects overclaim language, flags unsupported statements
+- Severity-rated per-claim audit (high/medium/low/clean)
 
 **Architecture Extraction (Stage 1 — NEW)**
 - Auto-extract all nn.Module / Flax / Keras subclasses

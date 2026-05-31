@@ -83,7 +83,7 @@ AI-SCI-SKILLs 是一个以中文为先的端到端 SCI 论文写作流水线，�
 Stage 0: INIT   → 盘点材料，创建项目状态文件
 Stage 1: DIGEST → 阅读项目材料，生成结构化简报
 Stage 2: LIT    → 文献检索（API 自动化）、AI 自动填矩阵、验证、缺口分析、叙述合成（矩阵→Introduction+Related Work）
-Stage 3: EXPER  → 实验分析、改进计算、论点提炼
+Stage 3: EXPER  → 实验计划生成、改进计算、统计分析、可视化、叙述合成
 Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色
                → 4d 英译 → 4e 英文润色 → 4f 自批判 → 4g 模板渲染
 ```
@@ -149,7 +149,9 @@ python literature/scripts/analyze_citations.py lit_matrix.md --output gap_analys
 python literature/scripts/synthesize_literature.py lit_matrix.md \
     --project-brief project_brief.md --output synthesis.md
 
-# ── Stage 3: 实验分析 + 统计 + 可视化 ──
+# ── Stage 3: 实验设计 → 分析 → 统计 → 可视化 → 合成 ──
+python experiment/scripts/design_experiments.py \
+    --project-brief project_brief.md --venue cvpr --output experiment_plan.md
 python experiment/scripts/compute_improvements.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 \
     --higher-better R@1 R@5 R@10 --group-cols Dataset --stats --output improvements.md
@@ -158,9 +160,14 @@ python experiment/scripts/statistical_tests.py results.csv \
     --higher-better R@1 R@5 R@10 --output stats_report.md
 python experiment/scripts/result_visualizer.py results.csv \
     --target MyModel --metrics R@1 R@5 R@10 --output-dir ./figures/
+python experiment/scripts/synthesize_experiments.py \
+    --improvements improvements.md --stats stats_report.md \
+    --project-brief project_brief.md --output exp_synthesis.md
 
-# ── Stage 4f: 质量检查 ──
+# ── Stage 4f: 质量检查 + 声明-证据审计 ──
 python scripts/check_quality.py output_dir/ --all --output quality_report.md
+python scripts/claim_evidence_auditor.py paper.md \
+    --output-dir output_dir/ --output claim_audit.md
 
 # ── Stage 4g: 模板渲染 ──
 python scripts/render_word.py content.json \
@@ -182,12 +189,18 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 - 时间趋势分析、会议分布、方法家族聚类、研究缺口识别
 - **文献叙述合成** — 矩阵自动转化为 Introduction 和 Related Work 的有逻辑段落（按范式组织，非论文罗列；含主题句、论述演进、方法区分、逻辑流检查）
 
-**统计分析（Stage 3 — NEW）**
-- Bootstrap 置信区间、Cohen's d / Hedges' g 效应量
-- 配对 t 检验 / Wilcoxon 符号秩检验
-- 多重比较校正（Bonferroni / Benjamini-Hochberg）
-- 统计功效分析
-- 结果可视化：柱状图、消融瀑布图、雷达图、热力图、Pareto 前沿
+**实验全流程（Stage 3 — 全面升级）**
+- **实验计划生成** — 从声明推导所需实验类型和消融变体，基线覆盖检查，分阶段路线图
+- 改进计算 + Bootstrap CI（v0.3 + v0.4 增强）
+- 统计检验：效应量、显著性检验、多重比较校正、功效分析
+- 结果可视化：6 种图表类型（PNG/PDF/SVG/PGF）
+- **实验叙述合成** — 自动生成 Setup / Results / Ablation / Efficiency / Discussion 段落模板
+
+**声明-证据审计（Stage 4f — NEW）**
+- 从稿件中提取全部事实性声明
+- 逐条追溯表/图引用，数值交叉验证
+- 夸大表述检测，未支撑声明标记
+- 按严重性分级（high/medium/low/clean）
 
 **架构提取（Stage 1 — NEW）**
 - 自动提取所有 nn.Module / Flax / Keras 子类
