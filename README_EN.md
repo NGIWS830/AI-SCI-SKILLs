@@ -79,7 +79,7 @@ You can also jump directly to a specific stage:
 
 ```
 Stage 0: INIT   → Inventory materials, create project state file
-Stage 1: DIGEST → Read project materials, produce structured project brief
+Stage 1: DIGEST → File inventory, deep code analysis, notebook parsing, dependency tracing, auto-generate project brief
 Stage 2: LIT    → Literature search (API), AI auto-filled matrix, verification, gap analysis, narrative synthesis (matrix→Introduction+Related Work)
 Stage 3: EXPER  → Experiment planning, improvement calculation, statistical analysis, visualization, narrative synthesis
 Stage 4: WRITE  → 4a Storyline → 4b Chinese draft → 4c Chinese polish
@@ -96,7 +96,9 @@ Resumable: if interrupted, reload `SKILL.md` with the existing `project-state.md
 SKILL.md (root entry point)
 ├── digest/        — Extract paper-ready facts from project materials
 │   ├── references/  — Code reading, task taxonomy, evidence rules, brief template
-│   └── scripts/     — summarize_repo.py, extract_architecture.py
+│   └── scripts/     — summarize_repo.py, extract_architecture.py,
+│                      parse_notebooks.py, trace_dependencies.py,
+│                      synthesize_brief.py
 ├── literature/    — Search → auto-fill matrix → verify → gap analysis → narrative synthesis
 │   ├── references/  — Search strategies, API guide, citation verification, classic paper maps,
 │   │                  literature synthesis guide (matrix→narrative)
@@ -104,7 +106,9 @@ SKILL.md (root entry point)
 │                      analyze_citations.py, synthesize_literature.py
 ├── experiment/    — Analyze experiments and validate claims
 │   ├── references/  — Metrics guide, claim rules, ablation writing, reproducibility checklist
-│   └── scripts/     — compute_improvements.py, statistical_tests.py, result_visualizer.py
+│   └── scripts/     — compute_improvements.py, statistical_tests.py,
+│                      result_visualizer.py, design_experiments.py,
+│                      synthesize_experiments.py
 ├── writer/        — Chinese draft → polish → EN conversion → EN polish → Self-critique
 │   └── references/  — Full section templates, CN-EN translation corpus, terminology glossary, quality rubric
 ├── scripts/       — Quality checks, claim-evidence audit, cross-reference validation,
@@ -133,8 +137,12 @@ SKILL.md (root entry point)
 You can also use individual stage scripts directly:
 
 ```bash
-# -- Stage 1: Architecture extraction --
+# -- Stage 1: Inventory -> Architecture -> Notebooks -> Dependencies -> Brief --
+python digest/scripts/summarize_repo.py my_project/ --output repo_inventory.md
 python digest/scripts/extract_architecture.py my_project/ --output arch_report.md
+python digest/scripts/parse_notebooks.py experiments/*.ipynb --output-dir ./digest/
+python digest/scripts/trace_dependencies.py my_project/ --entry train.py --output deps.md
+python digest/scripts/synthesize_brief.py --repo my_project/ --output project_brief.md
 
 # -- Stage 2: Literature search -> fill matrix -> verify -> analyze -> synthesize --
 python literature/scripts/search_literature.py "cross-modal retrieval contrastive learning" \
@@ -199,11 +207,12 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 - **Claim-Evidence Audit** — extracts all factual claims, traces to table/figure refs, cross-verifies numbers, detects overclaims
 - **Cross-Reference Validator** — sequential numbering check, orphan object detection, ref-before-def order, abbreviation first-use, citation range
 
-**Architecture Extraction (Stage 1 — NEW)**
-- Auto-extract all nn.Module / Flax / Keras subclasses
-- Loss function parsing, hyperparameter detection
-- Framework identification (PyTorch / JAX / TF / HuggingFace)
-- Training infrastructure detection (optimizer, scheduler, mixed precision, distributed training)
+**Project Digestion (Stage 1 — Fully Upgraded)**
+- File inventory + deep code analysis (nn.Module / Flax / Keras subclass extraction)
+- Jupyter Notebook parsing (model definitions, training loops, hyperparameters, results tables)
+- Cross-file dependency tracing (import graph, data flow, core pipeline identification, orphan detection)
+- Loss function parsing, hyperparameter detection, framework identification, training infrastructure detection
+- **Project brief auto-synthesis** — one-click complete `project_brief.md` generation (`--repo` mode for end-to-end)
 
 **Post-Submission Tools (Stage 4 — NEW)**
 - Reviewer rebuttal letter generation (Markdown / LaTeX), comment auto-classification, cross-reviewer consistency check
@@ -259,6 +268,7 @@ Optional dependencies:
 ```bash
 pip install matplotlib          # result_visualizer.py for charts
 pip install anthropic           # auto_fill_matrix.py / synthesize_literature.py --auto mode
+pip install jupyter             # parse_notebooks.py for .ipynb files (usually pre-installed)
 ```
 
 LaTeX compilation (Stage 4g only) requires a local TeX Live or MiKTeX installation.

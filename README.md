@@ -81,7 +81,7 @@ AI-SCI-SKILLs 是一个以中文为先的端到端 SCI 论文写作流水线，�
 
 ```
 Stage 0: INIT   → 盘点材料，创建项目状态文件
-Stage 1: DIGEST → 阅读项目材料，生成结构化简报
+Stage 1: DIGEST → 文件清单、深度代码分析、Jupyter 解析、依赖追踪、自动生成项目简报
 Stage 2: LIT    → 文献检索（API 自动化）、AI 自动填矩阵、验证、缺口分析、叙述合成（矩阵→Introduction+Related Work）
 Stage 3: EXPER  → 实验计划生成、改进计算、统计分析、可视化、叙述合成
 Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色
@@ -98,7 +98,9 @@ Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色
 SKILL.md（根入口）
 ├── digest/        — 从项目材料中提取论文可用信息
 │   ├── references/  — 代码阅读、任务分类、证据规则、简报模板
-│   └── scripts/     — summarize_repo.py, extract_architecture.py
+│   └── scripts/     — summarize_repo.py, extract_architecture.py,
+│                      parse_notebooks.py, trace_dependencies.py,
+│                      synthesize_brief.py
 ├── literature/    — 检索 → 自动填矩阵 → 验证 → 缺口分析 → 叙述合成
 │   ├── references/  — 搜索策略、API 指南、引文验证、经典论文地图、
 │   │                  文献合成指南（矩阵→叙事）
@@ -108,7 +110,8 @@ SKILL.md（根入口）
 ├── experiment/    — 分析实验并验证论点
 │   ├── references/  — 指标指南、声明规则、消融写作、可复现性检查清单
 │   └── scripts/     — compute_improvements.py, statistical_tests.py,
-│                      result_visualizer.py
+│                      result_visualizer.py, design_experiments.py,
+│                      synthesize_experiments.py
 ├── writer/        — 中文初稿 → 润色 → 英译 → 英文润色 → 自批判
 │   └── references/  — 全章节模板、中英翻译语料库、术语表、质量评分标准
 ├── scripts/       — 质量检查、声明-证据审计、交叉引用校验、
@@ -137,8 +140,12 @@ SKILL.md（根入口）
 你也可以直接调用各阶段脚本：
 
 ```bash
-# ── Stage 1: 架构提取 ──
+# ── Stage 1: 文件清单 → 架构提取 → Notebook解析 → 依赖追踪 → 简报合成 ──
+python digest/scripts/summarize_repo.py my_project/ --output repo_inventory.md
 python digest/scripts/extract_architecture.py my_project/ --output arch_report.md
+python digest/scripts/parse_notebooks.py experiments/*.ipynb --output-dir ./digest/
+python digest/scripts/trace_dependencies.py my_project/ --entry train.py --output deps.md
+python digest/scripts/synthesize_brief.py --repo my_project/ --output project_brief.md
 
 # ── Stage 2: 文献检索 → 填矩阵 → 验证 → 分析 → 合成 ──
 python literature/scripts/search_literature.py "cross-modal retrieval contrastive learning" \
@@ -203,11 +210,12 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 - **声明-证据审计** — 提取全部事实性声明，逐条追溯表/图引用，数值交叉验证，夸大表述检测
 - **交叉引用校验** — 图/表/公式/章节编号连续性、孤立对象检测、引用-定义顺序检查、缩写首次使用检测
 
-**架构提取（Stage 1 — NEW）**
-- 自动提取所有 nn.Module / Flax / Keras 子类
-- 损失函数解析、超参数检测
-- 框架识别（PyTorch / JAX / TF / HuggingFace）
-- 训练基础设施检测（优化器、调度器、混合精度、分布式训练）
+**项目消化（Stage 1 — 全面升级）**
+- 文件清单 + 深度代码分析（nn.Module / Flax / Keras 子类提取）
+- Jupyter Notebook 解析（模型定义、训练循环、超参数、结果表格）
+- 跨文件依赖追踪（导入图、数据流、核心管线识别、孤立模块检测）
+- 损失函数解析、超参数检测、框架识别、训练基础设施检测
+- **项目简报自动合成** — 一键生成完整的 `project_brief.md`（`--repo` 模式端到端运行）
 
 **投稿后工具（Stage 4 — NEW）**
 - 审稿回复信生成（Markdown / LaTeX）、评论自动分类、跨审稿人一致性检查
@@ -263,6 +271,7 @@ pip install requests python-docx pylatexenc
 ```bash
 pip install matplotlib          # result_visualizer.py 可视化图表
 pip install anthropic           # auto_fill_matrix.py / synthesize_literature.py 的 --auto 模式
+pip install jupyter             # parse_notebooks.py 解析 .ipynb 文件（通常已安装）
 ```
 
 LaTeX 编译需要本地安装 TeX Live 或 MiKTeX（仅 Stage 4g 需要）。
