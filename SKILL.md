@@ -385,7 +385,8 @@ Read in order as each sub-stage progresses:
 - `writer/references/chinese-to-english-writing-rules.md` — CN→EN conversion
 - `writer/references/cn-en-translation-corpus.md` — translation error prevention (check before translating any technical term)
 - `writer/references/english-polishing-rules.md` — English refinement
-- `writer/references/forbidden-overclaims.md` — before finalizing claims
+- `writer/references/forbidden-overclaims.md` — before finalizing claims (includes Chinese overclaims list)
+- `writer/references/deai-dedup-rules.md` — de-AI language & cross-section deduplication rules
 - `writer/references/ai-terminology-glossary.md` — bilingual term consistency
 - `writer/references/quality-rubric.md` — self-critique scoring criteria
 
@@ -529,6 +530,20 @@ Self-check after drafting Introduction:
 
 1. Polish the Chinese draft using the detailed rules in `writer/references/chinese-polishing-rules.md`.
 
+**De-AI & Dedup Scan** (before finalizing Chinese polish):
+
+1. Read `writer/references/deai-dedup-rules.md` for the complete rules.
+2. Scan for AI 套话 (Chinese section of deAI rules):
+   - Replace 万能开头 (e.g., "近年来，随着...的发展") with concrete problem statements.
+   - Replace 万能结尾 (e.g., "综上所述，本文提出的方法有效...") with specific findings.
+   - Delete 空洞修饰语 (e.g., "强大的性能", "良好的效果") — replace with specific numbers.
+   - Remove 过度解释基础知识 — no explanations of basic concepts that SCI reviewers already know.
+3. Run cross-section dedup (Chinese section of dedup rules):
+   - Verify method details appear only in 方法 section, not in 引言.
+   - Verify results appear only in 实验 section, not in 方法.
+   - Verify no two sections share near-identical sentences.
+   - Check that Abstract, Introduction, and Conclusion use distinct phrasing.
+
 **10-Item Polishing Checklist** (apply to each section):
 
 | # | Check | Before (BAD) | After (GOOD) |
@@ -623,6 +638,17 @@ Scan for:
 
 1. Polish the English draft using `writer/references/english-polishing-rules.md`.
 
+**De-AI Scan** (before finalizing English polish):
+
+1. Read `writer/references/deai-dedup-rules.md` Part 1 (English section).
+2. Scan for AI-flavor patterns:
+   - Replace generic openers (e.g., "In recent years, there has been growing interest in...") with concrete statements.
+   - Reduce overused connectors (Moreover, Furthermore, In addition) — max 2 per section.
+   - Replace hollow adjectives ("powerful", "effective", "promising") with specific evidence or delete.
+   - Delete formulaic concluding sentences ("These results demonstrate the effectiveness of our approach.")
+   - Remove over-explanation of basic concepts (CNN, attention, transformer basics).
+3. Re-run cross-section dedup (same procedure as Stage 4c, applied to English text).
+
 **Sentence Variety Audit:**
 - Count sentences starting with "We" in each section. If >3 consecutive sentences begin with "We", restructure (e.g., "The model achieves...", "Results on [dataset] show...", "A key observation is...").
 - Measure sentence length distribution. If all sentences in a paragraph are 25-35 words, vary them: mix a short punchy sentence (10-15 words) among longer analytical ones (25-40 words).
@@ -692,8 +718,10 @@ python scripts/check_quality.py <output_dir> --all --output <output_dir>/10a_aut
 - Verify that every citation in the text appears in the References section and vice versa.
 - Check that every citation is used for a clear purpose (not "citation stuffing").
 
-**Overclaim Scan:**
-- Scan for the forbidden terms listed in `writer/references/forbidden-overclaims.md`.
+**Overclaim Scan (Chinese + English):**
+- Scan for English forbidden terms listed in `writer/references/forbidden-overclaims.md`.
+- Scan for Chinese forbidden terms listed in `writer/references/forbidden-overclaims.md` (Chinese Overclaims section).
+- Key Chinese words to flag: 完美, 彻底解决, 首次, 最优, 颠覆, 大幅, 显著, 极大, 通用, 众所周知, 毋庸置疑.
 - For each flagged term, check context: is the claim supported by evidence of sufficient strength?
 - Rewrite or caveat every overclaim.
 
@@ -845,7 +873,7 @@ Apply at every stage:
 | `experiment/scripts/compute_improvements.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --lower-better <m2> --group-cols <col> --output <path>` | Compute pairwise improvements from CSV |
 | `literature/scripts/search_literature.py "<query>" --sources s2,arxiv --max 20 --output <path>` | Search literature across Academic APIs |
 | `literature/scripts/verify_citations.py <citations_file> --sources crossref,dblp --output <path>` | Verify citation metadata |
-| `scripts/check_quality.py <output_dir> --all --output <path>` | Automated quality checks on generated paper |
+| `scripts/check_quality.py <output_dir> --checks all --output <path>` | Quality checks: claims, citations, reproducibility, language, structure, terminology, CN-overclaims, dedup, AI-flavor |
 | `scripts/compile_latex.py <tex_file> --output-dir <dir>` | Compile LaTeX manuscript to PDF |
 | `scripts/format_bibtex.py <bib_file> --validate --normalize --output <path>` | Validate and normalize BibTeX entries |
 | `scripts/render_word.py <content.json> --template <template.docx> --output <output.docx>` | Fill IEEE Word template with structured content |
@@ -858,5 +886,5 @@ Apply at every stage:
 | Digest | `digest/references/` | Code reading, task taxonomy, evidence rules, project brief template |
 | Literature | `literature/references/` | Search strategies, API search guide, citation verification, classic paper maps, related work patterns, literature matrix template |
 | Experiment | `experiment/references/` | Metrics guide, claim rules, ablation writing, experiment section patterns, reproducibility checklist |
-| Writer | `writer/references/` | Full writing pipeline: title, abstract, introduction, related work, method, experiments, conclusion, discussion patterns; Chinese drafting/polishing; CN→EN conversion; English polishing; forbidden overclaims; terminology glossary; quality rubric; template filling guide |
+| Writer | `writer/references/` | Full writing pipeline: title, abstract, introduction, related work, method, experiments, conclusion, discussion patterns; Chinese drafting/polishing; CN→EN conversion; English polishing; forbidden overclaims (CN+EN); de-AI & dedup rules; terminology glossary; quality rubric; template filling guide |
 | Templates | `templates/` | Chinese journal LaTeX (cjc), IEEE conference LaTeX (IEEEtran), IEEE conference Word |

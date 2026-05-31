@@ -52,6 +52,12 @@ Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色 → 4d 
 - `writer/references/quality-rubric.md` — 详细评分细则
 - 分数 ≥80 可交付；70-79 需修复；<70 需返回重写
 
+**去夸大 · 去重 · 去AI味**
+- `writer/references/forbidden-overclaims.md` — 中英文夸大表述禁用词表，含安全替代和自查流程
+- `writer/references/deai-dedup-rules.md` — AI套话检测（中/英）、章节去重规则、内容边界定义
+- `scripts/check_quality.py` 新增三个检查项：中文夸大检测、跨章节去重、AI生成痕迹扫描
+- 集成到 Stage 4c（中文润色）、Stage 4e（英文润色）、Stage 4f（自批判）三个阶段
+
 **中英翻译语料库**
 - `writer/references/cn-en-translation-corpus.md` — 高频术语、句式对照，防止翻译错误
 - 声明强度映射表：中文常见夸大表述 → 英文学术安全表述

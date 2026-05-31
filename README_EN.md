@@ -52,6 +52,12 @@ The pipeline is resumable: if interrupted, reload `SKILL.md` and point to the ex
 - `writer/references/quality-rubric.md` — Detailed scoring criteria
 - Score ≥80: ready; 70-79: needs fixes; <70: return for substantive revision
 
+**Anti-Overclaim · Dedup · De-AI**
+- `writer/references/forbidden-overclaims.md` — Banned overclaim words (CN+EN) with safe alternatives and self-scan procedure
+- `writer/references/deai-dedup-rules.md` — AI-flavor detection (CN+EN), cross-section dedup rules, content boundary definitions
+- `scripts/check_quality.py` with 3 new checks: Chinese overclaims, cross-section deduplication, AI-flavor scan
+- Integrated into Stage 4c (Chinese polish), Stage 4e (English polish), and Stage 4f (self-critique)
+
 **Chinese-English Translation Corpus**
 - `writer/references/cn-en-translation-corpus.md` — High-frequency term and sentence pattern mappings
 - Claim-strength mapping: common Chinese overclaims → safe English academic equivalents
