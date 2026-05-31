@@ -753,13 +753,13 @@ python scripts/check_quality.py <output_dir> --all --output <output_dir>/10a_aut
 
 #### 4g: Template Rendering (`chinese_manuscript/`, `english_manuscript/`, `english_manuscript.docx`) **[NEW in v0.3]**
 
-**Purpose:** Render polished content into submission-ready formats: Chinese LaTeX, English LaTeX, and English Word.
+**Purpose:** Render polished content into submission-ready formats: Chinese LaTeX, English LaTeX, English Word, and Cover Letter (LaTeX + Word).
 
 **Required Inputs:**
 - `06_chinese_polished.md` (for Chinese LaTeX)
-- `08_english_polished.md` (for English LaTeX and Word)
+- `08_english_polished.md` (for English LaTeX, Word, and cover letter)
 - Stage 2: Verified literature matrix (for .bib generation)
-- Stage 0: Author-provided author/affiliation/funding info
+- Stage 0: Author-provided author/affiliation/funding info, target journal
 
 **References:**
 - `writer/references/template-filling-guide.md` — complete filling rules for all three templates
@@ -771,6 +771,8 @@ python scripts/check_quality.py <output_dir> --all --output <output_dir>/10a_aut
 | Chinese LaTeX (cjc) | `templates/chinese/` | `<output_dir>/chinese_manuscript/` |
 | IEEE LaTeX | `templates/ieee-latex/` | `<output_dir>/english_manuscript/` |
 | IEEE Word | `templates/ieee-word/` | `<output_dir>/english_manuscript.docx` |
+| Cover Letter LaTeX | `templates/cover-letter/` | `<output_dir>/cover_letter/` |
+| Cover Letter Word | `templates/ieee-word/` | `<output_dir>/cover_letter.docx` |
 
 **Actions:**
 
@@ -801,14 +803,24 @@ python scripts/check_quality.py <output_dir> --all --output <output_dir>/10a_aut
        --output <output_dir>/english_manuscript.docx
    ```
 
-**Step 4: Cross-Template Consistency Check**
-Verify across all three outputs (see `template-filling-guide.md` for detailed checklist):
-1. Titles match (Chinese `title*` == IEEE title == Word title).
+**Step 4: Cover Letter (LaTeX + Word)**
+1. Generate cover letter content from pipeline outputs. See `template-filling-guide.md` for the full structure.
+2. Content structure: Para 1 (submission statement), Para 2 (background + 3-4 contribution bullets), Para 3 (key findings with numbers), Para 4 (why this journal), Para 5 (declarations).
+3. All overclaim rules apply doubly to cover letters — never use "first", "groundbreaking", or "solves".
+4. Cover letter must NOT copy-paste the abstract — use fresh phrasing.
+5. LaTeX output: Copy `templates/cover-letter/` to `<output_dir>/cover_letter/`, fill `cover_letter.tex`, compile with pdflatex.
+6. Word output: Create `<output_dir>/cover_letter_content.json`, run `python scripts/render_word.py <output_dir>/cover_letter_content.json --output <output_dir>/cover_letter.docx`.
+7. Verify: title in cover letter matches manuscript title exactly. Numbers in cover letter match manuscript numbers exactly. Cover letter claims do not exceed manuscript claims.
+
+**Step 5: Cross-Template Consistency Check**
+Verify across all outputs (see `template-filling-guide.md` for detailed checklist):
+1. Titles match (Chinese `title*` == IEEE title == Word title == cover letter).
 2. Author lists match in order and affiliation.
-3. English abstracts match between LaTeX and Word.
-4. All metric values are identical.
+3. English abstracts match between LaTeX and Word (cover letter must NOT copy-paste abstract).
+4. All metric values are identical across all files.
 5. Citation counts are consistent.
-6. No `AUTHOR_INPUT_NEEDED` or `[CITATION NEEDED]` in any final output.
+6. Cover letter claims do not exceed manuscript claims.
+7. No `AUTHOR_INPUT_NEEDED` or `[CITATION NEEDED]` in any final output.
 
 ### Final Output Files
 ```
@@ -823,6 +835,10 @@ Verify across all three outputs (see `template-filling-guide.md` for detailed ch
 ├── 10a_auto_check.md
 ├── word_content.json
 ├── english_manuscript.docx
+├── cover_letter_content.json
+├── cover_letter.docx
+├── cover_letter/
+│   └── cover_letter.tex
 ├── chinese_manuscript/
 │   ├── chinese_manuscript.tex
 │   ├── cjc.cls, cjc.bst
@@ -887,4 +903,4 @@ Apply at every stage:
 | Literature | `literature/references/` | Search strategies, API search guide, citation verification, classic paper maps, related work patterns, literature matrix template |
 | Experiment | `experiment/references/` | Metrics guide, claim rules, ablation writing, experiment section patterns, reproducibility checklist |
 | Writer | `writer/references/` | Full writing pipeline: title, abstract, introduction, related work, method, experiments, conclusion, discussion patterns; Chinese drafting/polishing; CN→EN conversion; English polishing; forbidden overclaims (CN+EN); de-AI & dedup rules; terminology glossary; quality rubric; template filling guide |
-| Templates | `templates/` | Chinese journal LaTeX (cjc), IEEE conference LaTeX (IEEEtran), IEEE conference Word |
+| Templates | `templates/` | Chinese journal LaTeX (cjc), IEEE conference LaTeX (IEEEtran), IEEE conference Word, Cover letter LaTeX |

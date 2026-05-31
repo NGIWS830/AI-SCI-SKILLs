@@ -24,7 +24,7 @@ SKILL.md (root entry point)
 ├── writer/        — Chinese draft → polish → EN conversion → EN polish → Self-critique
 │   └── references/  — Full section templates, CN-EN translation corpus, terminology glossary, quality rubric, template filling guide
 ├── scripts/       — Quality checks, LaTeX compilation, figure extraction, BibTeX formatting, Word rendering, packaging
-└── templates/     — Chinese journal LaTeX (cjc), IEEE conference LaTeX (IEEEtran), IEEE conference Word
+└── templates/     — Chinese journal, IEEE LaTeX, IEEE Word, Cover Letter templates
 ```
 
 ### Pipeline
@@ -66,6 +66,7 @@ The pipeline is resumable: if interrupted, reload `SKILL.md` and point to the ex
 - Chinese LaTeX output (generic Chinese journal format, cjc-based)
 - English LaTeX output (IEEE conference format, IEEEtran-based)
 - English Word output (IEEE conference format, programmatically filled)
+- Cover letter output (LaTeX + Word dual format, standalone template)
 - `scripts/render_word.py` — Fill Word template with structured content
 
 **Writing Tool Scripts**

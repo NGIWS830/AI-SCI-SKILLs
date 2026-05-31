@@ -11,6 +11,8 @@ Guide for filling the three output templates with polished manuscript content fr
 | Chinese LaTeX | `templates/chinese/template.tex` | `<output_dir>/chinese_manuscript/` | Yes (reference) |
 | English LaTeX | `templates/ieee-latex/template.tex` | `<output_dir>/english_manuscript/` | Yes (submission) |
 | English Word | `templates/ieee-word/template.docx` | `<output_dir>/english_manuscript.docx` | Yes (submission) |
+| Cover Letter LaTeX | `templates/cover-letter/template.tex` | `<output_dir>/cover_letter/` | Yes (submission) |
+| Cover Letter Word | `templates/ieee-word/template.docx` | `<output_dir>/cover_letter.docx` | Yes (submission) |
 
 ## Content Source Mapping
 
@@ -218,6 +220,106 @@ Before feeding to the script:
 
 ---
 
+---
+
+## Cover Letter Filling Rules
+
+### Purpose
+
+A cover letter accompanies the manuscript submission. It is addressed to the Editor-in-Chief and concisely explains why the paper merits publication in the target journal. The cover letter must use formal academic register and avoid overclaims.
+
+### Content Structure
+
+| Para | Content | Source |
+|------|---------|--------|
+| 1 | Submission statement: manuscript title, journal name, statement of exclusive submission | Stage 0: Target venue; Stage 4e: Final title |
+| 2 | Background (2-3 sentences) + Main contributions (3-4 bullets) | Stage 1: Project brief; Stage 4e: Contribution bullets |
+| 3 | Key findings (2-3 sentences with specific numbers) | Stage 4e: Abstract; Stage 3: Improvement summary |
+| 4 | Why this journal (2-3 reasons: topic fit, audience, recent related papers) | Stage 2: Literature matrix; author's journal knowledge |
+| 5 | Declarations: all authors approved, no conflicts, funding, data/code availability | Stage 0: Author-provided info |
+
+### Writing Rules
+
+**Tone & Register:**
+- Formal but not obsequious. Do not use "we are honored", "we humbly submit", or "esteemed journal".
+- Confident but not grandiose. Do not use "groundbreaking", "revolutionary", or "paradigm-shifting".
+- Specific: every claim about the paper's contribution must be traceable to evidence in the manuscript.
+
+**Length:** Maximum 1 page (400-500 words).
+
+**Overclaim Prevention (critical for cover letters):**
+- Never claim "this is the first" — the editor may know of earlier work.
+- Never claim the paper "solves" a problem — use "addresses", "advances", "makes progress on".
+- Never guarantee impact — state what was done and found, not its historical significance.
+- All overclaim rules from `forbidden-overclaims.md` apply doubly to cover letters.
+
+**Content Boundaries:**
+- DO write: short, specific statements about the paper's contribution and findings.
+- Do NOT write: a mini-abstract, a full literature review, or long method descriptions.
+- Do NOT copy-paste from the manuscript abstract — the cover letter should use fresh phrasing.
+
+### LaTeX Output
+
+1. Copy `templates/cover-letter/` to `<output_dir>/cover_letter/`.
+2. Fill `cover_letter.tex`:
+   - Sender block: corresponding author name, affiliation, address, email, phone.
+   - Recipient: Editor-in-Chief, journal name.
+   - Date: `\today` or specific date.
+   - Title: exact manuscript title (must match main manuscript).
+   - Para 1: submission statement.
+   - Para 2: background + contributions (bulleted list).
+   - Para 3: key findings with specific numbers.
+   - Para 4: why this journal.
+   - Para 5: declarations (authorship, conflicts, funding, data/code).
+   - Closing: "Sincerely," + corresponding author name.
+3. Optional: Suggested/opposed reviewers (comment in/out as needed).
+4. Compile check: `pdflatex cover_letter.tex`
+
+### Word Output (via JSON)
+
+Create `<output_dir>/cover_letter_content.json`:
+
+```json
+{
+  "title": "Submission of manuscript: Paper Title",
+  "output_type": "cover_letter",
+  "authors": [
+    {"name": "Corresponding Author", "affiliation": "Dept., University, City, Country", "email": "author@university.edu", "phone": "+X-XXX-XXX-XXXX"}
+  ],
+  "recipient": {
+    "role": "Editor-in-Chief",
+    "journal": "Journal Name"
+  },
+  "sections": [
+    {"heading": "", "level": 1, "content": "We wish to submit our manuscript entitled \"Paper Title\" for consideration for publication in Journal Name. This manuscript has not been published elsewhere and is not under consideration by any other journal."},
+    {"heading": "Background and Contributions", "level": 2, "content": "Background paragraph text...\\n\\nMain Contributions:\\n\\u2022 Contribution 1\\n\\u2022 Contribution 2\\n\\u2022 Contribution 3"},
+    {"heading": "Key Findings", "level": 2, "content": "Key findings paragraph with specific numbers..."},
+    {"heading": "Fit for Journal Name", "level": 2, "content": "Why this journal paragraph..."},
+    {"heading": "Declarations", "level": 2, "content": "\\u2022 All authors have read and approved the final manuscript.\\n\\u2022 The authors declare no conflicts of interest.\\n\\u2022 Funding: ..."}
+  ],
+  "references": []
+}
+```
+
+Run:
+```bash
+python scripts/render_word.py <output_dir>/cover_letter_content.json \
+    --template templates/ieee-word/template.docx \
+    --output <output_dir>/cover_letter.docx
+```
+
+### Cover Letter Output Files
+
+```
+<output_dir>/
+├── cover_letter/
+│   └── cover_letter.tex
+├── cover_letter_content.json
+└── cover_letter.docx
+```
+
+---
+
 ## Output Directory Structure (After Stage 4g)
 
 ```
@@ -232,6 +334,10 @@ Before feeding to the script:
 ├── 10a_auto_check.md
 ├── word_content.json                    (intermediate JSON for Word)
 ├── english_manuscript.docx              (final Word output)
+├── cover_letter_content.json            (intermediate JSON for cover letter)
+├── cover_letter.docx                    (cover letter Word output)
+├── cover_letter/
+│   └── cover_letter.tex                 (cover letter LaTeX output)
 ├── chinese_manuscript/
 │   ├── chinese_manuscript.tex
 │   ├── cjc.cls
@@ -250,13 +356,14 @@ Before feeding to the script:
 
 ## Cross-Template Consistency Checks
 
-Before finalizing, verify across all three output files:
+Before finalizing, verify across all output files:
 
-1. **Title matches**: Chinese LaTeX `title*` == IEEE LaTeX `\title{}` == Word title.
-2. **Author list matches**: Same authors, same order, same affiliations.
-3. **Abstract matches**: Chinese LaTeX `abstract*` == IEEE LaTeX abstract == Word abstract.
-4. **Numbers match**: Every metric value in Chinese LaTeX == IEEE LaTeX == Word.
-5. **Citation count matches**: Same number of references in all three outputs.
-6. **No `AUTHOR_INPUT_NEEDED` or `[CITATION NEEDED]`** in final outputs — these should be resolved before rendering.
+1. **Title matches**: Chinese LaTeX `title*` == IEEE LaTeX `\title{}` == Word title == cover letter title.
+2. **Author list matches**: Same authors, same order, same affiliations. Cover letter uses corresponding author.
+3. **Abstract matches**: Chinese LaTeX `abstract*` == IEEE LaTeX abstract == Word abstract. Cover letter should NOT copy-paste the abstract.
+4. **Numbers match**: Every metric value in Chinese LaTeX == IEEE LaTeX == Word. Cover letter key findings must use the same numbers.
+5. **Citation count matches**: Same number of references in all three manuscript outputs.
+6. **Claim consistency**: Cover letter claims must not exceed claims in the manuscript. The manuscript is the authoritative source.
+7. **No `AUTHOR_INPUT_NEEDED` or `[CITATION NEEDED]`** in final outputs — these should be resolved before rendering.
 
 If discrepancies are found, document them in `09_revision_notes.md` and fix before declaring the pipeline complete.

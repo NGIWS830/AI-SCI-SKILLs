@@ -24,7 +24,7 @@ SKILL.md（根入口）
 ├── writer/        — 中文初稿 → 润色 → 英译 → 英文润色 → 自批判
 │   └── references/  — 全章节模板、中英翻译语料库、术语表、质量评分标准、模板填充指南
 ├── scripts/       — 质量检查、LaTeX 编译、图表抽取、BibTeX 格式化、Word 渲染、打包
-└── templates/     — 中文期刊 LaTeX（cjc）、IEEE 会议 LaTeX（IEEEtran）、IEEE 会议 Word
+└── templates/     — 中文期刊、IEEE LaTeX、IEEE Word、Cover Letter 模板
 ```
 
 ### 流水线
@@ -66,6 +66,7 @@ Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色 → 4d 
 - 中文 LaTeX 输出（中文期刊通用格式，基于 cjc 模板）
 - 英文 LaTeX 输出（IEEE 会议格式，基于 IEEEtran 模板）
 - 英文 Word 输出（IEEE 会议格式，程序化填充）
+- Cover Letter 输出（LaTeX + Word 双格式，独立模板）
 - `scripts/render_word.py` — 将结构化内容填入 Word 模板
 
 **写作工具脚本**
