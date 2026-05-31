@@ -952,6 +952,7 @@ Apply at every stage:
 | `literature/scripts/synthesize_literature.py <lit_matrix.md> --project-brief <brief> --output <synthesis>` | Synthesize matrix into narrative for Introduction + Related Work — theme grouping, logical arc, paragraph templates with differentiation (NEW v0.4) |
 | `scripts/check_quality.py <output_dir> --checks all --output <path>` | Quality checks: claims, citations, reproducibility, language, structure, terminology, CN-overclaims, dedup, AI-flavor |
 | `scripts/claim_evidence_auditor.py <paper.md> --tables <csv> --output <audit>` | Structured claim-evidence audit: extracts claims, checks table references, verifies numbers, detects overclaims, flags unsupported statements (NEW v0.4) |
+| `scripts/validate_references.py <paper.md> --output <report>` | Cross-reference consistency: sequential numbering, orphan figures/tables, ref-before-def order, section balance, abbreviation first-use, citation range (NEW v0.4) |
 | `scripts/compile_latex.py <tex_file> --output-dir <dir>` | Compile LaTeX manuscript to PDF |
 | `scripts/format_bibtex.py <bib_file> --validate --normalize --output <path>` | Validate and normalize BibTeX entries |
 | `scripts/render_word.py <content.json> --template <template.docx> --output <output.docx>` | Fill IEEE Word template with structured content |
