@@ -527,7 +527,7 @@ Transition to 4b.
 
 **Title:** Read `writer/references/title-patterns.md`. Propose 3 title variants. Choose the one that is most specific and least overclaiming. Use the pattern `[Method Name]: [Core Mechanism] for [Task]` or `[Core Mechanism] for [Task] via [Key Insight]`.
 
-**Abstract:** Use the 2-6-2 structure from `writer/references/abstract-patterns.md`. Exactly 10 sentences: 2 for background/gap, 6 for method (signaled by First/Second/Finally), 2 for results/implication. Target ~250 Chinese characters or ~210 English words. The method's 6 sentences are the core — each pair is claim + why-it-works. Self-check: (1) exactly 10 sentences? (2) do sentences 3/5/7 start with First/Second/Finally (or 首先/其次/最后 in Chinese)? (3) does sentence 9 contain dataset + metric + value? (4) is the gap sentence backed by a "because" clause?
+**Abstract:** Use the 2-6-2 structure from `writer/references/abstract-patterns.md`. Exactly 10 sentences: 2 for background/gap, 6 for method (signaled by First/Second/Finally), 2 for experimental results/conclusion. Target ~250 Chinese characters or ~210 English words. The method's 6 sentences are the core — each pair is claim + why-it-works. Self-check: (1) exactly 10 sentences? (2) do sentences 3/5/7 start with First/Second/Finally (or 首先/其次/最后 in Chinese)? (3) does sentence 9 contain dataset + metric + value? (4) is the gap sentence backed by a "because" clause?
 
 **Introduction:** Use the structure from `writer/references/introduction-patterns.md`. Five paragraphs:
 - Para 1: Task importance and real-world applications
