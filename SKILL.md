@@ -629,11 +629,11 @@ Scan for:
 | Section | Guidance |
 |---------|----------|
 | Abstract | Active preferred: "We propose..." |
-| Introduction | Active: "We propose...", "We evaluate..." |
+| Introduction | Passive / impersonal for contribution bullets (Para 5): "This paper presents...", "A novel X is introduced...", "Extensive experiments on Y demonstrate..." Active acceptable for narrative setup (Paras 1-4). Do NOT write "We propose X" in contribution bullets. |
 | Related Work | Mix: passive for describing existing methods, active for "We differ from..." |
-| Method | Passive acceptable for process: "Features are extracted..." Active for design rationale: "We design X to..." |
-| Experiments | Active for narrative: "We compare...", "We observe..." Passive for procedure: "Models were trained..." |
-| Conclusion | Active: "We have presented...", "We demonstrated..." |
+| Method | Passive preferred for process: "Features are extracted..." Active for design rationale: "We design X to..." |
+| Experiments | Passive preferred for procedure: "Models were trained on..." Active for narrative: "We compare...", "We observe..." |
+| Conclusion | Passive / impersonal preferred: "This paper has presented..." Active acceptable: "We have demonstrated..." |
 
 **Claim-Strength Mapping (key entries — see `chinese-to-english-writing-rules.md` for full table):**
 
@@ -650,7 +650,7 @@ Scan for:
 
 1. **Topic-prominence transfer**: Chinese drops subjects when clear from context; English requires explicit subjects. Add "We", "The model", "This module" where Chinese omitted them.
 2. **Modifier stacking**: Chinese stacks modifiers before the noun ("基于注意力机制的特征融合模块"); English prefers post-modification ("a feature fusion module based on attention mechanisms").
-3. **Parallel structure**: Chinese parallelism uses重复 (repetition); English uses conjunction reduction. "我们提出了X，设计了Y，优化了Z" → "We propose X, design Y, and optimize Z."
+3. **Parallel structure**: Chinese parallelism uses重复 (repetition); English uses conjunction reduction. "我们提出了X，设计了Y，优化了Z" → "We propose X, design Y, and optimize Z." **However, avoid this "We..." pattern in contribution bullets** — use impersonal constructions instead (see Voice Conventions above).
 4. **Zero article → article**: Every English singular countable noun needs a/an/the. "Backbone网络采用ResNet-50" → "The backbone network adopts ResNet-50."
 5. **Aspect → tense**: Chinese 了（completion）often maps to past tense in Experiments section, but present in Method. "我们采用了..." → Method: "We adopt..."; Experiments: "We adopted..."
 

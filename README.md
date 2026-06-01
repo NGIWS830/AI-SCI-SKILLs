@@ -353,11 +353,11 @@ Q4: 混淆因素能否解释改善？
 | 章节 | 指导 |
 |------|------|
 | Abstract | 偏好主动："We propose..." |
-| Introduction | 主动："We propose...", "We evaluate..." |
+| Introduction | 贡献列表（Para 5）用被动/无人称："This paper presents...", "A novel X is introduced..."；前 4 段叙事可用主动。贡献条目中不要写 "We propose X" |
 | Related Work | 混合：描述现有方法用被动，区分自身用主动 |
-| Method | 流程可用被动："Features are extracted..."；设计理由用主动："We design X to..." |
-| Experiments | 叙事用主动："We compare..."；过程用被动："Models were trained..." |
-| Conclusion | 主动："We have presented...", "We demonstrated..." |
+| Method | 偏好被动："Features are extracted..."；设计理由用主动："We design X to..." |
+| Experiments | 偏好被动："Models were trained on..."；叙事可用主动："We compare..." |
+| Conclusion | 偏好被动/无人称："This paper has presented..."；主动可接受："We have demonstrated..." |
 
 **声明强度映射（关键条目）：**
 

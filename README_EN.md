@@ -350,11 +350,11 @@ Q4: Could confounding factors explain the improvement?
 | Section | Guidance |
 |---------|----------|
 | Abstract | Active preferred: "We propose..." |
-| Introduction | Active: "We propose...", "We evaluate..." |
+| Introduction | Passive / impersonal for contribution bullets (Para 5): "This paper presents...", "A novel X is introduced..."; active acceptable for narrative setup (Paras 1-4). Do NOT write "We propose X" in contribution bullets |
 | Related Work | Mix: passive for existing methods, active for "We differ from..." |
-| Method | Passive acceptable for process; active for design rationale: "We design X to..." |
-| Experiments | Active for narrative: "We compare..."; passive for procedure: "Models were trained..." |
-| Conclusion | Active: "We have presented...", "We demonstrated..." |
+| Method | Passive preferred for process; active for design rationale: "We design X to..." |
+| Experiments | Passive preferred for procedure: "Models were trained on..."; active for narrative: "We compare..." |
+| Conclusion | Passive / impersonal preferred: "This paper has presented..."; active acceptable: "We have demonstrated..." |
 
 **Claim-Strength Mapping (key entries):**
 
