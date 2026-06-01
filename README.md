@@ -278,7 +278,7 @@ Q4: 混淆因素能否解释改善？
 ### Stage 4b — 中文初稿（`05_chinese_draft.md`）
 
 **角色指令：**
-> 你现在正在撰写一篇中文学术论文初稿。目标是在形式中文语域中产出一份完整、逻辑连贯的初稿，每项事实性断言均应以项目状态文件中的证据为基础。使用 20-50 字的中短句。优先使用带明确主语的主动语态（本文/我们/该方法）。每段须有清晰的主题句。保留所有 `AUTHOR_INPUT_NEEDED` 和 `[CITATION NEEDED]` 标记。
+> 你现在正在撰写一篇中文学术论文初稿。目标是在形式中文语域中产出一份完整、逻辑连贯的初稿，每项事实性断言均应以项目状态文件中的证据为基础。使用 20-50 字的中短句。使用被动语态为主，避免以"我们"作主语。每段须有清晰的主题句。保留所有 `AUTHOR_INPUT_NEEDED` 和 `[CITATION NEEDED]` 标记。
 
 **逐节指导：**
 
@@ -316,14 +316,14 @@ Q4: 混淆因素能否解释改善？
 | # | 检查项 | 不良示例 | 良好示例 |
 |---|--------|---------|---------|
 | 1 | 删除空洞修饰语 | 该方法取得了较好的性能提升 | 该方法在Cityscapes上提升了2.3 mIoU |
-| 2 | 补充缺失主语 | 使用ResNet-50作为骨干网络 | 我们使用ResNet-50作为骨干网络 |
+| 2 | 补充缺失主语（无人称） | 使用ResNet-50作为骨干网络 | ResNet-50被用作骨干网络 |
 | 3 | 拆分长句（>50字） | （60字流水句） | （两句 25-35 字） |
 | 4 | 统一术语 | 注意力机制/Attention机制混用 | 统一为"注意力机制"（首次标注英文） |
 | 5 | 删除冗余近义词对 | 精度和准确率均得到提升 | 精度提升了1.2个百分点（指明指标） |
-| 6 | 强化弱转折 | 另外，我们还做了... | 在效率方面，我们进一步分析了... |
-| 7 | 落地模糊声明 | 性能优于所有基线方法 | 在三个数据集上均优于所有基线方法（Table 2） |
+| 6 | 强化弱转折 | 另外，我们还做了... | 在效率方面，进一步分析了... |
+| 7 | 落地模糊声明 | 性能优于所有基线方法 | 在三个数据集上，所提方法均优于所有基线方法（Table 2） |
 | 8 | 修正悬空引用 | 如图所示 | 如图3所示 |
-| 9 | 对齐平行结构 | 我们提出了X，设计了Y，以及对Z进行了优化 | 我们提出了X，设计了Y，优化了Z |
+| 9 | 对齐平行结构 | 我们提出了X，设计了Y，以及对Z进行了优化 | 提出了X，设计了Y，优化了Z |
 | 10 | 声明一致性检查 | 中文"显著提升" | 确保与 Stage 3 证据强度一致 |
 
 **逻辑流审计**：逐段边界提问——这段是否从前一段逻辑推导而来？是引入新信息还是重述？论证链是否完整？
@@ -341,7 +341,7 @@ Q4: 混淆因素能否解释改善？
 
 | 章节 | 主要时态 | 例外 |
 |------|---------|------|
-| Abstract | Present | Past for "We evaluated on..." |
+| Abstract | Present | Past for evaluation: "Performance was evaluated on..." |
 | Introduction | Present | Past for "Previous methods struggled...", Present perfect for "Recent work has shown..." |
 | Related Work | Present perfect / Present | Past for specific historical results |
 | Method | Present | — |
@@ -352,12 +352,12 @@ Q4: 混淆因素能否解释改善？
 
 | 章节 | 指导 |
 |------|------|
-| Abstract | 偏好主动："We propose..." |
+| Abstract | 偏好被动："A novel X is proposed..." |
 | Introduction | 贡献列表（Para 5）用被动/无人称："This paper presents...", "A novel X is introduced..."；前 4 段叙事可用主动。贡献条目中不要写 "We propose X" |
-| Related Work | 混合：描述现有方法用被动，区分自身用主动 |
-| Method | 偏好被动："Features are extracted..."；设计理由用主动："We design X to..." |
-| Experiments | 偏好被动："Models were trained on..."；叙事可用主动："We compare..." |
-| Conclusion | 偏好被动/无人称："This paper has presented..."；主动可接受："We have demonstrated..." |
+| Related Work | 描述现有方法用被动；区分自身用无人称："This work differs from..." |
+| Method | 偏好被动："Features are extracted..."；设计理由也倾向被动："X is designed to...", "This module enables..." |
+| Experiments | 偏好被动："Models were trained on..."；叙事被动："As shown in Table 1, the proposed method achieves..." |
+| Conclusion | 偏好被动/无人称："This paper has presented..." |
 
 **声明强度映射（关键条目）：**
 

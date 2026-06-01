@@ -516,7 +516,7 @@ Transition to 4b.
 
 **Role Instruction (read before drafting any section):**
 
-> You are now drafting a Chinese academic paper manuscript. Your goal is to produce a complete, logically coherent first draft where every factual claim is grounded in the project state file's evidence. Write in formal Chinese academic register. Use short to medium sentences (20-50 characters). Prefer active voice with explicit subjects (本文/我们/该方法). Every paragraph should have a clear topic sentence. Preserve all `AUTHOR_INPUT_NEEDED` and `[CITATION NEEDED]` markers — do not remove or fill them.
+> You are now drafting a Chinese academic paper manuscript. Your goal is to produce a complete, logically coherent first draft where every factual claim is grounded in the project state file's evidence. Write in formal Chinese academic register. Use short to medium sentences (20-50 characters). Prefer passive voice; avoid using "we" (我们) as the subject. Every paragraph should have a clear topic sentence. Preserve all `AUTHOR_INPUT_NEEDED` and `[CITATION NEEDED]` markers — do not remove or fill them.
 
 1. Read `writer/references/reference-paper-structure.md` for the manuscript skeleton.
 2. Build the outline first. Keep top-level sections: Title, Abstract, Index Terms, I Introduction, II Related Work, III Proposed Method, IV Experiments, V Conclusion, References.
@@ -581,14 +581,14 @@ Self-check after drafting Introduction:
 | # | Check | Before (BAD) | After (GOOD) |
 |---|-------|-------------|--------------|
 | 1 | Remove empty modifiers | 该方法取得了较好的性能提升 | 该方法在Cityscapes上提升了2.3 mIoU |
-| 2 | Add missing subjects | 使用ResNet-50作为骨干网络 | 我们使用ResNet-50作为骨干网络 |
+| 2 | Add missing subjects (impersonal) | 使用ResNet-50作为骨干网络 | ResNet-50被用作骨干网络 |
 | 3 | Split long sentences (>50 chars) | (a 60-character run-on) | (two 25-35 character sentences) |
 | 4 | Unify terminology | 注意力机制/Attention机制/attention混用 | 统一为"注意力机制"（首次出现标注英文） |
 | 5 | Remove redundant pairs | 精度和准确率均得到提升 | 精度提升了1.2个百分点（具体说明哪个指标） |
-| 6 | Strengthen weak transitions | 另外，我们还做了... | 在效率方面，我们进一步分析了... |
-| 7 | Ground vague claims | 性能优于所有基线方法 | 在三个数据集上，我们的方法均优于所有基线方法（Table 2） |
+| 6 | Strengthen weak transitions | 另外，我们还做了... | 在效率方面，进一步分析了... |
+| 7 | Ground vague claims | 性能优于所有基线方法 | 在三个数据集上，所提方法均优于所有基线方法（Table 2） |
 | 8 | Fix dangling references | 如图所示 | 如图3所示 |
-| 9 | Align parallel structures | 我们提出了X，设计了Y，以及对Z进行了优化 | 我们提出了X，设计了Y，优化了Z |
+| 9 | Align parallel structures | 我们提出了X，设计了Y，以及对Z进行了优化 | 提出了X，设计了Y，优化了Z |
 | 10 | Check claim-consistency | 中文"显著提升" vs 英文"significant" | 确保改善幅度表述与Stage 3证据强度一致 |
 
 **Logic Flow Audit:**
@@ -617,7 +617,7 @@ Scan for:
 
 | Section | Primary Tense | When to Use Other Tenses |
 |---------|--------------|--------------------------|
-| Abstract | Present | Past for "We evaluated on..." |
+| Abstract | Present | Past for evaluation: "Performance was evaluated on..." |
 | Introduction | Present | Past for "Previous methods struggled with...", Present perfect for "Recent work has shown..." |
 | Related Work | Present perfect / Present | Past for specific historical results |
 | Method | Present | — (Methods are described in present) |
@@ -628,12 +628,12 @@ Scan for:
 
 | Section | Guidance |
 |---------|----------|
-| Abstract | Active preferred: "We propose..." |
+| Abstract | Passive preferred: "A novel X is proposed..." |
 | Introduction | Passive / impersonal for contribution bullets (Para 5): "This paper presents...", "A novel X is introduced...", "Extensive experiments on Y demonstrate..." Active acceptable for narrative setup (Paras 1-4). Do NOT write "We propose X" in contribution bullets. |
-| Related Work | Mix: passive for describing existing methods, active for "We differ from..." |
-| Method | Passive preferred for process: "Features are extracted..." Active for design rationale: "We design X to..." |
-| Experiments | Passive preferred for procedure: "Models were trained on..." Active for narrative: "We compare...", "We observe..." |
-| Conclusion | Passive / impersonal preferred: "This paper has presented..." Active acceptable: "We have demonstrated..." |
+| Related Work | Passive for describing existing methods; impersonal for differentiation: "This work differs from..." |
+| Method | Passive preferred for process: "Features are extracted..." Passive / impersonal for design rationale: "X is designed to...", "This module enables..." |
+| Experiments | Passive preferred for procedure: "Models were trained on..." Passive for narrative: "As shown in Table 1, the proposed method achieves..." |
+| Conclusion | Passive / impersonal preferred: "This paper has presented..." |
 
 **Claim-Strength Mapping (key entries — see `chinese-to-english-writing-rules.md` for full table):**
 
@@ -648,11 +648,11 @@ Scan for:
 
 **Common CN→EN Translation Pitfalls:**
 
-1. **Topic-prominence transfer**: Chinese drops subjects when clear from context; English requires explicit subjects. Add "We", "The model", "This module" where Chinese omitted them.
+1. **Topic-prominence transfer**: Chinese drops subjects when clear from context; English prefers explicit impersonal subjects. Add "The model", "This module", "The proposed method" where Chinese omitted them (avoid "We").
 2. **Modifier stacking**: Chinese stacks modifiers before the noun ("基于注意力机制的特征融合模块"); English prefers post-modification ("a feature fusion module based on attention mechanisms").
-3. **Parallel structure**: Chinese parallelism uses重复 (repetition); English uses conjunction reduction. "我们提出了X，设计了Y，优化了Z" → "We propose X, design Y, and optimize Z." **However, avoid this "We..." pattern in contribution bullets** — use impersonal constructions instead (see Voice Conventions above).
+3. **Parallel structure**: Chinese parallelism uses重复 (repetition); English uses conjunction reduction. "我们提出了X，设计了Y，优化了Z" should NOT be rendered as "We propose X, design Y, and optimize Z" — use passive: "X is proposed, Y is designed, and Z is optimized."
 4. **Zero article → article**: Every English singular countable noun needs a/an/the. "Backbone网络采用ResNet-50" → "The backbone network adopts ResNet-50."
-5. **Aspect → tense**: Chinese 了（completion）often maps to past tense in Experiments section, but present in Method. "我们采用了..." → Method: "We adopt..."; Experiments: "We adopted..."
+5. **Aspect → tense**: Chinese 了（completion）often maps to past tense in Experiments section, but present in Method. "我们采用了..." → Method: "X is adopted..."; Experiments: "X was adopted..."
 
 1. Before translating, scan the Chinese draft for technical terms against `writer/references/cn-en-translation-corpus.md`. Use the verified translations exactly.
 2. Convert the polished Chinese to English SCI prose following `writer/references/chinese-to-english-writing-rules.md`.

@@ -275,7 +275,7 @@ Q4: Could confounding factors explain the improvement?
 ### Stage 4b — Chinese Draft (`05_chinese_draft.md`)
 
 **Role Instruction:**
-> You are now drafting a Chinese academic paper manuscript. Your goal is to produce a complete, logically coherent first draft where every factual claim is grounded in the project state file's evidence. Write in formal Chinese academic register. Use short to medium sentences (20-50 characters). Prefer active voice with explicit subjects (本文/我们/该方法). Every paragraph should have a clear topic sentence. Preserve all `AUTHOR_INPUT_NEEDED` and `[CITATION NEEDED]` markers.
+> You are now drafting a Chinese academic paper manuscript. Your goal is to produce a complete, logically coherent first draft where every factual claim is grounded in the project state file's evidence. Write in formal Chinese academic register. Use short to medium sentences (20-50 characters). Prefer passive voice; avoid using "we" (我们) as the subject. Every paragraph should have a clear topic sentence. Preserve all `AUTHOR_INPUT_NEEDED` and `[CITATION NEEDED]` markers.
 
 **Section-by-Section Guidance:**
 
@@ -313,14 +313,14 @@ Q4: Could confounding factors explain the improvement?
 | # | Check | Before (BAD) | After (GOOD) |
 |---|-------|-------------|--------------|
 | 1 | Remove empty modifiers | 该方法取得了较好的性能提升 | 该方法在Cityscapes上提升了2.3 mIoU |
-| 2 | Add missing subjects | 使用ResNet-50作为骨干网络 | 我们使用ResNet-50作为骨干网络 |
+| 2 | Add missing subjects (impersonal) | 使用ResNet-50作为骨干网络 | ResNet-50 is adopted as the backbone |
 | 3 | Split long sentences (>50 chars) | (a 60-character run-on) | (two 25-35 character sentences) |
 | 4 | Unify terminology | Mixed 注意力机制/Attention机制 | Unify to one term (with English on first use) |
 | 5 | Remove redundant pairs | 精度和准确率均得到提升 | 精度提升了1.2个百分点 (specify which metric) |
-| 6 | Strengthen weak transitions | 另外，我们还做了... | 在效率方面，我们进一步分析了... |
-| 7 | Ground vague claims | 性能优于所有基线方法 | On all three datasets, outperforms all baselines (Table 2) |
+| 6 | Strengthen weak transitions | 另外，我们还做了... | 在效率方面，进一步分析了... |
+| 7 | Ground vague claims | 性能优于所有基线方法 | On all three datasets, the proposed method outperforms all baselines (Table 2) |
 | 8 | Fix dangling references | 如图所示 | 如图3所示 |
-| 9 | Align parallel structures | 我们提出了X，设计了Y，以及对Z进行了优化 | 我们提出了X，设计了Y，优化了Z |
+| 9 | Align parallel structures | 我们提出了X，设计了Y，以及对Z进行了优化 | X is proposed, Y is designed, Z is optimized |
 | 10 | Check claim-consistency | CN "显著提升" vs EN "significant" | Ensure magnitude language matches Stage 3 evidence strength |
 
 **Logic Flow Audit**: At each paragraph boundary, ask: does it follow logically? New information or restated? Is the argument chain unbroken?
@@ -338,7 +338,7 @@ Q4: Could confounding factors explain the improvement?
 
 | Section | Primary Tense | Exceptions |
 |---------|--------------|------------|
-| Abstract | Present | Past for "We evaluated on..." |
+| Abstract | Present | Past for evaluation: "Performance was evaluated on..." |
 | Introduction | Present | Past for "Previous methods struggled...", Present perfect for "Recent work has shown..." |
 | Related Work | Present perfect / Present | Past for specific historical results |
 | Method | Present | — |
@@ -349,12 +349,12 @@ Q4: Could confounding factors explain the improvement?
 
 | Section | Guidance |
 |---------|----------|
-| Abstract | Active preferred: "We propose..." |
+| Abstract | Passive preferred: "A novel X is proposed..." |
 | Introduction | Passive / impersonal for contribution bullets (Para 5): "This paper presents...", "A novel X is introduced..."; active acceptable for narrative setup (Paras 1-4). Do NOT write "We propose X" in contribution bullets |
-| Related Work | Mix: passive for existing methods, active for "We differ from..." |
-| Method | Passive preferred for process; active for design rationale: "We design X to..." |
-| Experiments | Passive preferred for procedure: "Models were trained on..."; active for narrative: "We compare..." |
-| Conclusion | Passive / impersonal preferred: "This paper has presented..."; active acceptable: "We have demonstrated..." |
+| Related Work | Passive for existing methods; impersonal for differentiation: "This work differs from..." |
+| Method | Passive preferred for process; passive / impersonal for design rationale: "X is designed to...", "This module enables..." |
+| Experiments | Passive preferred for procedure: "Models were trained on..."; passive for narrative: "As shown in Table 1, the proposed method achieves..." |
+| Conclusion | Passive / impersonal preferred: "This paper has presented..." |
 
 **Claim-Strength Mapping (key entries):**
 
