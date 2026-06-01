@@ -247,6 +247,23 @@ Q4: 混淆因素能否解释改善？
 **结果段落填空模板：**
 > As shown in Table [X], [Method] achieves [value] on [dataset], [direction] the strongest baseline [baseline] by [absolute] ([relative]%). On [dataset_2], [Method] achieves [value_2], a [absolute_2] improvement over [baseline_2]. These results demonstrate that [component] contributes to [capability], as evidenced by [specific_evidence].
 
+**可视化消融设计（NEW v0.4）：**
+
+消融实验不仅需要定量指标，还需要可视化展示每个组件如何工作。详见 `experiment/references/ablation-writing.md` 的 "Visual Ablation Analysis" 章节，覆盖 **10 种可视化类型**：
+
+| 如果你的声明是... | 主要可视化 |
+|-----|------|
+| "我们的模块提升了特征质量" | t-SNE / PCA 嵌入分布 |
+| "我们的模块引导注意力到正确区域" | Grad-CAM 热力图 |
+| "门控机制选择性增强/抑制通道" | 通道权重分布 |
+| "损失函数改善了类别可分性" | t-SNE + 轮廓系数 |
+| "我们的方法更好地处理困难样本" | 错误案例对比 |
+| "我们的模块加速收敛" | 训练动态曲线 |
+| "注意力机制更具可解释性" | 注意力图 + Attention Rollout |
+| "卷积核学到更丰富的模式" | 滤波器/卷积核可视化 |
+
+另外还有：特征图对比、混淆矩阵差值、预测置信度分布。每张消融可视化图遵循 5 步叙述模式：提出问题 → 描述设置 → 指出关键观察 → 机理级解释 → 关联定量证据。
+
 **5 个脚本：** `design_experiments.py`（实验计划生成）→ `compute_improvements.py`（改进计算 + Bootstrap CI）→ `statistical_tests.py`（效应量/显著性/多重比较校正/功效分析）→ `result_visualizer.py`（6 种图表）→ `synthesize_experiments.py`（叙述合成）。
 
 **输出**：`03_experiment_analysis.md`，含分析表格列表、主要结果、基线上改善、消融发现、声明-证据映射表（含强度等级和注意事项）。

@@ -244,6 +244,23 @@ Q4: Could confounding factors explain the improvement?
 **Results Paragraph Fill-in-the-Blank Template:**
 > As shown in Table [X], [Method] achieves [value] on [dataset], [direction] the strongest baseline [baseline] by [absolute] ([relative]%). On [dataset_2], [Method] achieves [value_2], a [absolute_2] improvement over [baseline_2]. These results demonstrate that [component] contributes to [capability], as evidenced by [specific_evidence].
 
+**Visual Ablation Design (NEW v0.4):**
+
+Ablation studies need both quantitative metrics and visual evidence of HOW each component works. See `experiment/references/ablation-writing.md` "Visual Ablation Analysis" for full guidance, covering **10 visualization types**:
+
+| If your claim is... | Primary visualization |
+|-----|------|
+| "Our module improves feature quality" | t-SNE / PCA embedding |
+| "Our module guides attention to the right regions" | Grad-CAM heatmap |
+| "Our gating mechanism selects informative channels" | Channel weight distribution |
+| "Our loss function improves class separability" | t-SNE + silhouette score |
+| "Our method handles challenging cases better" | Error case comparison |
+| "Our module accelerates convergence" | Training dynamics curves |
+| "Our attention mechanism is more interpretable" | Attention map + rollout |
+| "Our filters learn more diverse patterns" | Filter / kernel visualization |
+
+Also covered: Feature Map Comparison, Confusion Matrix Difference, Prediction Confidence Distribution. Every visual ablation figure follows a 5-step prose pattern: state the question → describe setup → point to key observations → interpret mechanistically → link to quantitative evidence.
+
 **5 Scripts**: `design_experiments.py` (experiment plan) → `compute_improvements.py` (improvements + Bootstrap CI) → `statistical_tests.py` (effect sizes/significance/multiple comparison correction/power analysis) → `result_visualizer.py` (6 chart types) → `synthesize_experiments.py` (narrative synthesis).
 
 **Output**: `03_experiment_analysis.md` — tables analyzed, main results, improvement over baselines, ablation findings, claim→evidence mapping (with strength level and caveats).

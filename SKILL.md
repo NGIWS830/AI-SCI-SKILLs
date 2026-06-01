@@ -357,12 +357,32 @@ Use this fill-in-the-blank structure for the first results paragraph:
 
 > As shown in Table [X], [Method] achieves [metric_value] on [dataset], [direction_description] the strongest baseline [baseline_name] by [absolute_value] ([relative_value]%). On [dataset_2], [Method] achieves [metric_value_2], a [absolute_2] improvement over [baseline_2]. These results demonstrate that [component/design_choice] contributes to [capability], as evidenced by [specific_evidence].
 
+### Visual Ablation Design
+
+Beyond quantitative tables, design visual ablations to show HOW each component works. Read `experiment/references/ablation-writing.md` "Visual Ablation Analysis" for full guidance. The selection guide:
+
+| If your claim is... | Primary visualization |
+|-----|------|
+| "Our module improves feature quality" | t-SNE / PCA embedding |
+| "Our module guides attention to the right regions" | Grad-CAM heatmap |
+| "Our gating mechanism selects informative channels" | Channel weight distribution |
+| "Our loss function improves class separability" | t-SNE embedding + silhouette score |
+| "Our method handles challenging cases better" | Error case comparison |
+| "Our module accelerates convergence" | Training dynamics curves |
+| "Our attention mechanism is more interpretable" | Attention map + rollout |
+| "Our filters learn more diverse patterns" | Filter / kernel visualization |
+
+10 visualization types are covered: Feature Map, Grad-CAM Heatmap, Channel Weight, t-SNE/PCA, Attention Map, Error Case Comparison, Filter/Kernel, Confusion Difference Matrix, Training Dynamics, Prediction Confidence Distribution.
+
+For every visual ablation, follow the 5-step prose pattern: (1) state the question → (2) describe the setup → (3) point to key observations → (4) interpret mechanistically → (5) link back to quantitative evidence.
+
 ### Actions
 1. Identify table types: main results, ablation, robustness, efficiency, hyperparameter, qualitative, failure cases.
-2. Identify datasets, metrics, metric direction (higher/lower is better), baselines, and proposed method.
-3. Calculate absolute and relative improvements.
-4. Map each possible paper claim to concrete evidence using the claim strength decision tree above.
-5. Draft results and analysis paragraphs in Chinese first unless user requests English.
+2. Plan visual ablations: for each claimed component, select at least one visualization type from the guide above.
+3. Identify datasets, metrics, metric direction (higher/lower is better), baselines, and proposed method.
+4. Calculate absolute and relative improvements.
+5. Map each possible paper claim to concrete evidence using the claim strength decision tree above.
+6. Draft results and analysis paragraphs in Chinese first unless user requests English.
 
 ### Output
 Save to the project state file under `### Stage 3 Output (EXPER)`:
