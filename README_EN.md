@@ -302,9 +302,9 @@ Also covered: Feature Map Comparison, Confusion Matrix Difference, Prediction Co
 | **Abstract** | 2-6-2 structure, exactly 10 sentences: 2 background/gap + 6 method (signaled by First/Second/Finally; each pair = claim + why-it-works) + 2 experimental results/conclusion. ~250 Chinese characters |
 | **Introduction** | 5 paragraphs: task importance → current progress (2-3 method families) → remaining gap (with "because" clause) → proposed method (core mechanism in 2-3 sentences) → contributions (3-4 bullets, each pointing to evidence) |
 | **Related Work** | Theme-based (from Stage 2), 1 paragraph per theme: theme statement → 2-3 papers with comparison → how your method differs. Avoid laundry-list pattern |
-| **Method** | III-A Overview (with architecture diagram ref), III-B/C/D per module: input→process→output→rationale. Every formula explained in prose |
-| **Experiments** | Subsections: Datasets & Implementation Details / Main Results / Ablation Study / Efficiency Analysis / Qualitative Analysis. Every result number in both table AND prose |
-| **Conclusion** | Restate problem, method, key findings. No new claims or citations. End with 1-2 specific future directions |
+| **Method** | Main heading "方法", 3-5 sentence overview of the full framework (no separate Overview subsection), then three innovation points each as a sub-heading. Each innovation follows motivation→design→formula/mechanism→effect, with optional module diagrams or pseudocode |
+| **Experiments** | 5 subsections: Datasets & Metrics → Experimental Setup → Comparison with SOTA and Classical Methods → Ablation Study (numbered list 1), 2), 3)...) → Visualization |
+| **Conclusion** | Two paragraphs: first = full summary (problem→method→key results with numbers), second = limitations + future work. No new citations or claims |
 
 ---
 
