@@ -227,20 +227,15 @@ The main contributions of this paper are as follows:
 % Formal definition of the remote sensing task your paper addresses.
 
 % ===========================================================================
-% 4. PROPOSED METHOD
+% 4. METHOD
 % ===========================================================================
-\section{Proposed Method}
+\section{Method}
 \label{sec:method}
 
-% TGRS method sections should be detailed enough for reproducible research.
-% Aim for ~3-5 pages with clear sub-sections.
-
-\subsection{Overview}
-\label{sec:method-overview}
-
-% Architecture diagram: Fig. 1. Describe the complete pipeline.
-% For remote sensing: emphasize how your method handles unique RS data
-% characteristics (large coverage, multi-scale, multi-source, temporal).
+% Opening paragraph (3-5 sentences): overall framework → what each of the
+% three innovations solves → how they collaborate. No "Overview" subsection.
+% Emphasize how the method handles unique RS data characteristics (large
+% coverage, multi-scale, multi-source, temporal).
 
 \begin{figure}[t]
   \centering
@@ -258,32 +253,24 @@ The main contributions of this paper are as follows:
   \label{fig:architecture}
 \end{figure}
 
-\subsection{[Core Innovation Module A]}
-\label{sec:method-moduleA}
+\subsection{<Innovation 1 Name>}
+\label{sec:method-innov1}
 
-% For each module: Input → Process → Output → Rationale.
-% Include equations with ALL symbols defined.
-% Discuss WHY this module is specifically suited for remote sensing data.
+% Motivation → Design → Formula/Mechanism → Effect
+% WHY this module is specifically suited for remote sensing data.
 
-\subsection{[Core Innovation Module B]}
-\label{sec:method-moduleB}
+\subsection{<Innovation 2 Name>}
+\label{sec:method-innov2}
 
-% Second key innovation.
+% Motivation → Design → Formula/Mechanism → Effect
 
-\subsection{Loss Function and Training Strategy}
-\label{sec:method-loss}
+\subsection{<Innovation 3 Name>}
+\label{sec:method-innov3}
 
-% Define all loss terms. If multi-task, explain task balancing.
-% Remote sensing specific: class imbalance handling, spatial consistency
-% regularization, spectral-photometric invariance, etc.
+% Motivation → Design → Formula/Mechanism → Effect
 
-\begin{equation}
-  \mathcal{L}_{\text{total}} =
-    \mathcal{L}_{\text{task}} +
-    \lambda_{1} \mathcal{L}_{\text{aux1}} +
-    \lambda_{2} \mathcal{L}_{\text{aux2}}
-  \label{eq:total_loss}
-\end{equation}
+% If the loss function is an independent innovation, give it a subsection.
+% If it supports a specific module, include it within that module's subsection.
 
 \subsection{Implementation Details}
 \label{sec:method-implementation}
@@ -305,24 +292,11 @@ The main contributions of this paper are as follows:
 \section{Experiments}
 \label{sec:experiments}
 
-% TGRS experiments: typically very comprehensive (4-6 pages).
-% Expected components: datasets, implementation, main results, ablation,
-% parameter sensitivity, computational efficiency, qualitative visualization,
-% failure case analysis.
-
-% ---------------------------------------------------------------------------
-\subsection{Datasets}
+\subsection{Datasets and Metrics}
 \label{sec:exp-datasets}
 
-% For each dataset, describe:
-% - Sensor/platform (e.g., Sentinel-2, Landsat-8, Gaofen-2, WorldView-3)
-% - Spatial resolution and coverage
-% - Spectral bands and wavelengths
-% - Temporal coverage (if multi-temporal)
-% - Geographic region
-% - Training/validation/test split
-% - Number of samples per class
-% - Any preprocessing (cloud removal, atmospheric correction, etc.)
+% For each dataset: sensor/platform, spatial resolution, spectral bands,
+% geographic region, train/val/test split, preprocessing.
 
 \begin{table}[t]
   \centering
@@ -340,27 +314,19 @@ The main contributions of this paper are as follows:
   \end{tabular}
 \end{table}
 
-% ---------------------------------------------------------------------------
-\subsection{Evaluation Metrics}
-\label{sec:exp-metrics}
+% Define metrics and direction (higher/lower is better): OA, AA, Kappa, mIoU, etc.
 
-% TGRS common metrics:
-% Classification: OA (Overall Accuracy), AA (Average Accuracy), Kappa (κ),
-%                 per-class F1, confusion matrix
-% Segmentation: mIoU, FWIoU, per-class IoU
-% Detection: mAP, AP@[.5:.95]
-% Change detection: OA, F1, Kappa
-% Regression: RMSE, MAE, R²
+\subsection{Experimental Setup}
+\label{sec:exp-setup}
 
-% Define each metric and state direction (higher/lower is better).
+% Framework, optimizer, LR schedule, batch size, epochs, data augmentation,
+% GPU, seeds. List all baselines with citations and configuration.
 
-% ---------------------------------------------------------------------------
-\subsection{Comparison with State-of-the-Art}
+\subsection{Comparison with State-of-the-Art and Classical Methods}
 \label{sec:exp-main}
 
-% Main results table: bold = best, underline = second best.
-% Include: method name, year, OA, AA, Kappa, per-class metrics, params, FLOPs.
-% Use \pm for standard deviations over multiple runs.
+% SOTA comparison table. Bold = best, underline = second best.
+% Classical methods (SVM, RF, etc.) comparison for RS-specific baselines.
 
 \begin{table}[t]
   \centering
@@ -387,34 +353,17 @@ The main contributions of this paper are as follows:
   \end{tabular}
 \end{table}
 
-% ---------------------------------------------------------------------------
 \subsection{Ablation Study}
 \label{sec:exp-ablation}
 
-% Comprehensive ablation: each claimed component tested individually.
-% Use waterfall-style table (full model → remove component A → ... → baseline).
-
-% ---------------------------------------------------------------------------
-\subsection{Parameter Sensitivity Analysis}
-\label{sec:exp-sensitivity}
-
+% Numbered list 1), 2), 3)... analyzing each component / design choice.
+% May also include: parameter sensitivity analysis, computational efficiency.
 % TGRS reviewers expect sensitivity analysis for key hyperparameters.
-% Show how performance varies with λ, temperature, window size, etc.
-% Use line plots (Fig. X) showing stability range.
 
-% ---------------------------------------------------------------------------
-\subsection{Computational Efficiency}
-\label{sec:exp-efficiency}
+\subsection{Visualization}
+\label{sec:exp-visual}
 
-% For TGRS: efficiency matters for large-scale remote sensing deployment.
-% Report: training time, inference time (per image / per km²), GPU memory,
-% model size, throughput.
-
-% ---------------------------------------------------------------------------
-\subsection{Qualitative Analysis and Visualization}
-\label{sec:exp-qualitative}
-
-% Show classification maps, attention heatmaps, feature visualizations.
+% Classification maps, attention heatmaps, feature visualizations, error cases.
 % Compare predicted maps against ground truth.
 % Show BOTH successes and failure cases — TGRS reviewers value honesty.
 
@@ -424,29 +373,18 @@ The main contributions of this paper are as follows:
 \section{Discussion}
 \label{sec:discussion}
 
-% TGRS journal papers often have a dedicated Discussion section.
-% Topics to cover:
 \subsection{Key Findings and Implications}
 \label{sec:discuss-findings}
-
-\subsection{Why the Method Works for Remote Sensing Data}
-\label{sec:discuss-why}
 
 \subsection{Limitations and Failure Cases}
 \label{sec:discuss-limitations}
 
-% Be specific about:
-% - Geographic transferability (does it work in different regions?)
-% - Sensor transferability (does it work with different sensors?)
-% - Temporal robustness (does it work across seasons?)
-% - Computational scalability (can it handle country-scale mapping?)
+% Geographic/sensor/temporal transferability, computational scalability.
 
 \subsection{Future Work}
 \label{sec:discuss-future}
 
 % Concrete directions, not generic statements.
-% Example: "Extending to [other sensor modality, e.g., SAR] by [specific approach]."
-% Example: "Integrating physical models ([specific model, e.g., PROSAIL]) as a prior."
 
 % ===========================================================================
 % 7. CONCLUSION
@@ -454,8 +392,8 @@ The main contributions of this paper are as follows:
 \section{Conclusion}
 \label{sec:conclusion}
 
-% Restate: problem, method, key findings. NO new claims or citations.
-% 2-3 paragraphs for journal length.
+% Paragraph 1: Full summary (problem → method → key results with numbers)
+% Paragraph 2: Limitations + future work (specific limitations + actionable directions)
 
 % ===========================================================================
 % ACKNOWLEDGMENTS

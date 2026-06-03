@@ -217,18 +217,13 @@ The main contributions of this paper are:
 %   loss function, hypothesis class.
 
 % ===========================================================================
-% 4. PROPOSED METHOD
+% 4. METHOD
 % ===========================================================================
-\section{Proposed Method}
+\section{Method}
 \label{sec:method}
 
-% TETCI method sections should be rigorous.
-% CI papers: include pseudocode, complexity analysis, theoretical justification.
-
-\subsection{Overview and Design Rationale}
-\label{sec:method-overview}
-
-% Architecture/flowchart: Fig. 1.
+% Opening paragraph (3-5 sentences): overall framework → what each of the
+% three innovations solves → how they collaborate. No "Overview" subsection.
 % Explain the CI design philosophy: WHY this approach, not just WHAT.
 
 \begin{figure}[t]
@@ -246,13 +241,11 @@ The main contributions of this paper are:
   \label{fig:architecture}
 \end{figure}
 
-\subsection{[Core CI Component A]}
-\label{sec:method-componentA}
+\subsection{<Innovation 1 Name>}
+\label{sec:method-innov1}
 
-% Detailed description with equations and/or pseudocode.
-% For evolutionary methods: describe encoding, operators, selection mechanism.
-% For neural methods: describe architecture, training algorithm.
-% For fuzzy methods: describe rule base, inference mechanism, defuzzification.
+% Motivation → Design → Formula/Mechanism → Effect
+% Include equations and/or pseudocode as needed.
 
 \begin{algorithm}[t]
   \caption{[Core Component] of the Proposed Method}
@@ -269,46 +262,27 @@ The main contributions of this paper are:
   \end{algorithmic}
 \end{algorithm}
 
-\subsection{[CI Component B]}
-\label{sec:method-componentB}
+\subsection{<Innovation 2 Name>}
+\label{sec:method-innov2}
 
-% Second key innovation.
+% Motivation → Design → Formula/Mechanism → Effect
 
-\subsection{Complexity Analysis}
-\label{sec:method-complexity}
+\subsection{<Innovation 3 Name>}
+\label{sec:method-innov3}
 
+% Motivation → Design → Formula/Mechanism → Effect
+
+\subsection{Implementation Details}
+\label{sec:method-implementation}
+
+% Framework, optimizer, LR schedule, complexity analysis, etc.
 % TETCI strongly values computational complexity analysis.
-% For evolutionary methods: per-generation complexity, convergence rate.
-% For neural methods: FLOPs, parameter count, training complexity, inference complexity.
-% Compare to baseline methods' complexity.
-
-The time complexity of [Method] is $O([expression])$ per [unit], compared to
-$O([baseline\_expression])$ for [baseline]. The space complexity is
-$O([expression])$. This [is comparable to / is lower than / trades off against]
-the baseline.
 
 % ===========================================================================
-% 5. THEORETICAL ANALYSIS (highly valued at TETCI)
+% 5. THEORETICAL ANALYSIS (if applicable)
 % ===========================================================================
-\section{Theoretical Analysis}
-\label{sec:theory}
-
-% TETCI expects theoretical rigor. Depending on your CI paradigm, include:
-
-\subsection{[Relevant Property, e.g., Convergence Analysis]}
-\label{sec:theory-convergence}
-
-% For evolutionary methods: convergence proof, runtime analysis.
-% For neural methods: generalization bound, optimization landscape analysis.
-% For fuzzy methods: approximation capability, stability analysis.
-
-\subsection{[Second Property, e.g., Computational Complexity]}
-\label{sec:theory-complexity}
-
-% Detailed complexity analysis and comparison.
-
-% If your paper does not have theoretical contributions, replace this section
-% with a rigorous "Analysis and Discussion" section in the Experiments.
+% \section{Theoretical Analysis}
+% \label{sec:theory}
 
 % ===========================================================================
 % 6. EXPERIMENTS
@@ -316,17 +290,11 @@ the baseline.
 \section{Experiments}
 \label{sec:experiments}
 
-% TETCI experiments: rigorous, reproducible, statistically validated.
+\subsection{Datasets and Metrics}
+\label{sec:exp-data}
 
-\subsection{Experimental Settings}
-\label{sec:exp-settings}
-
-\subsubsection{Benchmark Problems}
-% Define test problems/suites:
-% - For optimization: CEC benchmark suites, ZDT/DTLZ for multi-objective
-% - For classification/regression: standard ML datasets
-% - For specific applications: describe the real-world problem
-% For each benchmark: dimensionality, characteristics, difficulty.
+% Benchmark problems, datasets, metrics with direction.
+% TETCI requires rigorous statistics: Wilcoxon, Friedman test, effect size.
 
 \begin{table}[t]
   \centering
@@ -344,58 +312,29 @@ the baseline.
   \end{tabular}
 \end{table}
 
-\subsubsection{Compared Methods}
-% List ALL compared CI methods with citations and parameter settings.
-% Use the original authors' recommended parameters.
-% Be explicit about which methods you re-implemented vs. used official code.
+\subsection{Experimental Setup}
+\label{sec:exp-setup}
 
-\subsubsection{Performance Metrics and Statistical Validation}
-% TETCI requires rigorous statistics:
-% - For optimization: best, mean, median, std of objective values over N runs
-% - For classification/regression: accuracy/F1/RMSE with std
-% - Statistical tests: Wilcoxon rank-sum, Friedman test with post-hoc,
-%   critical difference diagrams
-% - Effect size: Cohen's d, Vargha-Delaney A measure
-% State significance level (typically α = 0.05).
+% All compared methods with citations and parameter settings.
+% Programming language, libraries, hardware, number of runs, stopping criteria.
+% TETCI requires rigorous statistics: Wilcoxon, Friedman, critical difference diagrams.
 
-\subsubsection{Implementation and Reproducibility}
-% - Programming language and version
-% - Key libraries
-% - Hardware (CPU/GPU)
-% - Number of independent runs and random seeds
-% - Stopping criteria (max evaluations, convergence threshold)
-% - Code availability
-
-\subsection{Main Results}
+\subsection{Comparison with State-of-the-Art and Classical Methods}
 \label{sec:exp-main}
 
-% Results tables with statistical annotations.
-% Use \pm for std, superscripts for statistical rankings.
+% Results tables with statistical annotations. \pm for std.
+% Include classical CI baselines and recent SOTA.
 
-\subsection{Ablation and Component Analysis}
+\subsection{Ablation Study}
 \label{sec:exp-ablation}
 
-% Demonstrate the contribution of each CI component.
-% Show that each innovation independently improves performance.
+% Numbered list 1), 2), 3)... analyzing each component / design choice.
+% May also include: parameter sensitivity, scalability analysis.
 
-\subsection{Parameter Sensitivity}
-\label{sec:exp-sensitivity}
+\subsection{Visualization}
+\label{sec:exp-visual}
 
-% CI methods often have several hyperparameters.
-% Show robust performance across reasonable parameter ranges.
-% Identify which parameters are most sensitive.
-
-\subsection{Scalability Analysis}
-\label{sec:exp-scalability}
-
-% How does performance scale with problem dimension, population size, etc.?
-% Critical for TETCI -- shows the method is practical.
-
-\subsection{Comparison on Real-World Applications}
-\label{sec:exp-realworld}
-
-% TETCI emphasizes practical relevance.
-% Apply your method to at least one real-world CI problem.
+% Convergence curves, critical difference diagrams, Pareto fronts, etc.
 
 % ===========================================================================
 % 7. DISCUSSION
@@ -406,24 +345,11 @@ the baseline.
 \subsection{Why the Proposed CI Approach Works}
 \label{sec:discuss-why}
 
-% Connect experimental results back to the CI design principles.
-
 \subsection{Limitations and When the Method May Fail}
 \label{sec:discuss-limitations}
 
-% Be honest about:
-% - Problem classes where the method underperforms
-% - Computational overhead compared to simpler alternatives
-% - Sensitivity to specific problem characteristics
-% - Scalability limits
-
 \subsection{Future Research Directions}
 \label{sec:discuss-future}
-
-% Concrete CI research directions:
-% - Extending to [another CI paradigm, e.g., multi-task, multi-modal]
-% - Integration with [another CI technique, e.g., surrogate-assisted]
-% - Application to [new domain]
 
 % ===========================================================================
 % 8. CONCLUSION
@@ -431,8 +357,8 @@ the baseline.
 \section{Conclusion}
 \label{sec:conclusion}
 
-% Restate problem, method, and key findings (~3 paragraphs for journal).
-% No new claims or citations.
+% Paragraph 1: Full summary (problem → method → key results with numbers)
+% Paragraph 2: Limitations + future work (specific limitations + actionable directions)
 
 % ===========================================================================
 % ACKNOWLEDGMENTS

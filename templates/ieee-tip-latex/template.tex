@@ -220,20 +220,14 @@ The main contributions of this paper are:
 % Keep this brief -- TIP readers are image processing experts.
 
 % ===========================================================================
-% 4. PROPOSED METHOD
+% 4. METHOD
 % ===========================================================================
-\section{Proposed Method}
+\section{Method}
 \label{sec:method}
 
-% TIP method sections: very detailed (3-5 pages).
+% Opening paragraph (3-5 sentences): overall framework → what each of the
+% three innovations solves → how they collaborate. No "Overview" subsection.
 % A reader should be able to re-implement from this description.
-% Every equation must be explained; every architecture choice justified.
-
-\subsection{Overview}
-\label{sec:method-overview}
-
-% Architecture overview diagram (Fig. 1).
-% Describe the complete pipeline from input image to output.
 
 \begin{figure}[t]
   \centering
@@ -248,55 +242,30 @@ The main contributions of this paper are:
   \label{fig:architecture}
 \end{figure}
 
-\subsection{[Core Module A]}
-\label{sec:method-moduleA}
+\subsection{<Innovation 1 Name>}
+\label{sec:method-innov1}
 
-% For each module: Input → Process → Output → Rationale.
-% Image processing specifics:
-% - Specify tensor shapes: (B, C, H, W) for images, (B, T, C, H, W) for video
-% - Define kernel sizes, stride, padding for convolution layers
-% - Define window size, patch size for transformer-based methods
-% - Define noise level, degradation model for restoration methods
+% Motivation → Design → Formula/Mechanism → Effect
+% Specify tensor shapes, kernel sizes, stride, padding, etc.
 
-\subsection{[Core Module B]}
-\label{sec:method-moduleB}
+\subsection{<Innovation 2 Name>}
+\label{sec:method-innov2}
 
-% Second innovation.
+% Motivation → Design → Formula/Mechanism → Effect
 
-\subsection{Loss Function Design}
-\label{sec:method-loss}
+\subsection{<Innovation 3 Name>}
+\label{sec:method-innov3}
 
-% TIP papers often have carefully designed loss functions.
-% Common image processing losses:
-% - Reconstruction: L1 (MAE), L2 (MSE), Charbonnier
-% - Perceptual: VGG perceptual loss, LPIPS
-% - Adversarial: GAN loss (LSGAN, hinge, WGAN-GP)
-% - Structural: SSIM loss, MS-SSIM loss
-% - Frequency: FFT loss, wavelet loss
-% - Edge-aware: gradient loss, Laplacian loss
+% Motivation → Design → Formula/Mechanism → Effect
 
-% Explain WHY each loss term is included and what image property it preserves.
-
-\begin{equation}
-  \mathcal{L}_{\text{total}} =
-    \lambda_1 \mathcal{L}_{\text{reconstruction}} +
-    \lambda_2 \mathcal{L}_{\text{perceptual}} +
-    \lambda_3 \mathcal{L}_{\text{[auxiliary]}}
-  \label{eq:total_loss}
-\end{equation}
-
-% Each λ chosen via [validation / grid search / adaptive weighting].
+% If the loss function is an independent innovation, give it a subsection.
+% If it supports a specific module, include it within that module's subsection.
 
 \subsection{Implementation Details}
 \label{sec:method-implementation}
 
-% Comprehensive for TIP reproducibility:
-% - Framework and version (PyTorch X.X, CUDA X.X)
-% - Optimizer, learning rate, scheduler
-% - Batch size, patch size, number of epochs/iterations
-% - Data augmentation (geometric, photometric, degradation-specific)
-% - Hardware and training time
-% - Pretrained weights (if used)
+% Framework, optimizer, LR schedule, batch size, patch size, data augmentation,
+% hardware, training time, pretrained weights.
 
 % ===========================================================================
 % 5. EXPERIMENTS
@@ -304,16 +273,11 @@ The main contributions of this paper are:
 \section{Experiments}
 \label{sec:experiments}
 
-% TIP experiments: very comprehensive, 4-6 pages.
-% Must include: datasets, metrics, main comparison, ablation, efficiency,
-% qualitative visual comparison, failure case analysis.
-
-% ---------------------------------------------------------------------------
-\subsection{Datasets and Evaluation Protocols}
-\label{sec:exp-datasets}
+\subsection{Datasets and Metrics}
+\label{sec:exp-data}
 
 % For each dataset: source, size, resolution, characteristics, split.
-% Standard image processing benchmarks:
+% Metrics: PSNR, SSIM, LPIPS, NIQE, etc. State direction.
 
 \begin{table}[t]
   \centering
@@ -325,35 +289,23 @@ The main contributions of this paper are:
     \textbf{Task} & \textbf{Split (Train/Val/Test)} \\
     \midrule
     DIV2K & 1,000 & 2K & SR & 800/100/100 \\
-    Flickr2K & 2,650 & 2K & SR & 2,450/0/200 \\
-    BSD68 & 68 & 481×321/321×481 & Denoising & --/--/68 \\
-    Set5/Set14 & 5/14 & various & SR/Denoising & --/--/5,14 \\
-    Urban100 & 100 & various & SR & --/--/100 \\
+    BSD68 & 68 & 481×321 & Denoising & --/--/68 \\
+    Set5 & 5 & various & SR/Denoising & --/--/5 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-% ---------------------------------------------------------------------------
-\subsection{Evaluation Metrics}
-\label{sec:exp-metrics}
+\subsection{Experimental Setup}
+\label{sec:exp-setup}
 
-% TIP standard metrics:
-% - Full-reference: PSNR, SSIM, MS-SSIM, LPIPS, DISTS, NLPD, FSIM, VIF
-% - No-reference: NIQE, BRISQUE, PIQE, MANIQA, CLIPIQA
-% - Task-specific: mIoU (segmentation), AP (detection), FID (generation)
-% - Efficiency: Params (M), FLOPs (G), runtime (ms), GPU memory (GB)
-%
-% State metric direction: higher is better for PSNR/SSIM/PSNR;
-% lower is better for LPIPS/NIQE/runtime.
+% Framework, optimizer, LR schedule, batch size, epochs, data augmentation,
+% GPU, seeds. All baselines with citations and configuration.
 
-% ---------------------------------------------------------------------------
-\subsection{Comparison with State-of-the-Art}
+\subsection{Comparison with State-of-the-Art and Classical Methods}
 \label{sec:exp-main}
 
-% Table: method, year, venue, PSNR, SSIM, LPIPS, Params, FLOPs, Runtime.
-% Bold = best, underline = second-best.
-% Multiple scale factors (×2, ×3, ×4) in separate tables or sub-tables.
-% If reporting on multiple noise levels, organize by σ.
+% SOTA table. Bold = best, underline = second-best.
+% Include classical image processing baselines (bicubic, BM3D, etc.).
 
 \begin{table}[t]
   \centering
@@ -373,55 +325,17 @@ The main contributions of this paper are:
   \end{tabular}
 \end{table}
 
-% ---------------------------------------------------------------------------
 \subsection{Ablation Study}
 \label{sec:exp-ablation}
 
-% Comprehensive ablation of ALL components.
-% Waterfall-style: Full model → remove A → remove B → remove both → baseline.
-% Show PSNR drop for each removal.
+% Numbered list 1), 2), 3)... analyzing each component / design choice.
+% May also include: efficiency analysis, generalization analysis.
 
-% ---------------------------------------------------------------------------
-\subsection{Model Efficiency Analysis}
-\label{sec:exp-efficiency}
+\subsection{Visualization}
+\label{sec:exp-visual}
 
-% TIP highly values efficiency -- image processing needs to be practical.
-% - Parameter count comparison (bar chart)
-% - FLOPs vs PSNR scatter (Pareto frontier)
-% - Runtime on different resolutions
-% - GPU memory consumption
-% - Throughput (FPS) for video tasks
-
-% ---------------------------------------------------------------------------
-\subsection{Qualitative Results}
-\label{sec:exp-qualitative}
-
-% Visual comparison with SOTA methods.
-% Show zoomed-in patches to highlight fine details.
-% Use consistent color mapping across methods.
-% Show at least 2-3 diverse examples per dataset.
-% Include both easy and challenging cases.
-
-% ---------------------------------------------------------------------------
-\subsection{Failure Case Analysis}
-\label{sec:exp-failure}
-
-% TIP expects honesty about limitations.
-% Show cases where the method fails:
-% - What types of images/scenes cause degradation?
-% - What image structures are poorly reconstructed?
-% - Is there a systematic bias (e.g., over-smoothing, hallucination)?
-% Discuss WHY these failures occur.
-
-% ---------------------------------------------------------------------------
-\subsection{Generalization Analysis}
-\label{sec:exp-generalization}
-
-% TIP values generalization:
-% - Cross-dataset: train on A, test on B
-% - Cross-degradation: train on one noise level, test on others
-% - Cross-resolution: train on 2K, test on 4K images
-% - Real-world: test on real (not synthetic) degraded images
+% Visual comparison with SOTA, zoomed-in patches, failure cases.
+% Show BOTH successes and failures.
 
 % ===========================================================================
 % 6. DISCUSSION
@@ -432,29 +346,20 @@ The main contributions of this paper are:
 \subsection{Interpretation of Results}
 \label{sec:discuss-interpretation}
 
-% Explain WHY your method outperforms baselines.
-% Connect experimental observations to design choices.
-
 \subsection{Limitations}
 \label{sec:discuss-limitations}
 
-% Honest assessment of limitations.
-% Image-processing-specific:
-% - Resolution dependence
-% - Content dependence (textures, faces, text)
-% - Sensor/noise-type dependence
-% - Computational constraints for real-time applications
-
 \subsection{Future Work}
 \label{sec:discuss-future}
-
-% Concrete image processing research directions.
 
 % ===========================================================================
 % 7. CONCLUSION
 % ===========================================================================
 \section{Conclusion}
 \label{sec:conclusion}
+
+% Paragraph 1: Full summary (problem → method → key results with numbers)
+% Paragraph 2: Limitations + future work (specific limitations + actionable directions)
 
 % ---------------------------------------------------------------------------
 % 8. ACKNOWLEDGMENTS

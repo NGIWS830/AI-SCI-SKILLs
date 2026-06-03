@@ -111,16 +111,14 @@ Discussion of related work organized by themes.
 Discussion of related work.
 
 % ===========================================================================
-% 3. PROPOSED METHOD
+% 3. METHOD
 % ===========================================================================
-\section{Proposed Method}
+\section{Method}
 \label{sec:method}
 
-% 3.1 Overview -- architecture diagram reference (Fig.~1)
-\subsection{Overview}
-\label{sec:method-overview}
-
-Figure~\ref{fig:architecture} illustrates the overall architecture.
+% Opening paragraph (3-5 sentences): overall framework → what each of the
+% three innovations solves → how they collaborate. No "Overview" subsection.
+% Reference the architecture diagram: As illustrated in Fig.~\ref{fig:architecture}, ...
 
 \begin{figure}[t]
   \centering
@@ -133,33 +131,29 @@ Figure~\ref{fig:architecture} illustrates the overall architecture.
   \label{fig:architecture}
 \end{figure}
 
-% 3.2 Module B -- Input → Process → Output → Rationale
-\subsection{Module B: [Component Name]}
-\label{sec:method-moduleb}
+\subsection{<Innovation 1 Name>}
+\label{sec:method-innov1}
 
-Describe your first key component. For each module, follow this structure:
-\begin{enumerate}
-  \item \textbf{Input:} What goes in (tensor shapes, data types)
-  \item \textbf{Process:} What computation happens (equations, algorithms)
-  \item \textbf{Output:} What comes out
-  \item \textbf{Rationale:} Why this design choice
-\end{enumerate}
+% Motivation → Design → Formula/Mechanism → Effect
+% Optional: module diagram, algorithm pseudocode
 
-% 3.3 Module C
-\subsection{Module C: [Component Name]}
-\label{sec:method-modulec}
+\subsection{<Innovation 2 Name>}
+\label{sec:method-innov2}
 
-Describe your second key component.
+% Motivation → Design → Formula/Mechanism → Effect
 
-% 3.4 Loss Function / Training Objective
-\subsection{Training Objective}
-\label{sec:method-loss}
+\subsection{<Innovation 3 Name>}
+\label{sec:method-innov3}
 
-The overall training objective combines:
-\begin{equation}
-  \mathcal{L}_{\text{total}} = \mathcal{L}_{\text{primary}} + \lambda \mathcal{L}_{\text{auxiliary}}
-  \label{eq:loss}
-\end{equation}
+% Motivation → Design → Formula/Mechanism → Effect
+
+% If the loss function is an independent innovation, give it a subsection.
+% If it supports a specific module, include it within that module's subsection.
+
+\subsection{Implementation Details}
+\label{sec:method-impl}
+
+% Optimizer, learning rate schedule, batch size, data augmentation, etc.
 
 % ===========================================================================
 % 4. EXPERIMENTS
@@ -167,21 +161,20 @@ The overall training objective combines:
 \section{Experiments}
 \label{sec:experiments}
 
-% 4.1 Datasets and Implementation Details
-\subsection{Datasets and Implementation Details}
-\label{sec:exp-setup}
+\subsection{Datasets and Metrics}
+\label{sec:exp-data}
 
 \textbf{Datasets.} Describe datasets: name, size, splits, preprocessing.
 
-\textbf{Implementation Details.} Include: framework, optimizer, learning rate,
-scheduler, batch size, epochs, hardware, seeds, data augmentation.
-
-\textbf{Baselines.} List all baselines with citations.
-
 \textbf{Evaluation Metrics.} Define metrics with direction (higher/lower is better).
 
-% 4.2 Comparison with State-of-the-Art
-\subsection{Comparison with State-of-the-Art}
+\subsection{Experimental Setup}
+\label{sec:exp-setup}
+
+Include: framework, optimizer, learning rate, scheduler, batch size, epochs,
+hardware, seeds, data augmentation. List all baselines with citations.
+
+\subsection{Comparison with State-of-the-Art and Classical Methods}
 \label{sec:exp-main}
 
 \begin{table}[t]
@@ -200,9 +193,10 @@ scheduler, batch size, epochs, hardware, seeds, data augmentation.
   \end{tabular}
 \end{table}
 
-% 4.3 Ablation Study
 \subsection{Ablation Study}
 \label{sec:exp-ablation}
+
+% Numbered list 1), 2), 3)... analyzing each component / design choice / hyperparameter
 
 \begin{table}[t]
   \centering
@@ -213,20 +207,17 @@ scheduler, batch size, epochs, hardware, seeds, data augmentation.
     \textbf{Variant} & \textbf{Metric 1} & \textbf{$\Delta$} \\
     \midrule
     Full Model & 00.0 & -- \\
-    w/o Component B & 00.0 & -0.0 \\
-    w/o Component C & 00.0 & -0.0 \\
-    w/o Both & 00.0 & -0.0 \\
+    w/o Component 1 & 00.0 & -0.0 \\
+    w/o Component 2 & 00.0 & -0.0 \\
+    w/o Component 3 & 00.0 & -0.0 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-% 4.4 Efficiency Analysis (if applicable)
-\subsection{Efficiency Analysis}
-\label{sec:exp-efficiency}
+\subsection{Visualization}
+\label{sec:exp-visual}
 
-% 4.5 Qualitative Analysis
-\subsection{Qualitative Analysis}
-\label{sec:exp-qualitative}
+% Feature maps, attention maps, t-SNE, confusion matrices, error cases, etc.
 
 % ===========================================================================
 % 5. CONCLUSION
@@ -234,13 +225,8 @@ scheduler, batch size, epochs, hardware, seeds, data augmentation.
 \section{Conclusion}
 \label{sec:conclusion}
 
-% Restate problem, method, key findings.
-% Do NOT add new claims or citations.
-% End with 1-2 specific future work directions.
-
-In this paper, we have presented [Method], which [problem + core mechanism].
-Experiments on [N] datasets demonstrate that [key finding 1] and [key finding 2].
-Limitations include [specific limitation]. Future work may explore [specific direction].
+% Paragraph 1: Full summary (problem → method → key results with numbers)
+% Paragraph 2: Limitations + future work (specific limitations + actionable directions)
 
 % ===========================================================================
 % ACKNOWLEDGMENTS (optional)

@@ -65,56 +65,68 @@ keyword1, keyword2, keyword3, keyword4, keyword5
 \subsection{Theme B}
 
 % ============================================================
-% 2  Proposed Method
+% 2  Method
 % ============================================================
-\section{Proposed Method}
+\section{Method}
 
-\subsection{Overview}
+% Opening paragraph (3-5 sentences): overall framework → what each of the
+% three innovations solves → how they collaborate. No "Overview" subsection.
+% Reference the architecture diagram: As shown in Fig.~X, ...
 
-% Overall architecture description + architecture diagram reference
+\subsection{<Innovation 1 Name>}
 
-\subsection{Module A}
+% Motivation → Design → Formula/Mechanism → Effect
+% Optional: module diagram, algorithm pseudocode
 
-% Input → Processing → Output → Design rationale
+\subsection{<Innovation 2 Name>}
 
-\subsection{Module B}
+% Motivation → Design → Formula/Mechanism → Effect
 
-\subsection{Training Objective}
+\subsection{<Innovation 3 Name>}
 
-% Loss function formulation and explanation
+% Motivation → Design → Formula/Mechanism → Effect
+
+% If the loss function is an independent innovation, give it a subsection.
+% If it supports a specific module, include it within that module's subsection.
+
+\subsection{Implementation Details}
+
+% Optimizer, learning rate schedule, batch size, data augmentation, etc.
 
 % ============================================================
 % 3  Experiments
 % ============================================================
 \section{Experiments}
 
-\subsection{Datasets and Implementation Details}
+\subsection{Datasets and Metrics}
 
-% Dataset statistics, evaluation metrics, implementation details, hyperparameters
+% Dataset size, classes, splits; metrics and direction (higher/lower is better)
 
-\subsection{Comparison with State-of-the-Art}
+\subsection{Experimental Setup}
 
-% Main results table + analysis
+% Framework, optimizer, LR schedule, batch size, epochs, input size,
+% data augmentation, GPU, random seeds, baseline configuration
+
+\subsection{Comparison with State-of-the-Art and Classical Methods}
+
+% SOTA comparison: main results table + quantitative analysis
+% Classical methods comparison
 
 \subsection{Ablation Study}
 
-% Component contribution analysis
+% Numbered list 1), 2), 3)... analyzing each component / design choice / hyperparameter
 
-\subsection{Efficiency Analysis}
+\subsection{Visualization}
 
-% Parameters, inference time, etc.
-
-\subsection{Qualitative Analysis}
-
-% Visualizations
+% Feature maps, attention maps, t-SNE, confusion matrices, error cases, etc.
 
 % ============================================================
 % 4  Conclusion
 % ============================================================
 \section{Conclusion}
 
-% Restate problem, method, key findings
-% Future work directions
+% Paragraph 1: Full summary (problem → method → key results with numbers)
+% Paragraph 2: Limitations + future work (specific limitations + actionable directions)
 
 % ============================================================
 % Acknowledgments (optional)

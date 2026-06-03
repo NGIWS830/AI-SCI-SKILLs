@@ -75,26 +75,13 @@ Your introduction text here.
 \section{Related Work}
 
 % ===========================================================================
-% 3. PROPOSED METHOD
+% 3. METHOD
 % ===========================================================================
-\section{Proposed Method}
+\section{Method}
 
-\subsection{Preliminaries}
-\label{sec:prelim}
-
-Define notation, background concepts, and problem formulation.
-
-\subsection{Method Overview}
-\label{sec:method-overview}
-
-\subsection{Key Component A}
-\label{sec:method-compA}
-
-\subsection{Key Component B}
-\label{sec:method-compB}
-
-\subsection{Training Algorithm}
-\label{sec:method-training}
+% Opening paragraph (3-5 sentences): overall framework → what each innovation
+% solves → how they collaborate. No "Overview" or "Preliminaries" subsection.
+% Reference the architecture diagram.
 
 \begin{figure}[t]
   \centering
@@ -106,14 +93,31 @@ Define notation, background concepts, and problem formulation.
   \label{fig:architecture}
 \end{figure}
 
-% ===========================================================================
-% 4. THEORETICAL ANALYSIS (if applicable, valued at NeurIPS/ICML)
-% ===========================================================================
-\section{Theoretical Analysis}
-\label{sec:theory}
+\subsection{<Innovation 1 Name>}
+\label{sec:method-innov1}
 
-% Convergence analysis, generalization bounds, etc.
-% Remove this section if not applicable.
+% Motivation → Design → Formula/Mechanism → Effect
+
+\subsection{<Innovation 2 Name>}
+\label{sec:method-innov2}
+
+% Motivation → Design → Formula/Mechanism → Effect
+
+\subsection{<Innovation 3 Name>}
+\label{sec:method-innov3}
+
+% Motivation → Design → Formula/Mechanism → Effect
+
+\subsection{Implementation Details}
+\label{sec:method-impl}
+
+% Optimizer, LR schedule, batch size, data augmentation, etc.
+
+% ===========================================================================
+% 4. THEORETICAL ANALYSIS (if applicable)
+% ===========================================================================
+% \section{Theoretical Analysis}
+% \label{sec:theory}
 
 % ===========================================================================
 % 5. EXPERIMENTS
@@ -121,23 +125,33 @@ Define notation, background concepts, and problem formulation.
 \section{Experiments}
 \label{sec:experiments}
 
+\subsection{Datasets and Metrics}
+\label{sec:exp-data}
+
 \subsection{Experimental Setup}
 \label{sec:exp-setup}
 
-\subsection{Main Results}
+\subsection{Comparison with State-of-the-Art and Classical Methods}
 \label{sec:exp-main}
 
-\subsection{Ablation Studies}
+\subsection{Ablation Study}
 \label{sec:exp-ablation}
 
-\subsection{Analysis and Discussion}
-\label{sec:exp-analysis}
+% Numbered list 1), 2), 3)... analyzing each component / design choice
+
+\subsection{Visualization}
+\label{sec:exp-visual}
+
+% Feature maps, attention maps, t-SNE, error cases, etc.
 
 % ===========================================================================
 % 6. CONCLUSION
 % ===========================================================================
 \section{Conclusion}
 \label{sec:conclusion}
+
+% Paragraph 1: Full summary (problem → method → key results with numbers)
+% Paragraph 2: Limitations + future work (specific limitations + actionable directions)
 
 % ===========================================================================
 % BROADER IMPACT (required for NeurIPS)
