@@ -299,7 +299,7 @@ Also covered: Feature Map Comparison, Confusion Matrix Difference, Prediction Co
 | Section | Structure Rules |
 |---------|----------------|
 | **Title** | Propose 3 variants; choose the most specific and least overclaiming. Pattern: `[Method Name]: [Core Mechanism] for [Task]` |
-| **Abstract** | 2-6-2 structure, exactly 10 sentences: 2 background/gap + 6 method (signaled by First/Second/Finally; each pair = claim + why-it-works) + 2 experimental results/conclusion. ~250 Chinese characters |
+| **Abstract** | 2-6-2 structure, exactly 10 sentences: 2 background/gap + 6 method (signaled by First/Second/Finally; each pair = claim + why-it-works) + 2 experimental results/conclusion. ~210 words |
 | **Introduction** | 5 paragraphs: task importance → current progress (2-3 method families) → remaining gap (with "because" clause) → proposed method (core mechanism in 2-3 sentences) → contributions (3-4 bullets, each pointing to evidence) |
 | **Related Work** | Theme-based (from Stage 2), 1 paragraph per theme: theme statement → 2-3 papers with comparison → how your method differs. Avoid laundry-list pattern |
 | **Method** | Main heading "方法", 3-5 sentence overview of the full framework (no separate Overview subsection), then three innovation points each as a sub-heading. Each innovation follows motivation→design→formula/mechanism→effect, with optional module diagrams or pseudocode |
