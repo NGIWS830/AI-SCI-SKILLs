@@ -46,9 +46,9 @@ Organized by claim category. The "Safer English" column is the default; use "Ove
 
 | Chinese | Overclaiming English | Safer English (Default) |
 |---------|---------------------|------------------------|
-| 首次提出 | is the first to / is novel | introduces / proposes (without "first" unless objectively verifiable) |
+| 首次提出 | is the first to / is novel | proposes (without "first" unless objectively verifiable) |
 | 创新性地 | innovatively | — (delete; let the method speak for itself) |
-| 开辟了新方向 | opens a new direction | introduces a new approach to / explores a new perspective on |
+| 开辟了新方向 | opens a new direction | explores a new perspective on |
 | 从根本上解决了 | fundamentally solves | addresses a core challenge in / provides a solution to |
 
 ### Comparison Claims

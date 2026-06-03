@@ -383,7 +383,7 @@ Q4: 混淆因素能否解释改善？
 | 显著提升 | significantly improves | achieves a X.X pp improvement |
 | 解决了...问题 | solves the problem of... | addresses / alleviates / mitigates |
 | 优于现有方法 | outperforms all existing methods | outperforms [named baselines] on [specific datasets] |
-| 首次提出 | is the first to / novel | introduces / proposes（若无验证则不称 first） |
+| 首次提出 | is the first to / novel | proposes（若无验证则不称 first） |
 | 证明了 | proves that | demonstrates that / provides evidence that |
 
 **5 大中→英翻译陷阱：** 话题凸显迁移（补主语）、修饰语堆叠（前置→后置）、平行结构（重复→连词归并）、零冠词→冠词、体→时态。

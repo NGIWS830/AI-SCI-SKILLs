@@ -9,7 +9,7 @@ Do not write these unless explicitly supported by evidence of sufficient strengt
 | Forbidden | Safer Alternative | Required Evidence |
 |-----------|------------------|-------------------|
 | state-of-the-art | achieves the best reported performance on [specific benchmark] | Comparison against prior SOTA on the standard benchmark |
-| first / 首次 / 최초 | introduces / proposes (without "first") | Impossible to verify objectively — avoid entirely |
+| first / 首次 / 최초 | proposes (without "first") | Impossible to verify objectively — avoid entirely |
 | solves the problem | addresses / alleviates / mitigates | A problem is "solved" only when no meaningful gap remains |
 | proves | demonstrates that / suggests that / provides evidence that | "Proof" requires formal mathematical guarantee |
 | universally applicable | has been evaluated on [N] datasets spanning [domains] | Evaluation across fundamentally different domains |
@@ -40,7 +40,7 @@ Do not write these unless explicitly supported by evidence of sufficient strengt
 |-----------|------------------|
 | completely different from | differs from [specific prior work] in that [specific difference] |
 | unprecedented | without direct precedent in [specific area] |
-| paradigm shift | introduces a new approach to / explores a new perspective on |
+| paradigm shift | explores a new perspective on |
 | groundbreaking | contributes to / advances |
 | revolutionizes | offers improvements in |
 
@@ -78,7 +78,7 @@ After writing, scan for these danger words. For each occurrence, ask:
 | Category | Safer Phrasing |
 |----------|---------------|
 | Performance | achieves competitive performance, matches the best reported results, outperforms [named baselines] on [dataset] |
-| Novelty | introduces, proposes, presents, explores |
+| Novelty | proposes, presents, explores |
 | Problem-solving | addresses, alleviates, mitigates, reduces the impact of |
 | Evidence strength | demonstrates that, suggests that, provides evidence that, is consistent with |
 | Improvement claim | improves over [baseline] by [X] percentage points / [Y]% relative improvement |

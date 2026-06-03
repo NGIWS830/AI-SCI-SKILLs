@@ -380,7 +380,7 @@ Also covered: Feature Map Comparison, Confusion Matrix Difference, Prediction Co
 | 显著提升 | significantly improves | achieves a X.X pp improvement |
 | 解决了...问题 | solves the problem of... | addresses / alleviates / mitigates |
 | 优于现有方法 | outperforms all existing methods | outperforms [named baselines] on [specific datasets] |
-| 首次提出 | is the first to / novel | introduces / proposes (no "first" unless verifiable) |
+| 首次提出 | is the first to / novel | proposes (no "first" unless verifiable) |
 | 证明了 | proves that | demonstrates that / provides evidence that |
 
 **5 CN→EN Translation Pitfalls**: topic-prominence transfer (add subjects), modifier stacking (pre→post), parallel structure (repetition→conjunction reduction), zero article→article, aspect→tense.

@@ -664,7 +664,7 @@ Scan for:
 | 显著提升 | significantly improves / dramatically boosts | achieves a X.X percentage point improvement / outperforms by X% |
 | 解决了...问题 | solves the problem of... | addresses / alleviates / mitigates |
 | 优于现有方法 | outperforms all existing methods / state-of-the-art | outperforms [named baselines] on [specific datasets] |
-| 首次提出 | is the first to / novel | introduces / proposes (without "first" unless verifiable) |
+| 首次提出 | is the first to / novel | proposes (without "first" unless verifiable) |
 | 证明了 | proves that | demonstrates that / suggests that / provides evidence that |
 | 具有很强的泛化能力 | generalizes well / is robust | achieves competitive performance on [out-of-domain dataset X] |
 
