@@ -121,41 +121,39 @@ The gap paragraph is the most important paragraph in the introduction. A weak ga
 - WHAT: "We introduce a [module_name] that [computation]." (save details for Method section)
 - WHY: "This design enables [capability], because [reason]." (tease the rationale here)
 
-### Paragraph 5: Contributions (Bullet List)
+### Paragraph 5: Contributions (Lead-in + Exactly 3 Innovation Points)
 
-**Contribution bullet patterns:**
+**Structure:** A prose lead-in (2-3 sentences) → "Our main contributions are:" → 3 detailed bullets.
 
-Pattern A — Method + Experiment + Resource:
-```
-Our main contributions are:
-1. We propose [Method], a [brief_description] that [key_innovation]. (→ Section III)
-2. We demonstrate through extensive experiments on [datasets] that [Method] achieves
-   [key_result_1] and [key_result_2]. (→ Section IV, Tables X-Y)
-3. We release [code/dataset/benchmark] to facilitate future research in [area]. (→ URL)
-```
+**Lead-in pattern:**
+> To address [specific_problem] in [task], we propose [Method]. [Method]
+> consists of three core components: [Innovation_1], which [purpose_1];
+> [Innovation_2], which [purpose_2]; and [Innovation_3], which [purpose_3].
+> Our main contributions are:
 
-Pattern B — Method-only heavy paper:
+**Bullet pattern (exactly 3, matching the 3 innovation points):**
 ```
-Our main contributions are:
-1. We identify [insight/observation] as a key bottleneck in [task]. (→ Section I, III-A)
-2. Building on this insight, we propose [Method], which introduces [module_1] and
-   [module_2] to address [challenge]. (→ Section III-B, III-C)
-3. We provide theoretical analysis showing that [property] holds under [conditions]. (→ Section III-D)
-4. Experiments on [datasets] validate that [Method] [key_result]. (→ Section IV)
-```
+1. [Innovation 1 contribution]. We design [Module A], which [mechanism]
+   to achieve [capability]. This module enables [specific_effect],
+   addressing [specific_problem] (Section III-B).
 
-Pattern C — Systems/Resource paper:
-```
-Our main contributions are:
-1. We present [System/Dataset], a [scale/description]. (→ Section III)
-2. Using [System/Dataset], we conduct a systematic study of [research_question],
-   revealing [key_finding_1] and [key_finding_2]. (→ Section IV)
-3. We establish [benchmark_result] as a strong baseline for future comparisons. (→ Section V)
+2. [Innovation 2 contribution]. We propose [Module B], which [mechanism]
+   to [operation] on [input]. This design overcomes the limitation of
+   [Module A / existing methods] in [scenario], enabling [capability]
+   (Section III-C).
+
+3. [Innovation 3 contribution]. We introduce [Module C / strategy],
+   which [mechanism] to [function]. Working in concert with [Module A]
+   and [Module B], it achieves [overall_goal]. Experiments on [datasets]
+   validate the effectiveness of all three modules (Section IV).
 ```
 
-**Evidence mapping rule:** Every contribution bullet must cross-reference a specific section, table, or figure. If you cannot point to the evidence, demote the bullet to "We also explore..." or remove it.
-
-**Anti-pattern:** Bullets that only say "We propose [X]" without "We find/demonstrate/show that [Y]". A contribution is not the act of proposing — it is the value created by the proposal.
+**Key Rules:**
+1. **Prose lead-in before the list**: 2-3 sentences summarizing the problem, the method name, and the three innovations at a high level.
+2. **Exactly 3 contribution bullets**: One per innovation point. The experiment results evidence is folded into bullet (3), not a separate 4th bullet.
+3. **Each bullet is detailed**: Not a one-line summary. Explain what was done, why, and where the evidence lives.
+4. **Evidence pointers**: Every bullet ends with a Section/Table reference.
+5. **Open-source/code release**: If applicable, add a sentence at the end of bullet (3) or as a short separate note after the list — not a 4th contribution bullet.
 
 ---
 
@@ -246,18 +244,31 @@ Boundary Refinement）。SABR的核心创新在于引入方向一致性模块
 Method section）。
 
 第5段 (Contributions):
+针对语义分割中结构边界与纹理边界难以区分的问题，本文提出了
+结构感知边界优化方法SABR。SABR的核心包括三个组件：方向感知特征提取
+模块，用于捕获边界的方向信息；方向一致性约束模块，用于建模边界的
+几何连续性；以及自适应边界增强模块，用于强化结构边界的响应。
 本文的主要贡献如下：
-(1) 我们揭示了现有边界优化方法的一个根本局限——无法区分结构边界和
-    纹理边界——并通过定量实验验证了这一观察（Section III-A）。
-(2) 我们提出方向一致性损失（Directional Consistency Loss），一种
-    新的正则化项，显式约束边界预测的几何连续性（Section III-C）。
-(3) 在Cityscapes和Mapillary Vistas数据集上的实验表明，SABR在边界
-    敏感指标上显著优于现有方法（边界F1提升2.3点），同时在标准mIoU
-    指标上也取得有竞争力的结果（Section IV-B, Table 2）。
-(4) 我们开源了代码和预训练模型，以促进边界感知分割研究。
 
-[注释] 第5段功能: 贡献列表。每个贡献都有证据指向（Section + Table）。
-贡献(1)是分析性贡献，(2)是方法贡献，(3)是实验贡献，(4)是资源贡献。
+(1) 方向感知特征提取。设计了四个方向卷积核（0°, 45°, 90°, 135°），
+    对特征图进行方向性边缘响应提取。该设计使得网络能够显式感知边界
+    像素的方向属性，为后续的结构-纹理边界区分提供了基础（第III-B节）。
+
+(2) 方向一致性约束。提出了方向一致性损失（Directional Consistency
+    Loss），约束结构边界像素沿其主方向的响应一致性。该损失函数
+    弥补了现有方法将所有边界像素等同对待的不足，使得网络能够自动
+    区分具有几何连续性的结构边界和随机分布的纹理边界（第III-C节）。
+
+(3) 自适应边界增强与整体验证。设计了自适应边界增强模块，根据方向
+    一致性强度自适应地强化结构边界响应。该模块与方向感知特征提取和
+    方向一致性约束协同工作，共同提升边界分割精度。在Cityscapes和
+    Mapillary Vistas数据集上的实验表明，SABR在边界F1指标上较最强
+    基线提升2.3个百分点（第IV-B节，表2），消融实验验证了三个模块
+    各自的贡献（第IV-C节，表4）。代码已开源。
+
+[注释] 第5段功能: 先总述（2-3句：问题→方法→三个创新点简介），
+然后"本文的主要贡献如下："引出恰好3点贡献，每点对应一个方法创新点。
+每点详细展开（what + why + evidence），实验证据自然融入第(3)点。
 ```
 
 ### English Rendering (Annotated)
@@ -317,21 +328,43 @@ architecture without modifying the backbone.
 
 [Annotation] Para 4: Method teaser. Only WHAT and WHY — not HOW.
 
-Our main contributions are:
-1. We identify a fundamental limitation of existing boundary refinement
-   methods — the inability to distinguish structural from textural boundaries
-   — and validate this observation through quantitative analysis (Section III-A).
-2. We propose the Directional Consistency Loss, a novel regularization term
-   that explicitly enforces geometric continuity of boundary predictions
-   (Section III-C).
-3. Experiments on Cityscapes and Mapillary Vistas demonstrate that SABR
-   substantially outperforms existing methods on boundary-sensitive metrics
-   (+2.3 points boundary F1) while remaining competitive on standard mIoU
-   (Section IV-B, Table 2).
-4. We release code and pretrained models to facilitate future research in
-   boundary-aware segmentation.
+To address the challenge of distinguishing structural boundaries from textural
+boundaries in semantic segmentation, we propose Structure-Aware Boundary
+Refinement (SABR). SABR consists of three core components: a Direction-Aware
+Feature Extraction module, which captures directional boundary information;
+a Directional Consistency Constraint, which models geometric continuity of
+boundaries; and an Adaptive Boundary Enhancement module, which amplifies
+structural boundary responses. Our main contributions are:
 
-[Annotation] Para 5: Contributions. Each bullet has an evidence pointer.
+1. Direction-Aware Feature Extraction. We design four directional convolution
+   kernels (0°, 45°, 90°, 135°) that extract edge responses along the four
+   principal directions. This design enables the network to explicitly perceive
+   the directional attributes of boundary pixels, providing the foundation
+   for distinguishing structural from textural boundaries (Section III-B).
+
+2. Directional Consistency Constraint. We propose the Directional Consistency
+   Loss, a novel regularization term that enforces response consistency among
+   neighboring pixels along the dominant boundary direction. This loss
+   overcomes the limitation of existing methods that treat all boundary
+   pixels uniformly, enabling the network to automatically differentiate
+   geometrically continuous structural boundaries from stochastic texture
+   boundaries (Section III-C).
+
+3. Adaptive Boundary Enhancement and Overall Validation. We introduce an
+   Adaptive Boundary Enhancement module that amplifies structural boundary
+   responses based on directional consistency strength. Working in concert
+   with the two preceding components, it jointly improves boundary
+   segmentation accuracy. Experiments on Cityscapes and Mapillary Vistas
+   demonstrate that SABR improves boundary F1 by 2.3 points over the
+   strongest baseline (Section IV-B, Table 2), and ablation studies
+   confirm the contribution of each module (Section IV-C, Table 4).
+   Code is publicly available.
+
+[Annotation] Para 5: Contributions. Lead-in prose (2-3 sentences: problem →
+method → three innovations at high level), then exactly 3 contribution bullets,
+each matching one innovation point. Each bullet is detailed (what + why +
+evidence). Experimental results are folded into bullet (3), not a separate
+4th bullet.
 ```
 
 ---

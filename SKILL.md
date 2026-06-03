@@ -554,13 +554,15 @@ Transition to 4b.
 - Para 2: Current progress — 2-3 representative method families with specific examples
 - Para 3: Remaining gap — what existing methods fail to do and WHY
 - Para 4: Proposed method — core mechanism in 2-3 sentences, intuition for why it works
-- Para 5: Contributions — 3-4 bullets, each mapping to evidence (table/figure/section)
+- Para 5: Contributions — prose lead-in (2-3 sentences summarizing problem, method, and three innovations), then "Our main contributions are:" followed by exactly 3 detailed bullets, each matching one innovation point with what + why + evidence pointer
 
 Self-check after drafting Introduction:
 1. Is the gap stated with a "because" clause? (Not just "X is understudied" but "X is understudied because existing methods assume Y which fails when Z.")
-2. Does every contribution bullet have at least one concrete number or evidence pointer?
-3. Is the contribution scope aligned with evidence strength from Stage 3?
-4. Is the method teaser at the right level of detail — tells WHAT and WHY, not HOW?
+2. Does the contribution paragraph have a prose lead-in before the bullet list?
+3. Are there exactly 3 contribution bullets, each matching one innovation point?
+4. Is each bullet detailed (what + why + evidence), not a one-line summary?
+5. Is the contribution scope aligned with evidence strength from Stage 3?
+6. Is the method teaser at the right level of detail — tells WHAT and WHY, not HOW?
 
 **Related Work:** Use the theme-based structure from Stage 2's "Related Work Structure." Each theme gets 1 paragraph: lead with the theme statement, discuss 2-3 papers with comparison, end with how your method differs. Avoid the "Author et al. [X] proposed..." laundry-list pattern.
 
