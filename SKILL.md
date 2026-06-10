@@ -566,9 +566,9 @@ Self-check after drafting Introduction:
 
 **Related Work:** Use the theme-based structure from Stage 2's "Related Work Structure." Each theme gets 1 paragraph: lead with the theme statement, discuss 2-3 papers with comparison, end with how your method differs. Avoid the "Author et al. [X] proposed..." laundry-list pattern.
 
-**Method:** Use the modular structure from `writer/references/method-section-patterns.md`. III-A Overview with architecture diagram reference. III-B/C/D for each module with: input → process → output → design rationale. Every formula must be explained in prose — no orphan equations.
+**Method:** Use the simplified structure from `writer/references/method-section-patterns.md`. Main heading "方法", 3-5 sentence overview of the full framework directly under the heading (no separate Overview subsection), then three innovation points each as a sub-heading. Each innovation follows motivation → design → formula/mechanism → effect, with optional module diagrams or pseudocode. Every formula must be explained in prose — no orphan equations.
 
-**Experiments:** Use the structure from `writer/references/experiment-section-patterns.md`. Subsections: Datasets & Implementation Details, Main Results, Ablation Study, Efficiency Analysis, Qualitative Analysis. Every result number must appear in both the table AND the prose.
+**Experiments:** Use the structure from `writer/references/experiment-section-patterns.md`. 5 subsections: Datasets & Metrics → Experimental Setup → Comparison with SOTA and Classical Methods → Ablation Study (numbered list 1), 2), 3)...) → Visualization. Every result number must appear in both the table AND the prose.
 
 **Conclusion:** Use the structure from `writer/references/conclusion-patterns.md`. Restate problem, method, key findings. Do not add new claims or citations. End with 1-2 specific future work directions.
 

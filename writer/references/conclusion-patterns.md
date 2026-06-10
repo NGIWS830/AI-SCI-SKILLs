@@ -149,4 +149,4 @@ facilitate further research in boundary-aware segmentation.
 3. **Specific numbers**: Does the conclusion restate key results with specific numbers?
 4. **Future work specificity**: Are future directions concrete and grounded in the paper's findings?
 5. **Limitation honesty**: If there are obvious limitations, are they acknowledged?
-6. **Length**: 3-5 paragraphs. Shorter than introduction, longer than abstract.
+6. **Length**: Exactly 2 paragraphs — no more, no less. Shorter than introduction, longer than abstract.
