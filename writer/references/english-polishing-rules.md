@@ -46,7 +46,7 @@ Use conservative SCI journal style: clear, precise, formal, and not overdecorate
 ### Experiments
 - [ ] Metric direction stated for every metric
 - [ ] Standard deviations or confidence intervals reported
-- [ ] Past tense for what was done ("we trained/evaluated/observed")
+- [ ] Past tense for what was done ("models were trained/evaluated")
 - [ ] Present tense for tables/figures ("Table 1 reports/shows")
 - [ ] Best results bold, second-best underlined
 
@@ -60,13 +60,14 @@ Use conservative SCI journal style: clear, precise, formal, and not overdecorate
 
 ## Sentence Variety Patterns
 
-**The "Three-We" Rule:** Count sentences starting with "We" in each paragraph. If >3 consecutive sentences begin with "We", restructure:
+**Third-Person Sentence Variety:** Avoid monotonous sentence starts. Vary between subject-led ("The proposed method..."), passive construction ("Features are extracted via..."), and result-led ("Table X reports...") patterns:
 
-- "We observe that..." → "As shown in Table X, ..."
-- "We also evaluate..." → "Further evaluation on..."
-- "We find that..." → "The results indicate that..."
-- "We propose..." → "The proposed method..."
-- "We then..." → "Subsequently, ..."
+- "This paper proposes..." → Vary with "A [module] is proposed that..."
+- "The proposed method achieves..." → Vary with "As shown in Table X, [Method] achieves..."
+- "The results indicate that..." → Vary with "Experiments confirm that..."
+- "Subsequently, [step] is performed..." → Vary with "The next stage applies..."
+
+**Anti-pattern:** More than 3 consecutive sentences starting with the same subject (e.g., "The proposed method... The proposed method... The proposed method...").
 
 **Sentence length variety:**
 - Mix lengths: a short sentence (10-15 words) followed by longer analytical ones (25-40 words) creates rhythm.

@@ -77,15 +77,15 @@ Venue-specific adjustments:
 ### Part 2: Method (Sentences 3-8)
 
 **First (Sentences 3-4):**
-- S3: "First, we [design / introduce / propose] a [component_name] that [what_it_does_in_one_clause]."
+- S3: "First, this paper [designs / proposes] a [component_name] that [what_it_does_in_one_clause]."
 - S4: "This [enables / ensures / allows] [specific_capability] by [mechanism]."
 
 **Second (Sentences 5-6):**
-- S5: "Second, we [design / introduce / propose] a [component_name] that [what_it_does_in_one_clause]."
+- S5: "Second, this paper [designs / proposes] a [component_name] that [what_it_does_in_one_clause]."
 - S6: "This [addresses / complements / overcomes] [specific_limitation] by [mechanism]."
 
 **Finally (Sentences 7-8):**
-- S7: "Finally, we [design / introduce / propose] a [component_name / strategy] that [what_it_does_in_one_clause]."
+- S7: "Finally, this paper [designs / proposes] a [component_name / strategy] that [what_it_does_in_one_clause]."
 - S8: "This [complements / extends / addresses] [aspect] by [mechanism], [specific_benefit]."
 
 **Alternative for papers with fewer than 3 innovations (Sentences 3-8):**
@@ -128,7 +128,7 @@ but aggregate them via fixed pooling strategies, which treat all visual
 regions as equally important — an assumption that fails when queries have
 distinct semantic foci.
 
-[S3 — First: claim] First, we design a Semantic-Guided Alignment module that
+[S3 — First: claim] First, a Semantic-Guided Alignment (SGA) module is proposed that
 learns to re-weight visual regions according to their query-specific
 semantic relevance.
 
@@ -136,14 +136,14 @@ semantic relevance.
 per-region weights, enabling the model to dynamically emphasize
 discriminative regions for each query.
 
-[S5 — Second: claim] Second, we introduce a Hierarchical Matching Loss (HML)
+[S5 — Second: claim] Second, a Hierarchical Matching Loss (HML) is proposed
 that jointly supervises global image-text matching and local region-phrase
 matching.
 
 [S6 — Second: why] This dual-level supervision explicitly encourages
 fine-grained cross-modal alignment that global-only losses overlook.
 
-[S7 — Finally: claim] Finally, we design a staged optimization strategy
+[S7 — Finally: claim] Finally, a staged optimization strategy is designed
 that decouples region re-weighting pretraining from joint hierarchical
 fine-tuning.
 

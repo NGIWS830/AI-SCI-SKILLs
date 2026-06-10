@@ -108,17 +108,17 @@ The gap paragraph is the most important paragraph in the introduction. A weak ga
 ### Paragraph 4: Method Teaser (What You Propose)
 
 **Method introduction templates:**
-- "To address this gap, we propose [Method], which [core_mechanism_in_one_sentence]. Unlike [existing_approach], [Method] [key_difference]."
-- "We introduce [Method], a [type_of_contribution] that [core_mechanism]. The key insight is that [intuition]."
-- "In this work, we take a different approach: rather than [conventional_wisdom], we [counterintuitive_insight], which enables [benefit]."
+- "To address this gap, this paper proposes [Method], which [core_mechanism_in_one_sentence]. Unlike [existing_approach], [Method] [key_difference]."
+- "This paper proposes [Method], a [type_of_contribution] that [core_mechanism]. The key insight is that [intuition]."
+- "In this work, a different approach is taken: rather than [conventional_wisdom], [Method] [counterintuitive_insight], which enables [benefit]."
 
 **Intuition / design rationale:**
 - "The intuition behind [Method] is straightforward: [one_sentence_explanation]."
-- "Our design is motivated by the observation that [empirical_observation], which suggests that [design_principle]."
+- "This design is motivated by the observation that [empirical_observation], which suggests that [design_principle]."
 - "The core idea is to [action] so that [desired_outcome], which in turn [downstream_benefit]."
 
 **Distinguish WHAT vs. WHY:**
-- WHAT: "We introduce a [module_name] that [computation]." (save details for Method section)
+- WHAT: "A [module_name] is proposed that [computation]." (save details for Method section)
 - WHY: "This design enables [capability], because [reason]." (tease the rationale here)
 
 ### Paragraph 5: Contributions (Lead-in + Exactly 3 Innovation Points)
@@ -126,23 +126,23 @@ The gap paragraph is the most important paragraph in the introduction. A weak ga
 **Structure:** A prose lead-in (2-3 sentences) → "Our main contributions are:" → 3 detailed bullets.
 
 **Lead-in pattern:**
-> To address [specific_problem] in [task], we propose [Method]. [Method]
+> To address [specific_problem] in [task], this paper proposes [Method]. [Method]
 > consists of three core components: [Innovation_1], which [purpose_1];
 > [Innovation_2], which [purpose_2]; and [Innovation_3], which [purpose_3].
-> Our main contributions are:
+> The main contributions of this paper are:
 
 **Bullet pattern (exactly 3, matching the 3 innovation points):**
 ```
-1. [Innovation 1 contribution]. We design [Module A], which [mechanism]
+1. [Innovation 1 contribution]. [Module A] is designed, which [mechanism]
    to achieve [capability]. This module enables [specific_effect],
    addressing [specific_problem] (Section III-B).
 
-2. [Innovation 2 contribution]. We propose [Module B], which [mechanism]
+2. [Innovation 2 contribution]. [Module B] is proposed, which [mechanism]
    to [operation] on [input]. This design overcomes the limitation of
    [Module A / existing methods] in [scenario], enabling [capability]
    (Section III-C).
 
-3. [Innovation 3 contribution]. We introduce [Module C / strategy],
+3. [Innovation 3 contribution]. [Module C / strategy] is proposed,
    which [mechanism] to [function]. Working in concert with [Module A]
    and [Module B], it achieves [overall_goal]. Experiments on [datasets]
    validate the effectiveness of all three modules (Section IV).
@@ -234,7 +234,7 @@ BPR）通过后处理步骤修正边界预测；另一类方法（如GSCNN、PID
 
 第4段 (Method Teaser):
 针对上述问题，本文提出结构感知边界优化方法SABR（Structure-Aware
-Boundary Refinement）。SABR的核心创新在于引入方向一致性模块
+Boundary Refinement）。SABR的核心创新在于设计了方向一致性模块
 （Directional Consistency Module），该模块通过显式建模边界像素的
 空间连续性，使网络能够区分具有几何结构的边界和随机纹理边界。SABR
 可即插即用地集成到任何编码器-解码器架构的分割网络中，无需修改主干网络。
@@ -319,7 +319,7 @@ hand-crafted geometric priors (lacking adaptability to diverse scenes).
 (uniform treatment or hand-crafted priors). This is a "strong gap" with a
 clear failure mechanism.
 
-To address this gap, we propose Structure-Aware Boundary Refinement (SABR).
+To address this gap, this paper proposes Structure-Aware Boundary Refinement (SABR).
 The key innovation is a Directional Consistency Module that explicitly models
 the spatial continuity of boundary pixels, enabling the network to distinguish
 geometrically structured boundaries from random texture edges. SABR is designed
@@ -329,29 +329,29 @@ architecture without modifying the backbone.
 [Annotation] Para 4: Method teaser. Only WHAT and WHY — not HOW.
 
 To address the challenge of distinguishing structural boundaries from textural
-boundaries in semantic segmentation, we propose Structure-Aware Boundary
+boundaries in semantic segmentation, this paper proposes Structure-Aware Boundary
 Refinement (SABR). SABR consists of three core components: a Direction-Aware
 Feature Extraction module, which captures directional boundary information;
 a Directional Consistency Constraint, which models geometric continuity of
 boundaries; and an Adaptive Boundary Enhancement module, which amplifies
-structural boundary responses. Our main contributions are:
+structural boundary responses. The main contributions of this paper are:
 
-1. Direction-Aware Feature Extraction. We design four directional convolution
-   kernels (0°, 45°, 90°, 135°) that extract edge responses along the four
+1. Direction-Aware Feature Extraction. Four directional convolution
+   kernels (0°, 45°, 90°, 135°) are designed that extract edge responses along the four
    principal directions. This design enables the network to explicitly perceive
    the directional attributes of boundary pixels, providing the foundation
    for distinguishing structural from textural boundaries (Section III-B).
 
-2. Directional Consistency Constraint. We propose the Directional Consistency
-   Loss, a novel regularization term that enforces response consistency among
+2. Directional Consistency Constraint. The Directional Consistency
+   Loss is proposed, a novel regularization term that enforces response consistency among
    neighboring pixels along the dominant boundary direction. This loss
    overcomes the limitation of existing methods that treat all boundary
    pixels uniformly, enabling the network to automatically differentiate
    geometrically continuous structural boundaries from stochastic texture
    boundaries (Section III-C).
 
-3. Adaptive Boundary Enhancement and Overall Validation. We introduce an
-   Adaptive Boundary Enhancement module that amplifies structural boundary
+3. Adaptive Boundary Enhancement and Overall Validation. An
+   Adaptive Boundary Enhancement module is proposed that amplifies structural boundary
    responses based on directional consistency strength. Working in concert
    with the two preceding components, it jointly improves boundary
    segmentation accuracy. Experiments on Cityscapes and Mapillary Vistas

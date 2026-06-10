@@ -236,7 +236,7 @@ python literature/scripts/verify_citations.py <output_dir>/citations_to_verify.t
 ### Literature Matrix Column Guidance
 
 When filling the matrix, be specific:
-- **Relation to Our Work**: Use one of: "direct competitor (same task+method family)", "method inspiration (different task, similar technique)", "baseline comparison", "dataset source", "gap evidence (shows limitation we address)"
+- **Relation to This Work**: Use one of: "direct competitor (same task+method family)", "method inspiration (different task, similar technique)", "baseline comparison", "dataset source", "gap evidence (shows limitation addressed by this paper)"
 - **Use in Paper**: Which section and for what purpose (e.g., "Intro para 2 — representative method", "Related Work theme A — method-family paper", "Experiments Table 1 — SOTA baseline")
 - **Verification**: One of: "✓ confirmed (DOI+arXiv)", "~ metadata from single source", "✗ unverified [CITATION NEEDED]"
 
@@ -476,7 +476,7 @@ Gap:     Existing boundary-refinement methods rely on multi-scale feature fusion
         structural edges from texture edges, leading to blurred boundaries
         for geometrically regular structures.
 
-Method:  We propose Structure-Aware Boundary Refinement (SABR), which introduces
+Method:  Structure-Aware Boundary Refinement (SABR) is proposed, which designs
         a Geometric Continuity Module that explicitly models the spatial
         continuity of boundaries via a directional consistency loss.
         SABR can be plugged into any encoder-decoder segmentation architecture
@@ -503,7 +503,7 @@ Gap:     Existing parameter-efficient methods (LoRA, Adapters, Prefix-tuning) re
         trainable parameters, but they add inference-time overhead because adapted
         layers cannot be merged with frozen weights without approximation error.
 
-Method:  We propose Mergeable Low-Rank Adaptation (MeLoRA), which constrains
+Method:  Mergeable Low-Rank Adaptation (MeLoRA) is proposed, which constrains
         the low-rank decomposition such that the adapter can be exactly merged
         into the original weight matrix via a single matrix addition at inference
         time, eliminating adapter overhead entirely with zero accuracy loss.
@@ -651,7 +651,7 @@ Scan for:
 | Section | Guidance |
 |---------|----------|
 | Abstract | Passive preferred: "A novel X is proposed..." |
-| Introduction | Passive / impersonal for contribution bullets (Para 5): "This paper presents...", "A novel X is introduced...", "Extensive experiments on Y demonstrate..." Active acceptable for narrative setup (Paras 1-4). Do NOT write "We propose X" in contribution bullets. |
+| Introduction | Third-person for contribution bullets (Para 5): "This paper proposes...", "A novel X is proposed...", "Extensive experiments on Y demonstrate..." Do NOT write "We propose X" in contribution bullets. |
 | Related Work | Passive for describing existing methods; impersonal for differentiation: "This work differs from..." |
 | Method | Passive preferred for process: "Features are extracted..." Passive / impersonal for design rationale: "X is designed to...", "This module enables..." |
 | Experiments | Passive preferred for procedure: "Models were trained on..." Passive for narrative: "As shown in Table 1, the proposed method achieves..." |
@@ -704,7 +704,7 @@ Scan for:
 3. Re-run cross-section dedup (same procedure as Stage 4c, applied to English text).
 
 **Sentence Variety Audit:**
-- Count sentences starting with "We" in each section. If >3 consecutive sentences begin with "We", restructure (e.g., "The model achieves...", "Results on [dataset] show...", "A key observation is...").
+- Count sentences starting with "The proposed method" in each section. If >3 consecutive sentences begin with the same subject, restructure (e.g., vary between "The model achieves...", "Results on [dataset] show...", "A key observation is...").
 - Measure sentence length distribution. If all sentences in a paragraph are 25-35 words, vary them: mix a short punchy sentence (10-15 words) among longer analytical ones (25-40 words).
 - Check paragraph length: no paragraph should be 1 sentence or >12 sentences.
 

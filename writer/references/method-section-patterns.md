@@ -109,15 +109,15 @@ This is the **preferred** simplified structure. Depart from it only when the pap
 ### III-A: Overview
 
 **Template 1 — Simple feed-forward pipeline:**
-> Figure [X] illustrates the overall architecture of [Method]. Given an input [input_description], we first [step_1] using [component_1], which [purpose_1]. The resulting [intermediate_1] is then processed by [component_2], which [purpose_2]. Finally, [component_3] produces the [output_description] by [mechanism].
+> Figure [X] illustrates the overall architecture of [Method]. Given an input [input_description], [component_1] first [step_1], which [purpose_1]. The resulting [intermediate_1] is then processed by [component_2], which [purpose_2]. Finally, [component_3] produces the [output_description] by [mechanism].
 
 **Template 2 — Multi-branch architecture:**
 > [Method] consists of [N] main components, as shown in Fig. [X]. The [Branch_A] processes [input_A] to extract [feature_A], while concurrently, the [Branch_B] operates on [input_B] to produce [feature_B]. These representations are then fused by [Fusion_Module] via [fusion_mechanism], yielding [fused_feature], which is subsequently used for [downstream_task].
 
 **Template 3 — Iterative / sequential process:**
 > [Method] proceeds in [N] sequential stages, depicted in Fig. [X].
-> **Stage 1: [Name]**. Given [input], we [action], producing [output].
-> **Stage 2: [Name]**. Using the output of Stage 1, we [action], which [purpose].
+> **Stage 1: [Name]**. Given [input], [action] is performed, producing [output].
+> **Stage 2: [Name]**. Using the output of Stage 1, [action] is performed, which [purpose].
 > **Stage N: [Name]**. The final stage [action], yielding [final_output].
 
 ### III-B / III-C / III-D: Core Module Description
@@ -131,7 +131,7 @@ For each module, cover these five aspects in order:
 
 2. PROCESS DESCRIPTION
    What computation does this module perform? Step by step.
-   "First, we [operation_1]. Then, [operation_2]. Finally, [operation_3]."
+   "First, [operation_1] is applied. Then, [operation_2]. Finally, [operation_3]."
 
 3. OUTPUT SPECIFICATION
    What emerges from this module? Where does it go next?
@@ -139,7 +139,7 @@ For each module, cover these five aspects in order:
 
 4. DESIGN RATIONALE
    WHY this design choice? Ground in intuition, prior work, or empirical observation.
-   "We design [Module] to [mechanism] because [reason]. This is motivated by the observation that [empirical_finding] or the principle that [theoretical_argument]."
+   "[Module] is designed to [mechanism] because [reason]. This is motivated by the observation that [empirical_finding] or the principle that [theoretical_argument]."
 
 5. CONNECTION TO CLAIMS
    How does this module support a contribution claim?
@@ -179,7 +179,7 @@ Re-annotate after any dimension-changing operation:
 ### In-text Math vs. Display Equations
 
 - **In-text**: Short expressions, variable definitions, scalar relationships.
-  "We set λ = 0.1 throughout." "The attention weight α_ij is computed as..."
+  "λ is set to 0.1 throughout." "The attention weight α_ij is computed as..."
 - **Display equations**: Multi-term expressions, derivations, key formulas.
   ```
   L_total = L_task + λ_1 L_consistency + λ_2 L_sparsity   (1)
@@ -215,7 +215,7 @@ the feature dimension, and γ, β are learnable affine parameters.
 
 ### The "Explain Every Symbol" Rule
 
-Every symbol in a display equation must be explained in the surrounding prose. No orphan variables. If you introduce σ twice with different meanings, the reader will be confused — rename one.
+Every symbol in a display equation must be explained in the surrounding prose. No orphan variables. If σ is defined twice with different meanings, the reader will be confused — rename one.
 
 ---
 
@@ -277,15 +277,15 @@ Use algorithm2e LaTeX package conventions:
 >
 >     L = L_task + α L_aux + β L_reg
 >
-> **Task Loss (L_task).** We use [standard_loss] for the primary task. Given [inputs], L_task is computed as [formula_or_description]. This term ensures that the model learns to [primary_objective].
+> **Task Loss (L_task).** The [standard_loss] is used for the primary task. Given [inputs], L_task is computed as [formula_or_description]. This term ensures that the model learns to [primary_objective].
 >
-> **Auxiliary Loss (L_aux).** The auxiliary loss term encourages [desired_property]. Specifically, [formula_or_description]. The weight α controls the trade-off between [tradeoff_A] and [tradeoff_B]; we set α = [value] based on [selection_method].
+> **Auxiliary Loss (L_aux).** The auxiliary loss term encourages [desired_property]. Specifically, [formula_or_description]. The weight α controls the trade-off between [tradeoff_A] and [tradeoff_B]; α is set to [value] based on [selection_method].
 >
-> **Regularization (L_reg).** We apply [regularization_type] to [parameters] to prevent [overfitting/other]. With weight β = [value].
+> **Regularization (L_reg).** [regularization_type] is applied to [parameters] to prevent [overfitting/other]. With weight β = [value].
 
 ### Intuition-First Pattern
 
-> To encourage the model to focus on [desired_behavior], we introduce a [loss_name] that penalizes [undesired_behavior]. The key observation is that [insight_motivating_the_loss]. Formally:
+> To encourage the model to focus on [desired_behavior], a [loss_name] is proposed that penalizes [undesired_behavior]. The key observation is that [insight_motivating_the_loss]. Formally:
 >
 >     L_name = [formula]
 >
@@ -300,15 +300,15 @@ Each loss term should correspond to at least one ablation row in the experiments
 ## Training Procedure Description Template
 
 ```
-Implementation details. We implement [Method] in [framework] ([version]).
+Implementation details. [Method] is implemented in [framework] ([version]).
 All models are trained on [GPU_type] for [N] epochs with a batch size of [B].
-We use [optimizer] with β_1 = [val], β_2 = [val], and weight decay = [val].
+The [optimizer] optimizer is used with β_1 = [val], β_2 = [val], and weight decay = [val].
 The learning rate is initialized to [lr_init] and follows a [schedule]
-schedule: [description of warmup + decay]. For data augmentation, we apply
-[augmentation_list]. All input images are resized to [H]×[W]. Training a
+schedule: [description of warmup + decay]. For data augmentation, [augmentation_list]
+is applied. All input images are resized to [H]×[W]. Training a
 single model takes approximately [time] on [hardware].
 
-We report results averaged over [N] runs with different random seeds
+Results are reported averaged over [N] runs with different random seeds
 ([seed_list]). Standard deviations are reported in all result tables.
 Hyperparameters were selected via [method] on the [validation_set].
 ```

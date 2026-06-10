@@ -33,32 +33,32 @@ Best when: Your paper's main contribution is clearly identifying and filling a s
 **Introducing a new theme:**
 - "A substantial body of work has addressed [theme]."
 - "Another line of research focuses on [theme]."
-- "Closely related to our work are methods that [theme]."
-- "Our method also relates to research on [theme]."
+- "Closely related to this work are methods that [theme]."
+- "The proposed method also relates to research on [theme]."
 
 **Describing representative work within a theme:**
 - "For instance, [Author] et al. [X] proposed [method] which [mechanism]."
 - "A representative approach is [Method] [X], where [description]."
 - "Building on [prior_work], [Author] et al. [X] introduced [improvement]."
 
-**Distinguishing your method from a theme:**
-- "While effective for [scenario], these methods [limitation]. In contrast, our approach [difference]."
-- "Unlike [method_family] approaches that rely on [assumption], we [alternative]."
-- "A key difference from [prior_work] is that we [distinction], which enables [benefit]."
-- "Our method shares [common_element] with [theme], but differs in that we [key_difference]."
+**Distinguishing the proposed method from a theme:**
+- "While effective for [scenario], these methods [limitation]. In contrast, the proposed approach [difference]."
+- "Unlike [method_family] approaches that rely on [assumption], the proposed method [alternative]."
+- "A key difference from [prior_work] is that the proposed method [distinction], which enables [benefit]."
+- "The proposed method shares [common_element] with [theme], but differs in that it [key_difference]."
 
 ---
 
 ## Comparison Sentence Patterns
 
 **Direct comparison with specific work:**
-- "Unlike [Method] [X] which employs [mechanism_A], our method uses [mechanism_B], avoiding [limitation_of_A]."
-- "While [Method] [X] achieves [result] through [approach], we find that [approach] [limitation]. Our method instead [alternative]."
-- "[Method] [X] and our work both [shared_goal], but while [X] [method_A], we [method_B]."
+- "Unlike [Method] [X] which employs [mechanism_A], the proposed method uses [mechanism_B], avoiding [limitation_of_A]."
+- "While [Method] [X] achieves [result] through [approach], [approach] has the limitation of [limitation]. The proposed method instead [alternative]."
+- "[Method] [X] and this work both [shared_goal], but while [X] [method_A], the proposed method [method_B]."
 
 **Positioning among method families:**
-- "Methods in [family_A] typically [characteristic_A], whereas methods in [family_B] tend to [characteristic_B]. Our approach combines [strength_of_A] with [strength_of_B]."
-- "Unlike both [family_A] (which [limitation_A]) and [family_B] (which [limitation_B]), our method [advantage]."
+- "Methods in [family_A] typically [characteristic_A], whereas methods in [family_B] tend to [characteristic_B]. The proposed approach combines [strength_of_A] with [strength_of_B]."
+- "Unlike both [family_A] (which [limitation_A]) and [family_B] (which [limitation_B]), the proposed method [advantage]."
 
 ---
 
@@ -69,7 +69,7 @@ Respectfully identify limitations in prior work:
 - "While [Method] [X] showed promising results on [dataset], its reliance on [assumption] limits applicability to [scenario] where [condition]."
 - "Existing methods implicitly assume [assumption], which holds for [scenario_A] but fails in [scenario_B]."
 - "A common limitation across [method_family] approaches is [limitation], which manifests as [observable_symptom]."
-- "Although [Method] [X] addresses [aspect_A] effectively, it does not consider [aspect_B], which we find is critical for [reason]."
+- "Although [Method] [X] addresses [aspect_A] effectively, it does not consider [aspect_B], which is found to be critical for [reason]."
 
 **Anti-patterns:**
 - "The work of [Author] is fundamentally flawed." → Too aggressive. Describe the limitation, not the flaw.
@@ -89,7 +89,7 @@ Briefly acknowledge and explain why it's not directly comparable.
 
 ### Prior Self-Citations
 Be transparent but don't over-cite yourself.
-- "This work extends our preliminary study [X], where we [prior_finding]. The present work differs in [key_advancement]."
+- "This work extends a preliminary study [X], where [prior_finding] was established. The present work differs in [key_advancement]."
 
 ---
 
@@ -97,7 +97,7 @@ Be transparent but don't over-cite yourself.
 
 1. **Theme count**: 2-4 themes. Fewer than 2 = under-organized. More than 4 = over-fragmented.
 2. **Papers per theme**: 2-4 papers per theme. Cover the representative ones, not everything.
-3. **Comparison presence**: Does each theme paragraph end with a comparison to your method? ("In contrast, our method...", "Unlike these approaches, we...")
+3. **Comparison presence**: Does each theme paragraph end with a comparison to the proposed method? ("In contrast, the proposed method...", "Unlike these approaches, the proposed method...")
 4. **Chronology avoidance**: Are papers organized by idea, not by year?
 5. **Citation accuracy**: Are all citations verified? Any `[CITATION NEEDED]` remaining?
 6. **Fairness**: Would the authors of the cited papers agree with your characterization of their work?

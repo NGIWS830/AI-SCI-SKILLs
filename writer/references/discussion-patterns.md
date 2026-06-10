@@ -15,7 +15,7 @@ Best for: Papers where understanding the mechanism is the main contribution.
 ### Limitation-First (if limitations are significant)
 ```
 [Honest acknowledgment of limitations]
-[Despite limitations, what we learned]
+[Despite limitations, key findings]
 [Why the method still matters]
 [How future work can address limitations]
 ```
@@ -24,7 +24,7 @@ Best for: Papers that are a first step in a new direction. Honesty builds credib
 ### Synthesis-First
 ```
 [How our findings fit into the broader literature]
-[What we now understand that we didn't before]
+[New understanding gained from this work]
 [How this changes the research landscape]
 [Open questions for the community]
 ```
@@ -38,7 +38,7 @@ Best for: Papers that resolve a debate or establish a new baseline understanding
 
 > "The strong performance of [Method] can be attributed to [key_design_choice]. Unlike prior approaches that [previous_assumption], [Method] [different_approach], which enables [capability]. This interpretation is supported by the ablation study (Table [X]), which shows that removing [component] degrades [metric] by [delta]."
 
-> "We hypothesize that [Method]'s effectiveness stems from [mechanism_hypothesis]. Evidence for this comes from [qualitative_observation] (Fig. [X]), where [Method] exhibits [behavior] while [baseline] does not."
+> "It is hypothesized that [Method]'s effectiveness stems from [mechanism_hypothesis]. Evidence for this comes from [qualitative_observation] (Fig. [X]), where [Method] exhibits [behavior] while [baseline] does not."
 
 ### When It Works Best
 
@@ -46,13 +46,13 @@ Best for: Papers that resolve a debate or establish a new baseline understanding
 
 ### Failure Cases and Limitations
 
-> "We identify two failure modes. First, [Method] occasionally [failure_1] when [condition] (see Fig. [X], row [N]). We attribute this to [root_cause]. Second, performance degrades on [failure_2_scenario], likely due to [reason]. Addressing these failure cases is a priority for future work."
+> "Two failure modes are identified. First, [Method] occasionally [failure_1] when [condition] (see Fig. [X], row [N]). This is attributed to [root_cause]. Second, performance degrades on [failure_2_scenario], likely due to [reason]. Addressing these failure cases is a priority for future work."
 
 > "A limitation of our evaluation is [missing_analysis]. While our results on [evaluated_datasets] are promising, testing on [additional_scenarios] would strengthen the claims of [generalization/robustness]."
 
 ### Generalization Discussion
 
-> "To assess generalization, we evaluated [Method] on [out_of_domain_dataset] without fine-tuning. [Method] achieves [X.X] vs. [baseline]'s [Y.Y], suggesting that [capability] transfers across domains. However, the gap to in-domain performance ([delta]) indicates that domain shift remains a challenge."
+> "To assess generalization, [Method] is evaluated on [out_of_domain_dataset] without fine-tuning. [Method] achieves [X.X] vs. [baseline]'s [Y.Y], suggesting that [capability] transfers across domains. However, the gap to in-domain performance ([delta]) indicates that domain shift remains a challenge."
 
 > "While [Method] was developed for [task_A], its core mechanism — [brief_description] — may generalize to related tasks. Preliminary experiments on [task_B] (Appendix [X]) show [result], suggesting broader applicability."
 

@@ -72,9 +72,9 @@ Best for: Papers with clear limitations that reviewers will notice. Proactively 
 ## Sentence Templates per Component
 
 ### Summary of Method
-- "We have presented [Method], a [brief_description] that [core_mechanism]."
-- "This paper introduced [Method], which addresses [problem] by [key_innovation]."
-- "We proposed [Method] to tackle the challenge of [specific_problem] in [task]."
+- "This paper has presented [Method], a [brief_description] that [core_mechanism]."
+- "This paper proposed [Method], which addresses [problem] by [key_innovation]."
+- "[Method] is proposed to tackle the challenge of [specific_problem] in [task]."
 
 ### Summary of Findings
 - "Experiments on [datasets] demonstrated that [Method] achieves [key_result_1] and [key_result_2]."
@@ -87,15 +87,15 @@ Best for: Papers with clear limitations that reviewers will notice. Proactively 
 - "The success of [component] indicates that [broader_insight]."
 
 ### Limitations (if supported by evidence)
-- "A limitation of this work is [specific_limitation], which we plan to address by [direction]."
+- "A limitation of this work is [specific_limitation], which future work will address by [direction]."
 - "[Method] currently assumes [assumption], which may not hold in [scenario]."
 - "Our evaluation is limited to [datasets/domains]. Extending to [other_domains] is an important next step."
 
 ### Future Work
 - "Future work could explore [direction_1] and [direction_2]."
 - "Extending [Method] to [related_task] is a natural next step."
-- "We plan to investigate [open_question] in follow-up work."
-- "The [component/module] proposed here may also benefit [other_task]. We leave this exploration to future work."
+- "Future work will investigate [open_question] in follow-up work."
+- "The [component/module] proposed here may also benefit [other_task]. This exploration is left to future work."
 
 **Future work anti-patterns:**
 - Vague: "Much work remains to be done." → Too generic.
@@ -116,9 +116,9 @@ Best for: Papers with clear limitations that reviewers will notice. Proactively 
 demands precise object boundaries, yet existing methods struggle to
 delineate fine structures.
 
-[Restate method] We proposed Structure-Aware Boundary Refinement (SABR),
+[Restate method] This paper proposed Structure-Aware Boundary Refinement (SABR),
 a plug-and-play module that improves boundary quality through directional
-consistency modeling. SABR introduces a Directional Consistency Module
+consistency modeling. SABR designs a Directional Consistency Module
 that distinguishes structural from textural boundaries by exploiting
 their geometric continuity.
 

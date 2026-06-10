@@ -234,7 +234,7 @@ IV-G. Qualitative Results
 - When the benchmark has known high variance (e.g., RL, small datasets).
 
 **How to report:**
-> "We assess statistical significance using a [paired t-test / Wilcoxon signed-rank test / bootstrap test] with [Bonferroni/Holm] correction for multiple comparisons."
+> "Statistical significance is assessed using a [paired t-test / Wilcoxon signed-rank test / bootstrap test] with [Bonferroni/Holm] correction for multiple comparisons."
 
 > "The improvement of [Method] over [baseline] is statistically significant at p < 0.01 on [datasets]."
 
@@ -250,16 +250,16 @@ IV-G. Qualitative Results
 > "Table [X] reports the ablation results. Removing [component_A] (row 2, 'w/o [A]') reduces [metric] from [X.X] to [Y.Y] (−[delta] points), confirming that [component_A] is essential for [capability]."
 
 **Design choice justification:**
-> "We compare [design_choice_A] against [alternatives] in Table [X]. [Choice_A] achieves [X.X]%, outperforming [alternative_1] ([Y.Y]%) and [alternative_2] ([Z.Z]%). This confirms that [design_rationale]."
+> "Table [X] compares [design_choice_A] against [alternatives]. [Choice_A] achieves [X.X]%, outperforming [alternative_1] ([Y.Y]%) and [alternative_2] ([Z.Z]%). This confirms that [design_rationale]."
 
 **Hyperparameter sensitivity:**
-> "Figure [X] shows [metric] as a function of [hyperparameter]. Performance is stable for [hyperparameter] ∈ [range] (within [delta]% of peak). We use [value] for all experiments."
+> "Figure [X] shows [metric] as a function of [hyperparameter]. Performance is stable for [hyperparameter] ∈ [range] (within [delta]% of peak). [value] is used for all experiments."
 
 ---
 
 ## Qualitative Analysis Description
 
-> "Figure [X] presents qualitative results. We select representative examples covering [challenging_scenario_1], [scenario_2], and [scenario_3]. [Method] (column [N]) produces [observation_1] and [observation_2], whereas [baseline] (column [M]) struggles with [failure_mode]."
+> "Figure [X] presents qualitative results. Representative examples are selected covering [challenging_scenario_1], [scenario_2], and [scenario_3]. [Method] (column [N]) produces [observation_1] and [observation_2], whereas [baseline] (column [M]) struggles with [failure_mode]."
 
 **Case study selection:**
 - State how examples were selected (random, most challenging, most improved, failure cases).
