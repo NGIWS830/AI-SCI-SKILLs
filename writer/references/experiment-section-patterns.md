@@ -1,4 +1,4 @@
-# Experiment Section Patterns
+﻿# Experiment Section Patterns
 
 ## Recommended Experiment Section Structure
 
@@ -276,3 +276,19 @@ IV-G. Qualitative Results
 5. **Ablation coverage**: Does every claimed contribution have a corresponding ablation row?
 6. **No unsupported claims**: Are all result numbers traceable to tables/figures?
 7. **Statistical rigor**: If claiming superiority, is it supported by a significance test?
+
+---
+
+## Experimental Statistical Figures
+
+Experimental statistical figures are generated from source tables or logs with `experiment/scripts/publication_figures.py`. Use these for main comparison bars, improvement heatmaps, ablation contribution charts, efficiency-performance plots, robustness curves, and training dynamics curves.
+
+Do not use this path for method framework diagrams or algorithm structure diagrams. Those are method materials and should be collected during Stage 0/Stage 1. If they are missing, insert `AUTHOR_INPUT_NEEDED` placeholders.
+
+Default command:
+
+```bash
+python experiment/scripts/publication_figures.py results.csv --target MyModel --metrics Acc F1 --higher-better Acc F1 --group-col Dataset --output-dir figures
+```
+
+Every generated figure should have a manifest entry and a caption. If the data needed for a figure are absent, use a placeholder rather than inventing values.

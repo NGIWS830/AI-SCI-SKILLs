@@ -1,4 +1,4 @@
----
+﻿---
 name: ai-sci-skills
 description: End-to-end automated SCI paper writing for deep learning, machine learning, computer vision, NLP, multimodal learning, and related AI research. Chinese-first pipeline: raw project materials → structured digest → literature review → experiment analysis → polished English manuscript. v0.4 adds statistical testing, architecture extraction, citation network analysis, and result visualization. Use when the user wants to write a complete SCI paper from code, notes, experiment tables, framework diagrams, or mixed research materials.
 ---
@@ -302,6 +302,11 @@ For statistical significance testing (NEW in v0.4), run:
 python experiment/scripts/statistical_tests.py <table_path> --target <method_name> --metrics <m1,m2> --higher-better <m1> --output <output_dir>/03b_statistical_tests.md
 ```
 
+For publication-grade experimental statistical figures, run:
+```bash
+python experiment/scripts/publication_figures.py <table_path> --target <method_name> --metrics <m1,m2> --higher-better <m1> --lower-better <m2> --group-col Dataset --output-dir <output_dir>/figures/
+```
+Use this for manuscript figures generated from experiment tables. Method framework diagrams and algorithm structure diagrams are author-provided materials; if missing, insert `AUTHOR_INPUT_NEEDED` placeholders rather than fabricating them.
 For result visualizations (NEW in v0.4), run:
 ```bash
 python experiment/scripts/result_visualizer.py <table_path> --target <method_name> --metrics <m1,m2> --output-dir <output_dir>/figures/
@@ -970,7 +975,8 @@ Apply at every stage:
 | `digest/scripts/synthesize_brief.py --arch <arch.md> --deps <dep.md> --output <brief>` | Auto-generate complete project_brief.md from all digest outputs (NEW v0.4) |
 | `experiment/scripts/compute_improvements.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --lower-better <m2> --group-cols <col> --output <path>` | Compute pairwise improvements from CSV (v0.4: added --stats, --all-pairs, --format json, --seed-col) |
 | `experiment/scripts/statistical_tests.py <csv> --target <name> --metrics <m1,m2> --higher-better <m1> --output <path>` | Bootstrap CI, Cohen's d/Hedges' g, paired t-test, Wilcoxon, multiple comparison correction (NEW v0.4) |
-| `experiment/scripts/result_visualizer.py <csv> --target <name> --metrics <m1,m2> --output-dir <dir>` | Bar charts, ablation waterfall, radar charts, heatmaps, Pareto frontiers (NEW v0.4) |
+| `experiment/scripts/publication_figures.py <csv> --target <name> --metrics <m1,m2> --output-dir <dir>` | Publication-grade experimental statistical figures with manifest/caption templates (NEW v0.4+) |
+| `experiment/scripts/result_visualizer.py <csv> --target <name> --metrics <m1,m2> --output-dir <dir>` | Exploratory result visualizations: bar charts, ablation waterfall, radar charts, heatmaps, Pareto frontiers (NEW v0.4) |
 | `experiment/scripts/design_experiments.py --project-brief <brief> --output <plan>` | Generate structured experiment plan: required tables, ablation design, baseline coverage check, completeness checklist (NEW v0.4) |
 | `experiment/scripts/synthesize_experiments.py --improvements <imp.md> --stats <stats.md> --output <synth>` | Synthesize experiment results into narrative paragraphs for Setup, Results, Ablation, Efficiency, Discussion (NEW v0.4) |
 | `literature/scripts/search_literature.py "<query>" --sources s2,arxiv --max 20 --output <path>` | Search literature across Academic APIs |
@@ -997,3 +1003,4 @@ Apply at every stage:
 | Experiment | `experiment/references/` | Metrics guide, claim rules, ablation writing, experiment section patterns, reproducibility checklist |
 | Writer | `writer/references/` | Full writing pipeline: title, abstract, introduction, related work, method, experiments, conclusion, discussion patterns; Chinese drafting/polishing; CN→EN conversion; English polishing; forbidden overclaims (CN+EN); de-AI & dedup rules; terminology glossary; quality rubric; template filling guide |
 | Templates | `templates/` | Chinese journal LaTeX (cjc), IEEE conference LaTeX (IEEEtran), IEEE conference Word, Cover letter LaTeX |
+

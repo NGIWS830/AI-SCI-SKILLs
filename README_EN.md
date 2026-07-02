@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 # AI-SCI-SKILLs
 
@@ -636,7 +636,7 @@ pip install requests python-docx pylatexenc
 Optional dependencies:
 
 ```bash
-pip install matplotlib          # result_visualizer.py for charts
+pip install matplotlib          # publication_figures.py / result_visualizer.py for experiment figures
 pip install anthropic           # auto_fill_matrix.py / synthesize_literature.py --auto mode
 pip install jupyter             # parse_notebooks.py for .ipynb files (usually pre-installed)
 ```
@@ -663,3 +663,22 @@ python scripts/package_skills.py --output-dir dist
 - Mark missing author input as `AUTHOR_INPUT_NEEDED`.
 - Mark missing citations as `[CITATION NEEDED]`.
 - **Preserve scientific meaning over fluency** during polishing, translation, and editing.
+
+## Figure Generation Policy
+
+Paper figures are handled in two separate paths:
+
+1. **Method figures**: architecture diagrams, algorithm/module structure diagrams, principle diagrams, and flowcharts. These are author-provided or author-approved method materials collected during Stage 0/Stage 1. If they are missing, insert `AUTHOR_INPUT_NEEDED` placeholders instead of fabricating diagrams.
+2. **Experimental statistical figures**: main comparison charts, improvement heatmaps, ablation contribution plots, efficiency-performance plots, robustness curves, and training dynamics curves. These are generated from CSV/log data with `experiment/scripts/publication_figures.py`, exported as `pdf` plus high-resolution `png`, and tracked in `figure_manifest.md`.
+
+Example:
+
+```bash
+python experiment/scripts/publication_figures.py examples/mini-ai-paper-project/experiments/results.csv --target SGA-Ours --metrics R@1 R@5 R@10 --higher-better R@1 R@5 R@10 --group-col Dataset --output-dir examples/mini-ai-paper-project/outputs/figures
+```
+
+Missing data placeholder:
+
+```markdown
+![AUTHOR_INPUT_NEEDED: Fig. X. Experimental statistical figure placeholder. Provide the source CSV/log for this figure.](figures/fig_x_placeholder.png)
+```

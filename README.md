@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 # AI-SCI-SKILLs
 
@@ -83,7 +83,7 @@ AI-SCI-SKILLs 是一个以中文为先的端到端 SCI 论文写作流水线，�
 Stage 0: INIT   → 盘点材料，创建项目状态文件
 Stage 1: DIGEST → 文件清单、深度代码分析、Jupyter 解析、依赖追踪、自动生成项目简报
 Stage 2: LIT    → 文献检索（API 自动化）、AI 自动填矩阵、验证、缺口分析、叙述合成（矩阵→Introduction+Related Work）
-Stage 3: EXPER  → 实验计划生成、改进计算、统计分析、可视化、叙述合成
+Stage 3: EXPER  → 实验计划生成、改进计算、统计分析、实验统计图生成、叙述合成
 Stage 4: WRITE  → 4a 故事线 → 4b 中文初稿 → 4c 中文润色
                → 4d 英译 → 4e 英文润色 → 4f 自批判 → 4g 模板渲染
 ```
@@ -110,7 +110,8 @@ SKILL.md（根入口）
 ├── experiment/    — 分析实验并验证论点
 │   ├── references/  — 指标指南、声明规则、消融写作、可复现性检查清单
 │   └── scripts/     — compute_improvements.py, statistical_tests.py,
-│                      result_visualizer.py, design_experiments.py,
+│                      publication_figures.py, result_visualizer.py,
+│                      design_experiments.py,
 │                      synthesize_experiments.py
 ├── writer/        — 中文初稿 → 润色 → 英译 → 英文润色 → 自批判
 │   └── references/  — 全章节模板、中英翻译语料库、术语表、质量评分标准
@@ -221,7 +222,14 @@ summarize_repo.py → extract_architecture.py → parse_notebooks.py → trace_d
 
 ### Stage 3 — EXPER：实验分析
 
-**目标**：将实验产物转化为有证据支撑的结果声明。
+**目标**：将实验产物转化为有证据支撑的结果声明，并从实验表格或日志生成可直接进入论文的统计分析图。
+
+**图生成边界**：
+
+- 方法框架图、算法结构图、创新模块原理图属于方法材料，应在 Stage 0/Stage 1 开始收集。缺失时，在正文中使用 `AUTHOR_INPUT_NEEDED` 占位，不生成虚构示意图。
+- 实验统计图由 `experiment/scripts/publication_figures.py` 从 CSV/log 数据生成，包括主结果对比柱状图、提升热力图、消融贡献图、效率-性能图、鲁棒性曲线等。
+- `publication_figures.py` 是论文正式图优先入口，默认输出 `pdf` + 高分辨率 `png`，并生成 `figure_manifest.md` 记录数据来源和 caption 模板。
+- `result_visualizer.py` 保留为探索性/补充可视化工具，例如 radar、Pareto、waterfall 等；正式投稿图优先使用 `publication_figures.py` 或在其基础上定制。
 
 **声明强度决策树**（每条声明必须经过）：
 
@@ -264,7 +272,7 @@ Q4: 混淆因素能否解释改善？
 
 另外还有：特征图对比、混淆矩阵差值、预测置信度分布。每张消融可视化图遵循 5 步叙述模式：提出问题 → 描述设置 → 指出关键观察 → 机理级解释 → 关联定量证据。
 
-**5 个脚本：** `design_experiments.py`（实验计划生成）→ `compute_improvements.py`（改进计算 + Bootstrap CI）→ `statistical_tests.py`（效应量/显著性/多重比较校正/功效分析）→ `result_visualizer.py`（6 种图表）→ `synthesize_experiments.py`（叙述合成）。
+**6 个脚本：** `design_experiments.py`（实验计划生成）→ `compute_improvements.py`（改进计算 + Bootstrap CI）→ `statistical_tests.py`（效应量/显著性/多重比较校正/功效分析）→ `publication_figures.py`（论文级实验统计图 + manifest/caption）→ `result_visualizer.py`（探索性可视化）→ `synthesize_experiments.py`（叙述合成）。
 
 **输出**：`03_experiment_analysis.md`，含分析表格列表、主要结果、基线上改善、消融发现、声明-证据映射表（含强度等级和注意事项）。
 
@@ -572,7 +580,8 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 - **实验计划生成** — 从声明推导所需实验类型和消融变体，基线覆盖检查，分阶段路线图
 - 改进计算 + Bootstrap CI（v0.3 + v0.4 增强）
 - 统计检验：效应量、显著性检验、多重比较校正、功效分析
-- 结果可视化：6 种图表类型（PNG/PDF/SVG/PGF）
+- 论文级实验统计图：`publication_figures.py` 从 CSV/log 生成 PDF + 高分辨率 PNG，并输出 `figure_manifest.md` 与 caption 模板
+- 探索性结果可视化：`result_visualizer.py` 支持 PNG/PDF/SVG/PGF、radar、Pareto、waterfall 等
 - **实验叙述合成** — 自动生成 Setup / Results / Ablation / Efficiency / Discussion 段落模板
 
 **质量保障三件套（Stage 4f — NEW）**
@@ -616,6 +625,7 @@ python scripts/paper_to_slides.py paper.md --format beamer --author "J. Yang" --
 | `outputs/00_project_brief.md` | Stage 1 | 结构化简报含证据映射 |
 | `outputs/02_literature_matrix.md` | Stage 2 | 含验证状态的文献矩阵 |
 | `outputs/03_experiment_analysis.md` | Stage 3 | 论据强度分析 |
+| `outputs/figures/` | Stage 3 | 从实验 CSV 生成的论文级统计图与 `figure_manifest.md` |
 | `outputs/04_paper_storyline.md` | Stage 4a | 完整故事线 |
 | `outputs/05_chinese_draft.md` | Stage 4b | 中文初稿 |
 | `outputs/08_english_polished.md` | Stage 4e | 英文终稿 |
@@ -639,7 +649,7 @@ pip install requests python-docx pylatexenc
 可选依赖（按需安装）：
 
 ```bash
-pip install matplotlib          # result_visualizer.py 可视化图表
+pip install matplotlib          # publication_figures.py / result_visualizer.py 实验图生成
 pip install anthropic           # auto_fill_matrix.py / synthesize_literature.py 的 --auto 模式
 pip install jupyter             # parse_notebooks.py 解析 .ipynb 文件（通常已安装）
 ```
@@ -666,3 +676,25 @@ python scripts/package_skills.py --output-dir dist
 - 缺失的作者输入标注为 `AUTHOR_INPUT_NEEDED`。
 - 缺失的引用标注为 `[CITATION NEEDED]`。
 - 在润色、翻译过程中，**科学含义优先于语言流畅**。
+
+## 图生成策略
+
+论文中的图分两类处理：
+
+1. **方法图**：算法框架图、模块结构图、原理图、流程图。它们属于作者提供或确认的方法材料，应在 Stage 0/Stage 1 收集。缺失时，正文中插入 `AUTHOR_INPUT_NEEDED` 占位，不编造结构图。
+2. **实验统计图**：主结果对比、提升热力图、消融贡献、效率-性能、鲁棒性曲线、训练动态曲线。它们由 `experiment/scripts/publication_figures.py` 从 CSV/log 数据生成，优先导出 `pdf` 与高分辨率 `png`，并生成 `figure_manifest.md` 记录来源、图名和 caption 模板。
+
+示例：
+
+```bash
+python experiment/scripts/publication_figures.py examples/mini-ai-paper-project/experiments/results.csv --target SGA-Ours --metrics R@1 R@5 R@10 --higher-better R@1 R@5 R@10 --group-col Dataset --output-dir examples/mini-ai-paper-project/outputs/figures
+```
+
+缺失数据时，使用占位：
+
+```markdown
+![AUTHOR_INPUT_NEEDED: Fig. X. Experimental statistical figure placeholder. Provide the source CSV/log for this figure.](figures/fig_x_placeholder.png)
+```
+
+
+
